@@ -1,0 +1,75 @@
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #313234;
+    color: #fff;
+    position: fixed;
+    border-right: 1px solid #3d3b3b;
+    top: 0;
+    left: -250px; /* Initially hide the sidebar outside the viewport */
+    transition: left 2s ease; /* Smooth transition on the left property */
+  }
+  
+  .open {
+    left: 0; /* Show the sidebar when it's open */
+  }
+  
+  .header_container {
+    padding: 6px;
+    box-shadow: inset 100px 100px 100px 100px rgba(0,0,0,0.1);
+   display: flex;
+   justify-content: space-between;
+}
+
+
+
+.input_search{
+    border: 1px solid rgb(139, 134, 134);
+    border-radius: 20px;
+}
+
+.input_search[type=text] {
+    padding: 12px 20px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+.icons {
+    color: white;
+     width: 2em;
+      height: 2em;
+      position: relative;
+      left: 0px;
+    transition: left 2s ease;
+}
+
+.openIcon {
+  left: 250px; /* Show the sidebar when it's open */
+} 
+
+.sidebar_container{
+  padding: 20px;
+  text-align: center;
+}
+
+.SearchIcons {
+  color: white;
+   font-size: 30px;
+    height: 1em;
+    margin-left: 10px;
+    position: relative;
+    top: 8px;
+    background-color: transparent;
+}
+.typoHeader{
+  color: grey;
+  font-size: 18px;
+  margin: 30px 100px 10px 0px;
+}
+
+.typoColumn{
+  font-size: 20px;
+  margin: 15px 70px 15px 0px;
+  color: #626060;
+}

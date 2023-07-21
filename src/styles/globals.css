@@ -77,7 +77,9 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  background-color: #313234;
 }
+
 
 html,
 body {
@@ -105,3 +107,4 @@ a {
     color-scheme: dark;
   }
 }
+
