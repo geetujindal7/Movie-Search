@@ -1,4 +1,4 @@
-.sidebar {
+.sidebar{
     width: 250px;
     height: 100vh;
     background-color: #313234;
@@ -10,11 +10,11 @@
     transition: left 2s ease; /* Smooth transition on the left property */
   }
   
-  .open {
+  .open{
     left: 0; /* Show the sidebar when it's open */
   }
   
-  .header_container {
+  .header_container{
     padding: 6px;
     box-shadow: inset 100px 100px 100px 100px rgba(0,0,0,0.1);
    display: flex;
@@ -28,23 +28,24 @@
     border-radius: 20px;
 }
 
-.input_search[type=text] {
+.input_search[type=text]{
     padding: 12px 20px;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
   
-.icons {
+.icons{
     color: white;
-     width: 2em;
-      height: 2em;
-      position: relative;
-      left: 0px;
-    transition: left 2s ease;
+    width: 2em;
+    height: 2em;
+    position: relative;
+    left: 0px;
+    font-size: 2.5rem !important;
+    transition: left 2s ease !important;
 }
 
-.openIcon {
+.openIcon{
   left: 250px; /* Show the sidebar when it's open */
 } 
 
@@ -53,23 +54,24 @@
   text-align: center;
 }
 
-.SearchIcons {
+.SearchIcons{
   color: white;
-   font-size: 30px;
-    height: 1em;
-    margin-left: 10px;
-    position: relative;
-    top: 8px;
-    background-color: transparent;
+  font-size: 30px;
+  height: 1em;
+  margin-left: 10px;
+  position: relative;
+  top: 8px;
+  background-color: transparent;
 }
+
 .typoHeader{
   color: grey;
   font-size: 18px;
-  margin: 30px 100px 10px 0px;
+  margin: 30px 100px 10px 0px !important;
 }
 
 .typoColumn{
   font-size: 20px;
-  margin: 15px 70px 15px 0px;
+  margin: 15px 70px 15px 0px !important;
   color: #626060;
 }

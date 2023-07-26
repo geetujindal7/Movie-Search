@@ -1,5 +1,4 @@
 import axios from "axios";
-const { options } = require("@/modal");
 
 
 const initialData = [];
