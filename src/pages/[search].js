@@ -8,24 +8,16 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styles from "@/styles/search.module.css"
-import MovieItems from '@/Components/Movies/MovieItems'
+import ActorItems from '@/Components/Actors/ActorItems'
 
-const User = ({params}) => {
+const User = ({}) => {
   const router = useRouter()
-  const { search } = router.query
-
-  const filter = useSelector((state) => state.searchApi.state)
-  const [data, setData] = useState(filter)
-
-  useEffect(() => {
-    setData(filter)
-  }, [filter])
+  const { search, select } = router.query
   
   return (
 <>
-    {!filter?.error ? (<MovieItems filter={filter} data={data} search ={search}/>) : (
-      <Box>No Data Found</Box>
-    )
+    { select === "Actor" ? (
+      <ActorItems search ={search}/>) : ("ebhke" )
     }
     </>
   )

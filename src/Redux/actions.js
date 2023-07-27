@@ -1,4 +1,4 @@
-import { options } from "@/pages/modal";
+import { movie, options } from "@/pages/modal";
 import axios from "axios";
 
 
@@ -9,8 +9,6 @@ export const SearchApi = (p)  => {
     // Perform Axios request
     axios.request(options(p))
       .then((response) => {
-        console.log("entered then")
-
         // Dispatch action with the received user data
         dispatch({
           type: 'SearchApi',
@@ -18,9 +16,29 @@ export const SearchApi = (p)  => {
         });
       })
       .catch((error) => {
-        console.log("entered catch")
         console.log(error, "error")
         // Dispatch action when the API request fails
       });
   };
 }
+
+export const SearchMovie = (p)  => {
+  return (dispatch) => {
+    // Dispatch action to indicate that the API request has started
+    dispatch({ type: 'SearchMovie' });
+    // Perform Axios request
+    axios.request(movie(p))
+      .then((response) => {
+        // Dispatch action with the received user data
+        dispatch({
+          type: 'SearchMovie',
+          payload: response.data.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error, "error")
+        // Dispatch action when the API request fails
+      });
+  };
+}
+

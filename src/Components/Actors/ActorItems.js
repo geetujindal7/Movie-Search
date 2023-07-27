@@ -1,11 +1,22 @@
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "@/styles/search.module.css"
+import { useSelector } from 'react-redux'
 
 
-function MovieItems({filter, data, search}) {
+function ActorItems({search}) {
+
+  const filter = useSelector((state) => state.searchApi.state)
+  const [data, setData] = useState(filter)
+
+  useEffect(() => {
+    setData(filter)
+  }, [filter])
+
   return (
+    <>
+    { !filter?.error ? (
     <Box>
     <Image src={`https://image.tmdb.org/t/p/original/${filter?.[0]?.backdrop_path || filter?.[1]?.backdrop_path}`} width ={1500} height = {500} alt="actor image"/>
     <Box className={styles.name_container}>
@@ -24,11 +35,13 @@ function MovieItems({filter, data, search}) {
       <Typography className={styles.date}>Average Rating: {e.vote_average}/10</Typography>
       </Box>
   ))} 
-  
   </Box>
-
-    </Box>
+    </Box>) :  (
+      <Box>No Data Found</Box>
+    )
+    }
+    </>
   )
 }
 
-export default MovieItems
+export default ActorItems
