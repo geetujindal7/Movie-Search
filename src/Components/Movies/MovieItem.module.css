@@ -1,3 +1,24 @@
 .mainimage{
-    
+    display: flex;
+    /* text-align: center; */
+    /* margin-top: 30px; */
+    padding: 1rem;
+}
+
+.icons{
+    margin-top: 50vh;
+    font-size: 3pc !important;
+}
+
+.titleHeader{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* padding: 11rem; */
+    margin: 15rem 8rem;
+}
+
+.title{
+    font-size: 30px !important;
+    color: #767676 !important;
 }

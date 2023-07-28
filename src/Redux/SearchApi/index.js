@@ -18,10 +18,7 @@ export const SearchMovie = (state= movieData, action) => {
     switch(action.type) {
         case 'SearchMovie': 
             console.log(action.payload)
-            // if(action.payload[0].Text)
-            // {
-            //     console.log("entered")
-            // }
+          
             state =  {...state, state: action.payload}
             console.log(state)
             return state

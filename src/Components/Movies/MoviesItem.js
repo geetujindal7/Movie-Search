@@ -5,15 +5,22 @@ import { useSelector } from 'react-redux';
 import KeyboardDoubleArrowRightOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowRightOutlined';
 import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDoubleArrowLeftOutlined';
 import styles from './MovieItem.module.css'
+import Image from 'next/image'
+import Loading from '@/pages/loading';
 
 function MoviesItem() {
 	const filter = useSelector((state) => state.searchMovie.state);
-	const [ key, setKey ] = useState(filter?.length - 1);
+	const [loading, setLoading] = useState(true)
+	const [key, setKey] = useState(0);
+	console.log(filter)
 
-    useEffect(() => {
-      console.log(filter, key)
-    }, [filter, key])
-    
+	useEffect(() => {
+		if (filter) {
+			setLoading(false)
+			// setKey(filter.length - 1)
+		}
+	}, [filter, key, loading])
+
 	const handleLeft = () => {
 		if (key !== 0) {
 			setKey(key - 1);
@@ -33,18 +40,22 @@ function MoviesItem() {
 	};
 
 	return (
-        <>
-        {console.log(filter?.[0]?.Text ||  filter?.length === 0)}
-        {
-            filter?.[0]?.Text ||  filter?.length === 0 ? (<Box>No Data Found</Box>) : (<Box>
-			<KeyboardDoubleArrowLeftOutlinedIcon onClick={() => handleLeft()} />
-			<Box className={styles.mainimage}>
-            <img src={filter?.[key]?.Image} alt="values" width={500} height={500} />
-            </Box>
-			<KeyboardDoubleArrowRightOutlinedIcon onClick={() => handleRight()} />
-		</Box>)
-        }	
-        </>
+		<>
+			{
+				loading ? (<Box><Loading /></Box>) : (filter?.[0]?.Text || filter?.length === 0 ? (<Box>No Data Found</Box>) : (
+					<Box className={styles.mainimage}>
+						<KeyboardDoubleArrowLeftOutlinedIcon className={styles.icons} onClick={() => handleLeft()} />
+						<Box>
+							<Image src={filter[key]['Image']} alt="values" width={800} height={800} />
+						</Box>
+						<KeyboardDoubleArrowRightOutlinedIcon className={styles.icons} onClick={() => handleRight()} />
+						<Box className={styles.titleHeader}>
+						<Typography className={styles.title}>{filter[key]['Movie Title']}</Typography>
+						</Box>
+					</Box>
+				))
+			}
+		</>
 	);
 }
 
