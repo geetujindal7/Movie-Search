@@ -20,7 +20,7 @@ export const options = (search) => {
 export const movie = (search) =>  {
   return ({
     method: 'GET',
-    url: 'https://cinema-api.p.rapidapi.com/get_ids/Titanic/movies',
+    url: `https://cinema-api.p.rapidapi.com/get_ids/${search}/movies`,
     headers: {
       'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
       'X-RapidAPI-Host': 'cinema-api.p.rapidapi.com'

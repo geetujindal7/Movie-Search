@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styles from "@/styles/search.module.css"
 import ActorItems from '@/Components/Actors/ActorItems'
+import MoviesItem from '@/Components/Movies/MoviesItem'
 
 const User = ({}) => {
   const router = useRouter()
@@ -17,7 +18,7 @@ const User = ({}) => {
   return (
 <>
     { select === "Actor" ? (
-      <ActorItems search ={search}/>) : ("ebhke" )
+      <ActorItems search ={search}/>) : (<MoviesItem /> )
     }
     </>
   )

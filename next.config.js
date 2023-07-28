@@ -7,7 +7,7 @@ const nextConfig = {
     X_RapidAPI_Host: process.env.X_RapidAPI_Host,
   },
   images: {
-    domains : ['cdn-icons-png.flaticon.com', 'image.tmdb.org', 'media.istockphoto.com']
+    domains : ['cdn-icons-png.flaticon.com', 'image.tmdb.org', 'media.istockphoto.com', 'm.media-amazon.com']
   }
 }
 
