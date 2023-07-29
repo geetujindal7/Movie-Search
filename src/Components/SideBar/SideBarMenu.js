@@ -1,11 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import { Box, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styles from '@/Components/SideBar/popper.module.css';
 import axios from 'axios';
+import { AppContext } from '../AppContext';
+import Link from 'next/link';
+import { SearchApi } from '@/Redux/actions';
+import { useDispatch } from 'react-redux';
 
 function SideBarMenu() {
-	
+
+	const dispatch = useDispatch()
+	const { follow } = useContext(AppContext)
+
+	const followSet = [...new Set(follow)]
+
 	return (
 		<Box className={styles.sidebar_container}>
 			<img
@@ -19,8 +28,21 @@ function SideBarMenu() {
 			<Typography className={styles.typoColumn}>Coming Soon</Typography>
 			<hr />
 			<Typography className={styles.typoHeader}>Following</Typography>
-			<Typography className={styles.typoColumn}>Browse</Typography>
-			
+			<Box sx={{
+				height: "400px",
+				width: "200px",
+				overflow: "auto", 
+			}}>
+				{
+					followSet?.map((value, key) => (<Link key={key} href={`/search/${value}?select=Actor`}>
+						<Typography className={styles.typoColumn} onClick={() => dispatch(SearchApi(value))}>{value}</Typography>
+					</Link>))
+				}
+			</Box>
+
+
+
+
 		</Box>
 	);
 }

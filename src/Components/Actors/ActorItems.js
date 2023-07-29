@@ -1,10 +1,11 @@
 import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from "@/styles/search.module.css"
 import { useSelector } from 'react-redux'
 import Loading from '@/pages/loading'
-import NoData from '../Common/NoData'
+import NoData from '../../pages/404'
+import { AppContext } from '../AppContext'
 
 
 function ActorItems({ search }) {
@@ -12,22 +13,30 @@ function ActorItems({ search }) {
   const filter = useSelector((state) => state.searchApi.state)
   const [data, setData] = useState(filter)
   const [loading, setLoading] = useState(true)
+  const [followed, setFollowed] = useState(false)
+  console.log(!filter?.error , filter?.length !== 0)
+  const { follow, handleFollow } = useContext(AppContext)
 
   useEffect(() => {
     if (filter) {
       setData(filter)
       setLoading(false)
     }
-  }, [filter])  
+  }, [filter])
 
+
+  useEffect(() => {
+    setFollowed(follow.includes(search));
+  }, [follow, search])
+  
   return (
     <>
-      {loading ? (<Box><Loading /></Box>) : (!filter?.error ? (
+      {loading ? (<Box><Loading /></Box>) : (!filter?.error && filter?.length !== 0 ? (
         <Box>
-          <Image src={`https://image.tmdb.org/t/p/original/${filter?.[0]?.backdrop_path || filter?.[1]?.backdrop_path}`} width={1500} height={500} alt="actor image" />
+          <Image src={`https://image.tmdb.org/t/p/original/${filter?.[0]?.backdrop_path || filter?.[0]?.poster_path}`} width={1500} height={500} alt="actor image" />
           <Box className={styles.name_container}>
             <Typography className={styles.name}>{search}</Typography>
-            <button className={styles.follow}>Follow</button>
+            <button className={styles.follow} onClick={() => handleFollow(search, followed)}>{followed ? "Unfollow" : "Follow"}</button>
           </Box>
           <hr></hr>
           <Typography className={styles.movie_header}>Movies</Typography>

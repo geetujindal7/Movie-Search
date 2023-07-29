@@ -94,7 +94,7 @@ const Sidebar = () => {
               onChange={handleChange}
             />
           </FormGroup>     <input type="text" className={styles.input_search} placeholder={`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} />
-          <Link href={{ pathname: `/${search}`, query: { select: `${select}` } }}> <SearchIcon onClick={() => handleDispatch()} className={styles.SearchIcons} /></Link>
+          <Link href={{ pathname: `/search/${search}`, query: { select: `${select}` } }}> <SearchIcon onClick={() => handleDispatch()} className={styles.SearchIcons} /></Link>
         </Box>
       </Box>
       <Box className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>

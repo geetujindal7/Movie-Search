@@ -7,6 +7,7 @@ import KeyboardDoubleArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardDou
 import styles from './MovieItem.module.css'
 import Image from 'next/image'
 import Loading from '@/pages/loading';
+import NoData from '@/pages/404';
 
 function MoviesItem() {
 	const filter = useSelector((state) => state.searchMovie.state);
@@ -42,7 +43,7 @@ function MoviesItem() {
 	return (
 		<>
 			{
-				loading ? (<Box><Loading /></Box>) : (filter?.[0]?.Text || filter?.length === 0 ? (<Box>No Data Found</Box>) : (
+				loading ? (<Box><Loading /></Box>) : (filter?.[0]?.Text || filter?.length === 0 ? (<Box><NoData /></Box>) : (
 					<Box className={styles.mainimage}>
 						<KeyboardDoubleArrowLeftOutlinedIcon className={styles.icons} onClick={() => handleLeft()} />
 						<Box>
@@ -50,7 +51,7 @@ function MoviesItem() {
 						</Box>
 						<KeyboardDoubleArrowRightOutlinedIcon className={styles.icons} onClick={() => handleRight()} />
 						<Box className={styles.titleHeader}>
-						<Typography className={styles.title}>{filter[key]['Movie Title']}</Typography>
+							<Typography className={styles.title}>{filter[key]['Movie Title']}</Typography>
 						</Box>
 					</Box>
 				))
