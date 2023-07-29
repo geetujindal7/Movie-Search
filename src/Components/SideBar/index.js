@@ -38,7 +38,7 @@ const Sidebar = () => {
         transform: 'translateX(22px)',
       },
     },
-    
+
     '& .MuiSwitch-thumb': {
       backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
       width: 32,
@@ -51,7 +51,7 @@ const Sidebar = () => {
         left: 0,
         top: 0,
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',    
+        backgroundPosition: 'center',
       },
     },
     '& .MuiSwitch-track': {
@@ -66,41 +66,41 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-   if(checked) 
-   setSelect("Movie")
-   else
-   setSelect('Actor')
+    if (checked)
+      setSelect("Movie")
+    else
+      setSelect('Actor')
   }, [checked])
-  
+
 
   const handleDispatch = () => {
-    if(select === "Actor") {
+    if (select === "Actor") {
       dispatch(SearchApi(search))
     }
-    else{
+    else {
       dispatch(SearchMovie(search))
     }
   }
   return (
     <>
-    <Box className={styles.header_container}>
-      <MenuSharpIcon className={`${styles.icons} ${isOpen ? styles.openIcon : ''}`}  onClick={handleSidebarToggle} />
-     <Box sx={{backgroundColor: "transparent", display: "flex", gap:"10px"}}>
-     <FormGroup>
-      <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} />}
-        label={select}
-        checked={checked}
-        onChange={handleChange}
-      />
-    </FormGroup>     <input type="text" className={styles.input_search} placeholder= {`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} />
-     <Link href={{ pathname: `/${search}`, query: {select: `${select}` }}}> <SearchIcon onClick={()=> handleDispatch()} className={styles.SearchIcons}/></Link>
-     </Box>
-    </Box>
-    <Box className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
-      <SideBarMenu />
+      <Box className={styles.header_container}>
+        <MenuSharpIcon className={`${styles.icons} ${isOpen ? styles.openIcon : ''}`} onClick={handleSidebarToggle} />
+        <Box className={styles.formHeader}>
+          <FormGroup>
+            <FormControlLabel
+              control={<MaterialUISwitch sx={{ m: 1 }} />}
+              label={select}
+              checked={checked}
+              onChange={handleChange}
+            />
+          </FormGroup>     <input type="text" className={styles.input_search} placeholder={`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} />
+          <Link href={{ pathname: `/${search}`, query: { select: `${select}` } }}> <SearchIcon onClick={() => handleDispatch()} className={styles.SearchIcons} /></Link>
+        </Box>
       </Box>
-      </>
+      <Box className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
+        <SideBarMenu />
+      </Box>
+    </>
   );
 };
 

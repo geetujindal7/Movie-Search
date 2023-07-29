@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import styles from "@/styles/search.module.css"
 import { useSelector } from 'react-redux'
 import Loading from '@/pages/loading'
+import NoData from '../Common/NoData'
 
 
 function ActorItems({ search }) {
@@ -17,7 +18,7 @@ function ActorItems({ search }) {
       setData(filter)
       setLoading(false)
     }
-  }, [filter])
+  }, [filter])  
 
   return (
     <>
@@ -33,7 +34,7 @@ function ActorItems({ search }) {
           <Box className={styles.cardContainer}>
             {data?.map((e, key) => (
               <Box key={key} className={styles.card}>
-                <Image src={e.poster_path ? `https://image.tmdb.org/t/p/w500/${e.poster_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} alt="poster_path" width={400} height={200} />
+                <Image src={e.poster_path ? `https://image.tmdb.org/t/p/w500/${e.poster_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} alt="poster_path" width={400} height={300} />
                 <Typography className={styles.title}>{e.title}</Typography>
                 <Typography className={styles.overview}>{`${e.overview.slice(0, 200)}${e.overview.length > 200 ? "..." : " "}`}</Typography>
                 <Typography className={styles.date}>Release Date: {e.release_date}</Typography>
@@ -42,7 +43,7 @@ function ActorItems({ search }) {
             ))}
           </Box>
         </Box>) : (
-        <Box>No Data Found</Box>
+        <Box><NoData /></Box>
       ))
       }
     </>

@@ -56,11 +56,10 @@
 
 .SearchIcons{
   color: white;
-  font-size: 30px;
+  font-size: 30px !important;
   height: 1em;
-  margin-left: 10px;
   position: relative;
-  top: 8px;
+  top: 11px;
   background-color: transparent;
 }
 
@@ -74,4 +73,14 @@
   font-size: 20px;
   margin: 15px 70px 15px 0px !important;
   color: #626060;
+}
+
+.formHeader{
+  background-color: transparent; 
+  display: flex;
+   gap: 10px
+}
+
+.formHeader a {
+  background-color: transparent;
 }
