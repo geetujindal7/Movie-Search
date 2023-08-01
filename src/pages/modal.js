@@ -4,7 +4,7 @@ const { publicRuntimeConfig } = getConfig();
 
 
 export const options = (search) => {
-    return ({
+  return ({
     method: 'GET',
     url: `https://actor-movie-api1.p.rapidapi.com/getid/${search}`,
     params: {
@@ -14,16 +14,29 @@ export const options = (search) => {
       'X-RapidAPI-Key': publicRuntimeConfig.X_RapidAPI_Key,
       'X-RapidAPI-Host': publicRuntimeConfig.X_RapidAPI_Host
     }
-})
-  };
+  })
+};
 
-export const movie = (search) =>  {
+export const movie = (search) => {
   return ({
     method: 'GET',
     url: `https://cinema-api.p.rapidapi.com/get_ids/${search}/movies`,
     headers: {
       'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
       'X-RapidAPI-Host': 'cinema-api.p.rapidapi.com'
-    }})
-  };
-  
+    }
+  })
+};
+
+export const comingSoon = (l) => {
+  return ({
+    method: 'GET',
+    url: 'https://moviesdatabase.p.rapidapi.com/titles/x/upcoming',
+    params: {limit: l},
+    headers: {
+      'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
+      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+    }
+  })
+};
+

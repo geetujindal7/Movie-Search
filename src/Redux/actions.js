@@ -1,4 +1,4 @@
-import { movie, options } from "@/pages/modal";
+import { comingSoon, movie, options } from "@/pages/modal";
 import axios from "axios";
 
 
@@ -42,3 +42,23 @@ export const SearchMovie = (p)  => {
   };
 }
 
+export const ComingSoon = (p)  => {
+  return (dispatch) => {
+    // Dispatch action to indicate that the API request has started
+    dispatch({ type: 'ComingSoon' });
+    // Perform Axios request
+    axios.request(comingSoon(p))
+      .then((response) => {
+        console.log(response)
+        // Dispatch action with the received user data
+        dispatch({
+          type: 'ComingSoon',
+          payload: response.data.results,
+        });
+      })
+      .catch((error) => {
+        console.log(error, "error")
+        // Dispatch action when the API request fails
+      });
+  };
+}

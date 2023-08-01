@@ -11,17 +11,17 @@ import styles from "@/styles/search.module.css"
 import ActorItems from '@/Components/Actors/ActorItems'
 import MoviesItem from '@/Components/Movies/MoviesItem'
 
-const User = ({}) => {
-  const router = useRouter()
-  const { search, select } = router.query
-  
-  return (
-<>
-    { select === "Actor" ? (
-      <ActorItems search ={search}/>) : (<MoviesItem /> )
-    }
-    </>
-  )
+const User = ({ }) => {
+    const router = useRouter()
+    const { search, select } = router.query
+
+    return (
+        <>
+            {select === "Actor" ? (
+                <ActorItems search={search} />) : (<MoviesItem />)
+            }
+        </>
+    )
 }
 
 export default User

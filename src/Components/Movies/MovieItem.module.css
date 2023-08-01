@@ -15,10 +15,11 @@
     /* justify-content: center; */
     /* align-items: center; */
     /* padding: 11rem; */
-    margin: 15rem 8rem;
+    margin: 6rem 11rem;
 }
 
 .title{
     font-size: 30px !important;
-    color: #767676 !important;
+    color: #ffffff !important;
+    width: 12rem;
 }

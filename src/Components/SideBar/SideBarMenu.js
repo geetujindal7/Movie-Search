@@ -34,7 +34,7 @@ function SideBarMenu() {
 				overflow: "auto", 
 			}}>
 				{
-					followSet?.map((value, key) => (<Link key={key} href={`/search/${value}?select=Actor`}>
+					followSet?.map((value, key) => (<Link key={key}  href={{ pathname: `/search`, query: { select: `Actor`, search: `${value}` } }}>
 						<Typography className={styles.typoColumn} onClick={() => dispatch(SearchApi(value))}>{value}</Typography>
 					</Link>))
 				}

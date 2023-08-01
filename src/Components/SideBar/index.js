@@ -29,20 +29,27 @@ const Sidebar = () => {
     width: 62,
     height: 34,
     padding: 7,
+    // border: '1px solid',
     '& .MuiSwitch-switchBase': {
       margin: 1,
       padding: 0,
       transform: 'translateX(6px)',
+      border: '1px solid',
+
       '&.Mui-checked': {
         color: '#fff',
         transform: 'translateX(22px)',
+        border: '1px solid',
+
       },
     },
 
     '& .MuiSwitch-thumb': {
       backgroundColor: theme.palette.mode === 'dark' ? '#003892' : '#001e3c',
-      width: 32,
-      height: 32,
+      width: 29,
+      height: 30,
+      border: '1px solid',
+
       '&:before': {
         content: "''",
         position: 'absolute',
@@ -52,12 +59,15 @@ const Sidebar = () => {
         top: 0,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
+
       },
     },
     '& .MuiSwitch-track': {
       opacity: 1,
       // backgroundColor: theme.palette.mode === 'dark' ? '#8796A5' : '#aab4be',
       borderRadius: 20 / 2,
+      border: '1px solid',
+
     },
   }));
 
@@ -94,7 +104,7 @@ const Sidebar = () => {
               onChange={handleChange}
             />
           </FormGroup>     <input type="text" className={styles.input_search} placeholder={`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} />
-          <Link href={{ pathname: `/search/${search}`, query: { select: `${select}` } }}> <SearchIcon onClick={() => handleDispatch()} className={styles.SearchIcons} /></Link>
+          <Link href={{ pathname: `/search`, query: { select: `${select}`, search: `${search}` } }}> <SearchIcon onClick={() => handleDispatch()} className={styles.SearchIcons} /></Link>
         </Box>
       </Box>
       <Box className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}>
