@@ -28,11 +28,16 @@ export const movie = (search) => {
   })
 };
 
-export const comingSoon = (l) => {
+export const comingSoon = (l, genre= "Romance", page = "1", year='2023') => {
   return ({
     method: 'GET',
     url: 'https://moviesdatabase.p.rapidapi.com/titles/x/upcoming',
-    params: {limit: l},
+    params: {
+      year: year,
+      limit: l,
+      genre: genre,
+      page : page
+    },
     headers: {
       'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
       'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
@@ -40,3 +45,18 @@ export const comingSoon = (l) => {
   })
 };
 
+
+export const randomMovie = (l, lists = "most_pop_movies") => {
+  return ({
+    method: 'GET',
+  url: 'https://moviesdatabase.p.rapidapi.com/titles/random',
+  params: {
+    limit: l,
+    list: lists
+  },
+  headers: {
+    'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
+    'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+  }
+})
+}

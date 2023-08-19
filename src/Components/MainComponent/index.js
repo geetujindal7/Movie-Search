@@ -15,7 +15,7 @@ function MainComponent() {
                 The Soul Conductor
             </Box>
             <Box sx={{
-                display: "flex", marginTop: "-20px",
+                display: "flex", marginTop: "-41px",
                 background: "linear-gradient(rgb(17 17 17) 3%, rgb(49 74 125 / 0%) 18.6%),linear-gradient(180.13deg, rgb(67 75 92 / 0%) 62.57%, rgb(37 5 5) 88.89%);"
             }}>
 

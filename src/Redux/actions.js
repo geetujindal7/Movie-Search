@@ -1,4 +1,4 @@
-import { comingSoon, movie, options } from "@/pages/modal";
+import { comingSoon, movie, options, randomMovie } from "@/Redux/modal";
 import axios from "axios";
 
 
@@ -42,17 +42,37 @@ export const SearchMovie = (p)  => {
   };
 }
 
-export const ComingSoon = (p)  => {
+export const ComingSoon = (p, genre, page)  => {
+  console.log(genre)
   return (dispatch) => {
     // Dispatch action to indicate that the API request has started
     dispatch({ type: 'ComingSoon' });
     // Perform Axios request
-    axios.request(comingSoon(p))
+    axios.request(comingSoon(p, genre, page))
       .then((response) => {
-        console.log(response)
         // Dispatch action with the received user data
         dispatch({
           type: 'ComingSoon',
+          payload: response.data.results,
+        });
+      })
+      .catch((error) => {
+        console.log(error, "error")
+        // Dispatch action when the API request fails
+      });
+  };
+}
+
+export const randomMov = (l, list)  => {
+  return (dispatch) => {
+    // Dispatch action to indicate that the API request has started
+    dispatch({ type: 'randomMovie' });
+    // Perform Axios request
+    axios.request(randomMovie(l,list))
+      .then((response) => {
+        // Dispatch action with the received user data
+        dispatch({
+          type: 'randomMovie',
           payload: response.data.results,
         });
       })

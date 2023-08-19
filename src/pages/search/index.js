@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable @next/next/no-img-element */
-import { options } from '@/pages/modal'
+import { options } from '@/Redux/modal'
 import { Box, Button, Typography } from '@mui/material'
 import axios from 'axios'
 import Image from 'next/image'

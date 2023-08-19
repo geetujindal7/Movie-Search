@@ -15,5 +15,29 @@
 .card_container{
     display: flex;
     width: 100%;
-    overflow: scroll;
+    overflow: hidden,
+}
+
+.card_container_wrap{
+    display: flex;
+    width: 89%;
+    flex-wrap: wrap;
+}
+
+.stack{
+    width: 40%;
+    border-radius: 10px;
+    background-color: grey !important
+}
+
+.dropdown{
+    width: 7rem;
+     height: 2rem; 
+     border-radius: 12px;
+     padding: 6px;
+}
+
+.vl {
+  border-left: 1px solid grey;
+  height: auto;
 }

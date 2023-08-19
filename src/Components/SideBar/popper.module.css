@@ -11,7 +11,9 @@
   }
   
   .open{
-    left: 0; /* Show the sidebar when it's open */
+    left: 0; 
+    z-index: 1;
+    /* Show the sidebar when it's open */
   }
   
   .header_container{

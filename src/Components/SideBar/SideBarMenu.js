@@ -25,7 +25,9 @@ function SideBarMenu() {
 			<Typography className={styles.typoHeader}>News Feed</Typography>
 			<Typography className={styles.typoColumn}>Browse</Typography>
 			<Typography className={styles.typoColumn}>Wishlist</Typography>
-			<Typography className={styles.typoColumn}>Coming Soon</Typography>
+			<Link href='/ComingSoon'>
+			<Typography className={styles.typoColumn}>Coming</Typography>
+			</Link>
 			<hr />
 			<Typography className={styles.typoHeader}>Following</Typography>
 			<Box sx={{
