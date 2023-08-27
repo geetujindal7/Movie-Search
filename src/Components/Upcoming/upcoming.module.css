@@ -15,12 +15,16 @@
 .card_container{
     display: flex;
     width: 100%;
-    overflow: hidden,
+    overflow: auto
 }
+
+.card_container::-webkit-scrollbar {
+    display: none;
+  }
 
 .card_container_wrap{
     display: flex;
-    width: 89%;
+    width: 100%;
     flex-wrap: wrap;
 }
 
@@ -40,4 +44,13 @@
 .vl {
   border-left: 1px solid grey;
   height: auto;
+}
+
+.name{
+    position: relative;
+    bottom: 2.5rem;
+    margin-left: 20px;
+    color: white;
+    font-size: 18px;
+    opacity: 0.7;
 }

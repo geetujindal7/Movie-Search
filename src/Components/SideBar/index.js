@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './popper.module.css'; // Import the CSS module
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
-import { Box, FormControlLabel, FormGroup, Stack, Switch, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { Box, FormControlLabel, FormGroup, Switch, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import SideBarMenu from './SideBarMenu';
 import SearchIcon from '@mui/icons-material/Search';
 import Link from 'next/link';
@@ -96,14 +96,16 @@ const Sidebar = () => {
       <Box className={styles.header_container}>
         <MenuSharpIcon className={`${styles.icons} ${isOpen ? styles.openIcon : ''}`} onClick={handleSidebarToggle} />
         <Box className={styles.formHeader}>
-          <FormGroup>
+          <FormGroup className={styles.tooltiponhover}>
             <FormControlLabel
               control={<MaterialUISwitch sx={{ m: 1 }} />}
               label={select}
               checked={checked}
               onChange={handleChange}
             />
-          </FormGroup>     <input type="text" className={styles.input_search} placeholder={`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} />
+          </FormGroup>    
+          <Typography className={styles.tooltip}>Click for the {select=== "Actor" ? 'Movie' : 'Actor'}</Typography>
+           <input type="text" className={styles.input_search} placeholder={`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} />
           <Link href={{ pathname: `/search`, query: { select: `${select}`, search: `${search}` } }}> <SearchIcon onClick={() => handleDispatch()} className={styles.SearchIcons} /></Link>
         </Box>
       </Box>

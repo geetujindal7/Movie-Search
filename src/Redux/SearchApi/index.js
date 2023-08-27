@@ -3,7 +3,12 @@ import axios from "axios";
 
 const actorData = [];
 const movieData = [];
-const comingSoon = [];
+const comingSoon = [
+    {
+        data: [],
+        loading: true
+    }
+];
 const randomMovie = [];
 
 const SearchApi = (state= actorData, action) => {

@@ -7,16 +7,17 @@ import Sidebar from '@/Components/SideBar'
 import Upcoming from '@/Components/Upcoming'
 import { ComingSoon, randomMov } from '@/Redux/actions'
 import { Box } from '@mui/material'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 // import styles from '@/styles/Home.module.css'
 
 export default function Home() {
   
   return <>
-      <Box>
-        <Sidebar />
-        <MainComponent /> 
-        <Upcoming comingSoon = {"comingSoon"} ComingSoon = {ComingSoon} title={"Coming Soon"}/>
-        <Upcoming ComingSoon = {randomMov} title={"Favourite"}/>
-      </Box>
+    <Box>
+      <MainComponent />
+      <Upcoming comingSoon={"comingSoon"} ComingSoon={ComingSoon} title={"Coming Soon"} />
+      <Upcoming ComingSoon={randomMov} title={"Favourite"} />
+    </Box>
   </>
 }

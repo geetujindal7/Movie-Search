@@ -1,25 +1,30 @@
 .mainimage{
-    display: flex;
+    /* display: flex; */
     /* text-align: center; */
     /* margin-top: 30px; */
     padding: 1rem;
 }
 
+.mainImageDetail{
+    padding: 1rem;
+    display: flex
+}
+
 .icons{
-    margin-top: 50vh;
+    margin-top: 33vh;
     font-size: 3pc !important;
 }
 
 .titleHeader{
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
+    justify-content: center; 
+     align-items: center;
     /* padding: 11rem; */
-    margin: 6rem 11rem;
+    margin: 1rem 0rem;
 }
 
 .title{
     font-size: 30px !important;
     color: #ffffff !important;
-    width: 12rem;
+    /* width: 12rem; */
 }

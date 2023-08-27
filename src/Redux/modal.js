@@ -28,7 +28,7 @@ export const movie = (search) => {
   })
 };
 
-export const comingSoon = (l, genre= "Romance", page = "1", year='2023') => {
+export const comingSoon = (l, genre= "Crime", page = "2", year='2023') => {
   return ({
     method: 'GET',
     url: 'https://moviesdatabase.p.rapidapi.com/titles/x/upcoming',
@@ -46,7 +46,7 @@ export const comingSoon = (l, genre= "Romance", page = "1", year='2023') => {
 };
 
 
-export const randomMovie = (l, lists = "most_pop_movies") => {
+export const randomMovie = (l, lists) => {
   return ({
     method: 'GET',
   url: 'https://moviesdatabase.p.rapidapi.com/titles/random',

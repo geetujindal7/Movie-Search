@@ -15,7 +15,6 @@ function ActorItems({ search }) {
   const [data, setData] = useState(filter)
   const [loading, setLoading] = useState(true)
   const [followed, setFollowed] = useState(false)
-  console.log(!filter?.error, filter?.length !== 0)
   const { follow, handleFollow } = useContext(AppContext)
 
   useEffect(() => {

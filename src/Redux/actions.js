@@ -53,7 +53,7 @@ export const ComingSoon = (p, genre, page)  => {
         // Dispatch action with the received user data
         dispatch({
           type: 'ComingSoon',
-          payload: response.data.results,
+          payload: response.data,
         });
       })
       .catch((error) => {
@@ -66,7 +66,7 @@ export const ComingSoon = (p, genre, page)  => {
 export const randomMov = (l, list)  => {
   return (dispatch) => {
     // Dispatch action to indicate that the API request has started
-    dispatch({ type: 'randomMovie' });
+    // dispatch({ type: 'randomMovie' });
     // Perform Axios request
     axios.request(randomMovie(l,list))
       .then((response) => {

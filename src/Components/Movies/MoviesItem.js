@@ -44,16 +44,19 @@ function MoviesItem() {
 		<>
 			{
 				loading ? (<Box><Loading /></Box>) : (filter?.[0]?.Text || filter?.length === 0 ? (<Box><NoData /></Box>) : (
-					<Box className={styles.mainimage}>
+					<>
+					<Box sx={{display: "flex", marginLeft: "10rem", marginTop: "5rem"}}>
 						<KeyboardDoubleArrowLeftOutlinedIcon className={styles.icons} onClick={() => handleLeft()} />
 						<Box>
-							<Image src={filter[key]['Image']} alt="values" width={800} height={800} />
+							<Image style={{borderRadius: "15px"}} src={filter[key]['Image']} alt="values" width={1000} height={600} />
 						</Box>
 						<KeyboardDoubleArrowRightOutlinedIcon className={styles.icons} onClick={() => handleRight()} />
-						<Box className={styles.titleHeader}>
+						
+					</Box>
+					<Box className={styles.titleHeader}>
 							<Typography className={styles.title}>{filter[key]['Movie Title']}</Typography>
 						</Box>
-					</Box>
+					</>
 				))
 			}
 		</>

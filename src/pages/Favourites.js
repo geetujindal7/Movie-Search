@@ -20,7 +20,7 @@ import {
 import { randomMov } from "@/Redux/actions";
 import Random from "@/Components/Random";
   
-  function ComingSoonMovie() {
+  function Favourites() {
     const filter = useSelector((state) => state.randomMovie.state);
     const dispatch = useDispatch();
     const [genre, setGenre] = useState("most_pop_movies");
@@ -83,5 +83,5 @@ import Random from "@/Components/Random";
     );
   }
   
-  export default ComingSoonMovie;
+  export default Favourites;
   
