@@ -1,4 +1,4 @@
-import { comingSoon, movie, options, randomMovie } from "@/Redux/modal";
+import { comingSoon, keyword, movie, options, randomMovie } from "@/Redux/modal";
 import axios from "axios";
 
 
@@ -75,6 +75,22 @@ export const randomMov = (l, list)  => {
         dispatch({
           type: 'randomMovie',
           payload: response.data.results,
+        });
+      })
+      .catch((error) => {
+        console.log(error, "error")
+        // Dispatch action when the API request fails
+      });
+  };
+}
+
+export const Keyword = (search) => {
+  return (dispatch) => {   
+    axios.request(keyword(search))
+      .then((response) => {
+        dispatch({
+          type: 'keyword',
+          payload: response.data,
         });
       })
       .catch((error) => {

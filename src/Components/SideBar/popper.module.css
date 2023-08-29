@@ -102,3 +102,18 @@
 .tooltiponhover:hover + .tooltip {    /* Uses the adjacent sibling selector */
   visibility: visible;  /* Or display: block */
 }
+
+.dropdownlist {
+  background: #313131;
+    padding: 13px 18px;
+    width: 11.7rem;
+    z-index: 99;
+    margin-top: 3px;
+    /* display: inline-block; */
+    border: 1px solid #ccc;
+    position: absolute;
+    /* box-sizing: border-box; */
+    /* background: gray; */
+    border-radius: 10px;
+
+}

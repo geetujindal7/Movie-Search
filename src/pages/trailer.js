@@ -33,7 +33,7 @@ function Trailer({ result }) {
                                 marginTop: "5px",
                                 fontSize: "1.2rem",
                                 color: "black"
-                            }}>{value.name}</Typography>
+                            }}>{value.name.slice(0,37)}</Typography>
                         </Box>
                     ))
                 }

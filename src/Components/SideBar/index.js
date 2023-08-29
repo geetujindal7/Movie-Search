@@ -7,8 +7,8 @@ import { Box, FormControlLabel, FormGroup, Switch, ToggleButton, ToggleButtonGro
 import SideBarMenu from './SideBarMenu';
 import SearchIcon from '@mui/icons-material/Search';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
-import { SearchApi, SearchMovie } from '@/Redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { SearchApi, SearchMovie, Keyword } from '@/Redux/actions';
 import { styled } from '@mui/material/styles';
 
 
@@ -16,6 +16,10 @@ const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("")
   const [select, setSelect] = useState("Actor")
+  const filter = useSelector((state) => state.keywords.state);
+  console.log(filter)
+  const [open, setOpen] = useState(false)
+
 
   const dispatch = useDispatch()
 
@@ -82,6 +86,14 @@ const Sidebar = () => {
       setSelect('Actor')
   }, [checked])
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (search) {
+        dispatch(Keyword(search))
+      }
+    }, [1000])
+  }, [search])
+
 
   const handleDispatch = () => {
     if (select === "Actor") {
@@ -92,6 +104,18 @@ const Sidebar = () => {
     }
     setSearch("")
   }
+
+  const handleInputClick = (val) => {
+    if (select === "Actor") {
+      dispatch(SearchApi(val))
+    }
+    else {
+      dispatch(SearchMovie(val))
+    }
+    setOpen(false)
+    setSearch("")
+  }
+
   return (
     <>
       <Box className={styles.header_container}>
@@ -104,9 +128,19 @@ const Sidebar = () => {
               checked={checked}
               onChange={handleChange}
             />
-          </FormGroup>    
-          <Typography className={styles.tooltip}>Click for the {select=== "Actor" ? 'Movie' : 'Actor'}</Typography>
-           <input type="text" className={styles.input_search} placeholder={`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} />
+          </FormGroup>
+          <Typography className={styles.tooltip}>Click for the {select === "Actor" ? 'Movie' : 'Actor'}</Typography>
+          <Box className={styles.dropdown}>
+            <input type="text" className={styles.input_search} placeholder={`Search  ${select}`} value={search} onChange={(e) => setSearch(e.target.value)} onClick={() => setOpen(true)} />
+            {
+              (filter?.results.length !== 0 && search) && <Box className={styles.dropdownlist}>
+                {open && filter?.results?.map((val, key) => (
+                  <Link key={key} href={{ pathname: `/search`, query: { select: `${select}`, search: `${val.name}` } }}>
+                    <Typography sx={{ margin: "10px", textTransform: "capitalize" }} onClick={() => handleInputClick(val.name)}>{val.name}</Typography></Link>
+                ))}
+              </Box>
+            }
+          </Box>
           <Link href={{ pathname: `/search`, query: { select: `${select}`, search: `${search}` } }}> <SearchIcon onClick={() => handleDispatch()} className={styles.SearchIcons} /></Link>
         </Box>
       </Box>

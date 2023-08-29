@@ -9,6 +9,7 @@ const comingSoon = [
         loading: true
     }
 ];
+const keywords = [];
 const randomMovie = [];
 
 const SearchApi = (state= actorData, action) => {
@@ -54,5 +55,16 @@ export const RandomMovie = (state = randomMovie, action) => {
             return state;
     }
 }
+
+export const Keyboard = (state = keywords, action) => {
+    switch(action.type) {
+        case 'keyword': 
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
+
 
 export default SearchApi

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import styles from "./slider.module.css"
@@ -14,21 +14,34 @@ function MainComponent({ result }) {
 
   useEffect(() => {
     // Automatically advance to the next slide every 10 seconds
-    const timer = setInterval(nextSlide, 2000); // 10,000 milliseconds = 10 seconds
-
+    const timer = setInterval(nextSlide, 5000); // 10,000 milliseconds = 10 seconds
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <>
-      <Box sx={{ marginTop: "-80px" }}>
-        {
+    <Box>
+       <Box sx={{height: "36rem"}}>
+       {
           result?.results?.map((value, index) => (
             <>
-              <Box key={value.overview} sx={{
+                <Box>
+                  <Image style={{
+                    opacity: "0.3", borderRadius: "2%", background: `url(https://image.tmdb.org/t/p/original/${value.poster_path})`,
+                    /* padding-left: 128pc; */
+                    /* padding-bottom: 29pc; */
+                    padding: "17pc",
+                    clip: "rect(50px,275px,198px,142px)",
+                    /* left: -60px; */
+                    /* object-fit: cover; */
+                    backgroundSize: "90pc 50pc",
+                    backgroundRepeat: "no-repeat"
+                  }} src={`https://image.tmdb.org/t/p/original/${value.poster_path}`} width={800} height={500} alt="image" className={index === currentIndex ? `${styles.slide} ${styles.active}` : `${styles.slide}`}
+                  />
+                </Box>
+                <Box key={value.overview} sx={{
                 position: "relative",
-                top: "27rem",
-                left: "5vw",
+                bottom: "16rem",
+                left: "3vw",
                 display: "inline"
               }}
               >
@@ -46,44 +59,22 @@ function MainComponent({ result }) {
                   wordWrap: "break-word",
                   width: "80%"
                 }} className={index === currentIndex ? `${styles.slide} ${styles.active}` : `${styles.slide}`}>{value.overview}</Typography>
-              </Box>
-              <Link href={{
+                 <Link href={{
                 pathname: "trailer",
                 query: {
                   id: value.id,
                 }
               }}>
-
-                <Box sx={{
-                  display: "flex",
-                  background: "linear-gradient(180deg, rgb(0 0 0) 15%, rgb(0 0 0) 42%, rgb(0 0 0) 102%);",
-                  width: "100%",
-                  justifyContent: "center"
-                }}>
-                  <Image style={{
-                    opacity: "0.3", borderRadius: "2%", background: `url(https://image.tmdb.org/t/p/original/${value.poster_path})`,
-                    /* padding-left: 128pc; */
-                    /* padding-bottom: 29pc; */
-                    padding: "17pc",
-                    clip: "rect(50px,275px,198px,142px)",
-                    /* left: -60px; */
-                    /* object-fit: cover; */
-                    backgroundSize: "90pc 50pc",
-                    backgroundRepeat: "no-repeat"
-                  }} src={`https://image.tmdb.org/t/p/original/${value.poster_path}`} width={800} height={500} alt="image" className={index === currentIndex ? `${styles.slide} ${styles.active}` : `${styles.slide}`}
-                  />
-                </Box>
-              </Link>
-
+               <button className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.watch}` : `${styles.slide} ${styles.watch}`}>Watch Now</button></Link>
+              </Box>
             </>
           ))
         }
-      </Box>
-      <Box sx={{ marginTop: "3rem" }}>
+       </Box>
+      <Box>
         <Image src="https://v3img.voot.com/resizeMedium,w_1920,h_411/v3Storage/assets/kaalkoot_launch_03_cta-14x3-1690815691064.jpg?imformat=chrome" width={1200} height={200} alt="image" />
       </Box>
-
-    </>
+    </Box>
   )
 }
 
