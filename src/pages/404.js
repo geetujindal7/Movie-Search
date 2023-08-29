@@ -2,6 +2,8 @@ import { Box, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import Router from 'next/router'
+
 
 function NoData() {
 
@@ -41,12 +43,11 @@ function NoData() {
                 justifyContent: "center",
                 marginTop: "30px"
             }}>
-                <Link href="/">
-                    <button style={handleBack}>Go Back</button>
-                </Link>
+                {/* <Link href="/"> */}
+                    <button onClick={() => Router.back()} style={handleBack}>Go Back</button>
+                {/* </Link> */}
             </Box>
         </>
     )
 }
-
 export default NoData

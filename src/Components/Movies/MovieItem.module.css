@@ -28,3 +28,14 @@
     color: #ffffff !important;
     /* width: 12rem; */
 }
+
+.buttn{
+    border: 1px solid white !important;
+    padding: 5px 2px !important;
+    color: aliceblue !important;
+    margin-top: 6px !important;
+    justify-content: center;
+    display: flex;
+    /* text-align: center; */
+    width: 35%;
+}

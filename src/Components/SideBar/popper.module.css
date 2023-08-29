@@ -12,13 +12,13 @@
   
   .open{
     left: 0; 
-    z-index: 1;
+    z-index: 11;
     background-color: #323232;
     /* Show the sidebar when it's open */
   }
   
   .header_container{
-    padding: 13px 12px 0px 12px;
+    padding: 13px 12px 12px 12px;
     box-shadow: inset 100px 100px 100px 100px rgba(0,0,0,0.1);
    display: flex;
    justify-content: space-between;

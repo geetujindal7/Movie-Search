@@ -29,10 +29,11 @@ export const SearchMovie = (p)  => {
     // Perform Axios request
     axios.request(movie(p))
       .then((response) => {
+        console.log(response)
         // Dispatch action with the received user data
         dispatch({
           type: 'SearchMovie',
-          payload: response.data.data,
+          payload: response.data.results,
         });
       })
       .catch((error) => {

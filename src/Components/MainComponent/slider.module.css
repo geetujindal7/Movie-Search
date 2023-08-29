@@ -1,0 +1,68 @@
+Slider container
+.slider {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Individual slide */
+  .slide {
+   /* Each slide takes 100% of the slider's width */
+    transition: transform 0.5s ease; /* Slide transition */
+  }
+  
+  /* Make the active slide visible, translate it to the center */
+  .slide.active {
+    transform: translateX(0%);
+  }
+  
+  /* Style the images inside each slide */
+  .slide img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Additional styling as needed */
+  
+  .imageslider {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+  }
+  
+  .imageslider img {
+    /* width: 100%; */
+    height: auto;
+    display: block;
+  }
+  
+  /* styles.css */
+
+/* Style for the image slider container */
+.imageslider {
+    position: relative;
+    /* width: 100%; */
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  /* Style for individual slides */
+  .slide {
+    width: 100%;
+    display: none;
+    transition: opacity 0.5s ease; /* Add a fade-in/fade-out transition */
+  }
+  
+  /* Style for the active slide */
+  .slide.active {
+    display: block;
+  }
+  
+  /* Style for image captions (optional) */
+  .slide img {
+    width: 70%;
+    height: auto;
+  }

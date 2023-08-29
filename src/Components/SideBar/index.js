@@ -90,6 +90,7 @@ const Sidebar = () => {
     else {
       dispatch(SearchMovie(search))
     }
+    setSearch("")
   }
   return (
     <>
