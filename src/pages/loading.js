@@ -7,7 +7,7 @@ position: relative;
   width: 100%;
   opacity: 0;
   animation: fade 0.4s ease-in forwards;
-  background: grey;
+  background: #121212;
 
   @keyframes fade {
     0% {

@@ -6,20 +6,24 @@ import { useSelector } from 'react-redux'
 import styles from "@/Components/Movies/MovieItem.module.css"
 import axios from 'axios'
 import Loading from '@/pages/loading'
+import RelatedDetails from '@/Components/RelatedDetails'
 
 function Detail({ result }) {
+    console.log(result)
     const overview = {
         fontSize: "17px",
-        padding: "10px 0rem",
-        color: "#7d7d7d",
+        padding: "3px 0rem",
+        color: "white",
         // marginLeft: "24px"
     }
     const overview_title = {
-        fontSize: "32px",
+        fontSize: "38px",
         padding: "1rem 0rem",
         color: "rgb(255 255 255)",
         /* font-style: inherit; */
-        fontWeight: "500",
+        fontWeight: "bold",
+        width: "32%",
+        wordWrap: "break-word",
     }
 
     const filter = useSelector((state) => state.searchApi.state)
@@ -27,41 +31,45 @@ function Detail({ result }) {
     const { detail } = router.query
     const data = filter.filter((e) => e.id == detail)
     const [loading, setLoading] = useState(true)
+    console.log(filter)
 
     useEffect(() => {
-       setTimeout(() => {
-        setLoading(false)
-       }, 2000)
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000)
     }, [result])
 
     return (
         <>
             {
                 loading ? <Loading /> : (
-                    <Box className={styles.mainimage}>
-                        <Box>
-                            {
-                                result.results.length !== 0 ? (<Box>
-                                    <iframe
-                                        width="1400"
-                                        height="600"
-                                        src={`https://www.youtube.com/embed/${result.results[0].key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${result.results[0].key};wmode=transparent`}
-                                        title="YouTube Trailer"
-                                        frameborder="0"
-                                    ></iframe>
-                                </Box>) : <Image style={{ borderRadius: "10px", width: "100%" }} src={data[0].backdrop_path ? `https://image.tmdb.org/t/p/original/${data[0].backdrop_path}` : `https://image.tmdb.org/t/p/original/${data[0].poster_path}`} alt="values" width={1100} height={450} />
-                            }
+                    <>
+                        <Box className={styles.mainimage}>
+                            <Box>
+                                {
+                                    result.results.length !== 0 ? (<Box>
+                                        <iframe
+                                            width="1400"
+                                            height="600"
+                                            src={`https://www.youtube.com/embed/${result.results[0].key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${result.results[0].key};wmode=transparent`}
+                                            title="YouTube Trailer"
+                                            frameborder="0"
+                                        ></iframe>
+                                    </Box>) : <Image style={{ borderRadius: "8px", width: "100%", height: "81vh", opacity: "0.2" }} src={data[0].backdrop_path ? `https://image.tmdb.org/t/p/original/${data[0].backdrop_path}` : `https://image.tmdb.org/t/p/original/${data[0].poster_path}`} alt="values" width={1100} height={450} />
+                                }
+                            </Box>
+                            <Box sx={{ position: "relative", bottom: "14rem", padding: "18px" }}>
+                                <Typography style={overview_title}>{`${data[0].title} (${data[0].original_title})`}</Typography>
+                            </Box>
                         </Box>
-                        <Box >
-                            <Typography style={overview_title}>{`${data[0].title} (${data[0].original_title})`}</Typography>
-                            <Typography style={overview}>{data[0].overview}</Typography>
-                            <Typography style={overview}>Release Date: {data[0].release_date}</Typography>
-                            <Typography style={overview}>Average Rating: {data[0].vote_average.toFixed(1)}/10</Typography>
-                            <Typography style={overview}>Character: {data[0].character}</Typography>
-                            <Typography style={overview}>Adult Movie: {data[0].adult ? "Yes" : "No"}</Typography>
-
+                        <Box sx={{
+                            // bottom: "17rem",
+                            // display: "flex",
+                            // justifyContent: "center"
+                        }}>
+                            <RelatedDetails data={data}/>
                         </Box>
-                    </Box>
+                    </>
                 )
             }
         </>
@@ -69,7 +77,6 @@ function Detail({ result }) {
 }
 
 export async function getServerSideProps(context) {
-    console.log(context)
     const options = {
         method: 'GET',
         url: `https://api.themoviedb.org/3/movie/${context.query.detail}/videos`,

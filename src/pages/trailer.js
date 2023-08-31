@@ -1,44 +1,68 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Box, Typography } from '@mui/material';
 import styles from "@/Components/MainComponent/slider.module.css"
+import { CircularProgress } from '@mui/material';
+import Loading from './loading';
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import Link from "next/link";
+import Router from 'next/router'
 
 function Trailer({ result }) {
-    return (
-        <Box sx={{ marginTop: "4rem" }}>
-            <Box sx={{
-                display: "flex", justifyContent: "space-evenly",
-                gap: "30px",
-                flexWrap: "wrap",
-                margin: "20px"
-            }}>
+    const [loading, setLoading] = useState(true)
 
-                {
-                    result?.results?.map((value, key) => (
-                        <Box key={key} sx={{
-                            borderRadius: "15px",
-                            height: "24rem",
-                            background: "grey"
-                        }}>
-                            <iframe
-                                width="430"
-                                height="330"
-                                src={`https://www.youtube.com/embed/${value.key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${value.key};wmode=transparent`}
-                                title="YouTube Trailer"
-                                frameborder="0"
-                            ></iframe>
-                            <Typography sx={{
-                                width: "100%",
-                                textAlign: "center",
-                                marginTop: "5px",
-                                fontSize: "1.2rem",
-                                color: "black"
-                            }}>{value.name.slice(0,37)}</Typography>
-                        </Box>
-                    ))
-                }
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    })
+    return (
+        <>
+            <Box
+                sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
+            >
+                <Box sx={{ display: "flex", gap: "5px", padding: "19px 9px 0px 3px" }}>
+                        <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
+                    <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography>
+                </Box>
             </Box>
-        </Box>
+            {
+                loading ? <Loading /> : (<Box>
+                    <Box sx={{
+                        display: "flex", justifyContent: "space-evenly",
+                        gap: "30px",
+                        flexWrap: "wrap",
+                        margin: "20px"
+                    }}>
+
+                        {
+                            result?.results?.slice(0, 5).map((value, key) => (
+                                <Box key={key} sx={{
+                                    borderRadius: "8px",
+                                    height: "25.5rem",
+                                    background: "#121212"
+                                }}>
+                                    <iframe
+                                        width="640"
+                                        height="360"
+                                        src={`https://www.youtube.com/embed/${value.key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${value.key};wmode=transparent`}
+                                        title="YouTube Trailer"
+                                        frameborder="0"
+                                    ></iframe>
+                                    <Typography sx={{
+                                        width: "100%",
+                                        textAlign: "center",
+                                        marginTop: "5px",
+                                        fontSize: "1.2rem",
+                                        color: "white"
+                                    }}>{value.name.slice(0, 37)}</Typography>
+                                </Box>
+                            ))
+                        }
+                    </Box>
+                </Box>)
+            }
+        </>
     )
 }
 

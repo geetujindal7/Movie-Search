@@ -9,12 +9,13 @@ import Image from 'next/image'
 import Loading from '@/pages/loading';
 import NoData from '@/pages/404';
 import Link from 'next/link';
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import Router from 'next/router'
 
 function MoviesItem() {
 	const filter = useSelector((state) => state.searchMovie.state);
 	const [loading, setLoading] = useState(true)
 	const [key, setKey] = useState(0);
-	console.log(filter)
 
 	useEffect(() => {
 		if (filter) {
@@ -47,7 +48,15 @@ function MoviesItem() {
 			{
 				loading ? (<Box><Loading /></Box>) : (filter?.length === 0 ? (<Box><NoData /></Box>) : (
 					<>
-						<Box sx={{ display: "flex", marginTop: "2.5rem", justifyContent: "space-between", flexWrap: "wrap" }}>
+						<Box
+							sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
+						>
+							<Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
+									<KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
+								<Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography>
+							</Box>
+						</Box>
+						<Box sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
 							{
 								filter?.map((value, key) => (
 									(value?.backdrop_path || value?.poster_path) &&

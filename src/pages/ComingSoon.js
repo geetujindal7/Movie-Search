@@ -20,6 +20,7 @@ import Stack from "@mui/material/Stack";
 import { ComingSoon } from "@/Redux/actions";
 import ComingSoonFilters from "@/Components/Upcoming/ComingSoonFilters";
 import Loading from "./loading";
+import Router from 'next/router'
 
 function ComingSoonMovie() {
   const filter = useSelector((state) => state.comingSoon.state);
@@ -29,10 +30,11 @@ function ComingSoonMovie() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true)
   // const [count, setCount] = useState(2)
-
   const handlePageChange = (event, value) => {
     setPage(value);
   };
+
+  console.log(filter)
 
 
   useEffect(() => {
@@ -77,9 +79,7 @@ function ComingSoonMovie() {
         sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
       >
         <Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
-          <Link href={"/"}>
-            <KeyboardArrowLeftIcon sx={{ fontSize: "2rem" }} />
-          </Link>
+            <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
           <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Coming Soon</Typography>
           <Box sx={{ position: "absolute", right: "40px" }}>
             <ComingSoonFilters handleGenreChange={handleGenreChange} />
@@ -90,16 +90,25 @@ function ComingSoonMovie() {
         loading ? <Box><Loading /></Box> : (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box sx={{ padding: "20px", fontSize: "1.5rem" }}>
-
               <Box className={styles.card_container_wrap}>
                 {!(filter?.results?.length === 0) ? (
                   filter?.results?.map((value, key) => {
                     return (
-                      value?.primaryImage?.url && (
+                      value?.primaryImage?.url ? (
                         <Box key={key} className={styles.Card}>
                           <Image
                             style={{ borderRadius: "12px" }}
                             src={value?.primaryImage?.url}
+                            width={250}
+                            height={300}
+                            alt="primaryImage"
+                          />
+                        </Box>
+                      ) : (
+                        <Box className={styles.Card}>
+                          <Image
+                            style={{ borderRadius: "12px" }}
+                            src={"https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="}
                             width={250}
                             height={300}
                             alt="primaryImage"

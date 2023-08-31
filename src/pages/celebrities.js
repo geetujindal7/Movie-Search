@@ -55,7 +55,6 @@ export async function getServerSideProps() {
     const response = await axios.request(options);
     const result = response.data.data
     // const result = await response.text();
-    // console.log(result)
     return {
         props: {
             result,

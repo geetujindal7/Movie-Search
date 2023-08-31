@@ -1,78 +1,81 @@
-Slider container
-.slider {
-    width: 100%;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  /* Individual slide */
-  .slide {
-   /* Each slide takes 100% of the slider's width */
-    transition: transform 0.5s ease; /* Slide transition */
-  }
-  
-  /* Make the active slide visible, translate it to the center */
-  .slide.active {
-    transform: translateX(0%);
-  }
-  
-  /* Style the images inside each slide */
-  .slide img {
-    width: 100%;
-    height: auto;
-  }
-  
-  /* Additional styling as needed */
-  
-  .imageslider {
-    position: relative;
-    width: 100%;
-    max-width: 800px; /* Adjust as needed */
-    margin: 0 auto;
-  }
-  
-  .imageslider img {
-    /* width: 100%; */
-    height: auto;
-    display: block;
-  }
-  
-  /* styles.css */
+Slider container .slider {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
 
-/* Style for the image slider container */
-.imageslider {
-    position: relative;
-    /* width: 100%; */
-    max-width: 800px; /* Adjust as needed */
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  
-  /* Style for individual slides */
-  .slide {
-    width: 100%;
-    display: none;
-    transition: opacity 0.5s ease; /* Add a fade-in/fade-out transition */
-  }
-  
-  /* Style for the active slide */
-  .slide.active {
-    display: block;
-  }
-  
-  /* Style for image captions (optional) */
-  .slide img {
-    width: 70%;
-    height: auto;
-  }
+/* Individual slide */
+.slide {
+  /* Each slide takes 100% of the slider's width */
+  transition: transform 0.5s ease;
+  /* Slide transition */
+}
 
-  .watch{
-    border-radius: 15px;
-    margin-top: 10px;
-    width: 10rem;
-    height: 2.5rem;
-    background: aliceblue;
-    color: black;
-    border: 0;
-  }
+/* Make the active slide visible, translate it to the center */
+.slide.active {
+  transform: translateX(0%);
+}
+
+/* Style the images inside each slide */
+.slide img {
+  width: 100%;
+  height: auto;
+}
+
+/* Additional styling as needed */
+
+/* Style for individual slides */
+.slide {
+  width: 100%;
+  display: none;
+  transition: opacity 0.5s ease;
+  /* Add a fade-in/fade-out transition */
+}
+
+/* Style for the active slide */
+.slide.active {
+  display: block;
+}
+
+/* Style for image captions (optional) */
+.slide img {
+  width: 70%;
+  height: auto;
+}
+
+.watch {
+  border-radius: 8px;
+  margin-top: 10px;
+  width: 10rem;
+  height: 2.5rem;
+  background: aliceblue;
+  color: black;
+  border: 0;
+}
+
+.mainImage {
+  padding: 17pc;
+  clip: rect(50px, 275px, 198px, 142px);
+  background-size: 90pc 50pc !important;
+  background-repeat: no-repeat !important;
+  opacity: 0.3;
+  border-radius: 8px
+}
+
+.typoHeader {
+  position: relative;
+  bottom: 16rem;
+  left: 3vw;
+  display: inline
+}
+
+.movieName {
+  font-size: 2.5rem !important;
+  color: azure;
+  z-Index: 10;
+  position: relative;
+  font-family: emoji !important;
+  font-weight: bold !important;
+  text-transform: uppercase
+}

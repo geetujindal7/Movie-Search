@@ -14,6 +14,7 @@ import MoviesItem from '@/Components/Movies/MoviesItem'
 const User = ({ }) => {
     const router = useRouter()
     const { search, select } = router.query
+    const filter = useSelector((state) => state.searchApi.state)
 
     return (
         <>

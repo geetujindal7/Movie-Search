@@ -19,6 +19,7 @@ import Stack from "@mui/material/Stack";
 //   import { ComingSoon } from "@/Redux/actions";
 import { randomMov } from "@/Redux/actions";
 import Random from "@/Components/Random";
+import Router from 'next/router'
 
 function Favourites() {
   const filter = useSelector((state) => state.randomMovie.state);
@@ -36,7 +37,6 @@ function Favourites() {
   };
 
   const handleImageError = (e) => {
-    console.log("Incorrect Image", e.target.src, e.target)
     e.target.srcset = "",
       e.target.src = "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="
   };
@@ -46,9 +46,7 @@ function Favourites() {
         sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
       >
         <Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
-          <Link href={"/"}>
-            <KeyboardArrowLeftIcon sx={{ fontSize: "2rem" }} />
-          </Link>
+            <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
           <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Favourites</Typography>
           <Box sx={{ position: "absolute", right: "40px" }}>
             <Random handleGenreChange={handleGenreChange} />

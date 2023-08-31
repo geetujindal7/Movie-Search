@@ -1,65 +1,69 @@
-.sidebar{
-    width: 250px;
-    height: 100vh;
-    background-color: #323232;
-    color: #fff;
-    position: fixed;
-    border-right: 1px solid #3d3b3b;
-    top: 0;
-    left: -250px; /* Initially hide the sidebar outside the viewport */
-    transition: left 2s ease; /* Smooth transition on the left property */
-  }
-  
-  .open{
-    left: 0; 
-    z-index: 11;
-    background-color: #323232;
-    /* Show the sidebar when it's open */
-  }
-  
-  .header_container{
-    padding: 13px 12px 12px 12px;
-    box-shadow: inset 100px 100px 100px 100px rgba(0,0,0,0.1);
-   display: flex;
-   justify-content: space-between;
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #323232;
+  color: #fff;
+  position: fixed;
+  border-right: 1px solid #3d3b3b;
+  top: 0;
+  left: -250px;
+  /* Initially hide the sidebar outside the viewport */
+  transition: left 2s ease;
+  /* Smooth transition on the left property */
 }
 
-
-
-.input_search{
-    border: 1px solid rgb(139, 134, 134);
-    border-radius: 20px;
+.open {
+  left: 0;
+  z-index: 11;
+  background-color: #121212;
+  /* Show the sidebar when it's open */
 }
 
-.input_search[type=text]{
-    padding: 12px 20px;
-    height: 2.5rem;
-    margin-top: 5px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-.icons{
-    color: white;
-    width: 2em;
-    height: 2em;
-    position: relative;
-    left: 0px;
-    font-size: 2.5rem !important;
-    transition: left 2s ease !important;
+.header_container {
+  padding: 8px 12px;
+  box-shadow: 5px 1px 9px rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: space-between;
+  background: #121212;
 }
 
-.openIcon{
-  left: 250px; /* Show the sidebar when it's open */
-} 
+.input_search {
+  border: 1px solid rgb(139, 134, 134);
+  border-radius: 8px;
+}
 
-.sidebar_container{
+.input_search[type="text"] {
+  padding: 12px 20px;
+  height: 2.5rem;
+  margin-top: 5px;
+  display: inline-block;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.icons {
+  color: white;
+  width: 2em;
+  height: 2em;
+  position: relative;
+  left: 0px;
+  font-size: 2.5rem !important;
+  transition: left 2s ease !important;
+  margin-top : 5px
+}
+
+.openIcon {
+  left: 250px;
+  /* Show the sidebar when it's open */
+}
+
+.sidebar_container {
   padding: 20px;
   text-align: center;
 }
 
-.SearchIcons{
+.SearchIcons {
   color: white;
   font-size: 30px !important;
   height: 1em;
@@ -68,23 +72,23 @@
   background-color: transparent;
 }
 
-.typoHeader{
+.typoHeader {
   color: rgb(251 248 248);
   font-size: 20px !important;
   margin-top: 30px !important;
   text-align: center;
 }
 
-.typoColumn{
+.typoColumn {
   font-size: 18px !important;
   color: #b5b5b5;
   margin: 20px 0px !important;
 }
 
-.formHeader{
-  background-color: transparent; 
+.formHeader {
+  background-color: transparent;
   display: flex;
-   gap: 10px
+  gap: 10px;
 }
 
 .formHeader a {
@@ -96,24 +100,28 @@
 
   position: absolute;
   top: 3.5rem;
-/* Or display: none, depending on how you want it to behave */
+  /* Or display: none, depending on how you want it to behave */
 }
 
-.tooltiponhover:hover + .tooltip {    /* Uses the adjacent sibling selector */
-  visibility: visible;  /* Or display: block */
+.tooltiponhover:hover + .tooltip {
+  /* Uses the adjacent sibling selector */
+  visibility: visible;
+  /* Or display: block */
 }
 
 .dropdownlist {
-  background: #313131;
-    padding: 13px 18px;
-    width: 11.7rem;
-    z-index: 99;
-    margin-top: 3px;
-    /* display: inline-block; */
-    border: 1px solid #ccc;
-    position: absolute;
-    /* box-sizing: border-box; */
-    /* background: gray; */
-    border-radius: 10px;
-
+  background: #121212;
+  padding: 13px 18px;
+  width: 11.7rem;
+  z-index: 99;
+  overflow-y: scroll;
+  height: 14rem;
+  overflow: scroll;
+  margin-top: 1px;
+  /* display: inline-block; */
+  border: 1px solid #4b4848;
+  position: absolute;
+  /* box-sizing: border-box; */
+  /* background: gray; */
+  border-radius: 8px;
 }

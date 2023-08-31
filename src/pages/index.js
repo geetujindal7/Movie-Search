@@ -4,7 +4,7 @@
 import MainComponent from '@/Components/MainComponent'
 import React, { lazy, Suspense } from 'react';
 import Upcoming from '@/Components/Upcoming'
-import { ComingSoon, randomMov } from '@/Redux/actions'
+import { ComingSoon, PopularAPI, randomMov } from '@/Redux/actions'
 import { Box } from '@mui/material'
 import axios from 'axios';
 // import styles from '@/styles/Home.module.css'
@@ -15,7 +15,9 @@ function Home({ result }) {
     <Box>
       <MainComponent result={result} />
       <Upcoming comingSoon={"comingSoon"} ComingSoon={ComingSoon} title={"Coming Soon"} />
-      <Upcoming ComingSoon={randomMov} title={"Favourite"} />
+      <Upcoming comingSoon={"random"} ComingSoon={randomMov} title={"Favourite"} />
+      <Upcoming comingSoon={"popular"} ComingSoon={PopularAPI} title={"Popular"} />
+
     </Box>
   </>
 }
@@ -33,7 +35,6 @@ export async function getServerSideProps() {
   const response = await axios.request(options);
   const result = response.data
   // const result = await response.text();
-  // console.log(result)
   return {
     props: {
       result,

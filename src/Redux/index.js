@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import SearchApi, { ComingSoon, RandomMovie, SearchMovie, Keyboard } from "./SearchApi";
+import SearchApi, { ComingSoon, RandomMovie, SearchMovie, Keyboard, Popular } from "./SearchApi";
 
 
 const rootReducer = combineReducers({
@@ -7,7 +7,8 @@ const rootReducer = combineReducers({
     searchMovie: SearchMovie,
     comingSoon: ComingSoon,
     randomMovie: RandomMovie,
-    keywords: Keyboard
+    keywords: Keyboard,
+    popular: Popular
   });
 
 export default rootReducer;

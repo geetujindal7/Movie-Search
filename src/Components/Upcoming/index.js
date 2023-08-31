@@ -14,69 +14,91 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
     const dispatch = useDispatch();
     const filter = useSelector((state) => state.comingSoon.state)
     const randm = useSelector((state) => state.randomMovie.state)
-    const [loading, setLoading] = useState(true)
+    const popular = useSelector((state) => state.popular.state)
 
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         // setLoading(true)
-            if (comingSoon === "comingSoon") {
-                dispatch(ComingSoon(50, "Crime", "1", "2023"))
-            }
-            else {
-                dispatch(ComingSoon(50, "most_pop_movies"))
-            }
+        if (comingSoon === "comingSoon") {
+            dispatch(ComingSoon(50, "Crime", "1", "2023"))
+        }
+        else if (comingSoon === "popular") {
+            dispatch(ComingSoon())
+        }
+        else {
+            dispatch(ComingSoon(50, "most_pop_movies"))
+        }
     }, [])
 
     const handleImageError = (e) => {
-        console.log("Incorrect Image", e.target.src, e.target)
         e.target.srcset = "",
-          e.target.src = "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="
-      };
+            e.target.src = "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="
+    };
 
     useEffect(() => {
         setLoading(true)
-        console.log("entered")
-        if(filter && randm)
-        {
+        if (filter && randm) {
             setLoading(false)
         }
     }, [filter, randm])
-    
+
+    const components = () => {
+        if (comingSoon === "comingSoon") {
+            return (
+                filter?.results?.map((value, key) => {
+                    return (
+                        value?.primaryImage?.url &&
+                        <Box key={key} className={styles.Card}>
+                            <Image style={{ borderRadius: "12px" }} src={value?.primaryImage?.url} width={250} height={300} alt="s" />
+                        </Box>
+                    )
+                }))
+        }
+        else if (comingSoon === "random") {
+            return (
+                randm?.map((value, key) => {
+                    return (
+                        value?.primaryImage?.url &&
+                        <Box key={key} className={styles.Card}>
+                            <Image style={{ borderRadius: "12px" }} src={value?.primaryImage?.url ? value?.primaryImage?.url : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s" onError={handleImageError}
+                            />
+                        </Box>
+                    )
+                })
+            )
+        }
+        else {
+            return (
+                popular?.results?.map((value, key) => {
+                    return (
+                        value?.backdrop_path &&
+                        <Box key={key} className={styles.Card}>
+                            <Image style={{ borderRadius: "12px" }} src={value?.backdrop_path ? `https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s" onError={handleImageError}
+                            />
+                        </Box>
+                    )
+                })
+            )
+        }
+    }
+
     return (
         <Box className={styles.upcoming_header}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Box sx={{ fontSize: "20px",}}>{title}</Box>
+                <Box sx={{ fontSize: "20px", }}>{title}</Box>
                 {
-                    comingSoon ? <Link href={"/ComingSoon"}>
+                    comingSoon==="comingSoon" ? <Link href={"/ComingSoon"}>
                         <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50))} />
-                    </Link> : <Link href={"/Favourites"}>
+                    </Link> : (comingSoon === "random" ? <Link href={"/Favourites"}>
                         <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50))} />
-                    </Link>
+                    </Link> : <Link href={"/popular"}>
+                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
+                    </Link>)
                 }
             </Box>
             <Box className={styles.card_container}>
                 {
-                    loading ? <><div style={{display: "flex", justifyContent: "center", width: "100%", height: "250px", marginTop:"80px"}}><CircularProgress /></div></> : (
-                        comingSoon ? filter?.results?.map((value, key) => {
-                        return (
-                            value?.primaryImage?.url &&
-                            <Box key={key} className={styles.Card}>
-                                <Image style={{ borderRadius: "12px" }} src={value?.primaryImage?.url} width={250} height={300} alt="s" />
-                            </Box>
-                        )
-                    })
-                        :
-                        (
-                            randm?.map((value, key) => {
-                                return (
-                                    value?.primaryImage?.url &&
-                                    <Box key={key} className={styles.Card}>
-                                        <Image style={{ borderRadius: "12px" }} src={value?.primaryImage?.url ? value?.primaryImage?.url :  "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s"  onError={handleImageError}
-                                         />
-                                    </Box>
-                                )
-                            })
-                        )
-                    )
+                    loading ? <><div style={{ display: "flex", justifyContent: "center", width: "100%", height: "250px", marginTop: "80px" }}><CircularProgress style={{color: "white"}}/></div></> : components()
                 }
             </Box>
 

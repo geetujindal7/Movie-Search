@@ -20,57 +20,34 @@ function MainComponent({ result }) {
 
   return (
     <Box>
-       <Box sx={{height: "36rem"}}>
-       {
+      <Box sx={{ height: "36rem" }}>
+        {
           result?.results?.map((value, index) => (
             <>
-                <Box>
-                  <Image style={{
-                    opacity: "0.3", borderRadius: "2%", background: `url(https://image.tmdb.org/t/p/original/${value.poster_path})`,
-                    /* padding-left: 128pc; */
-                    /* padding-bottom: 29pc; */
-                    padding: "17pc",
-                    clip: "rect(50px,275px,198px,142px)",
-                    /* left: -60px; */
-                    /* object-fit: cover; */
-                    backgroundSize: "90pc 50pc",
-                    backgroundRepeat: "no-repeat"
-                  }} src={`https://image.tmdb.org/t/p/original/${value.poster_path}`} width={800} height={500} alt="image" className={index === currentIndex ? `${styles.slide} ${styles.active}` : `${styles.slide}`}
-                  />
-                </Box>
-                <Box key={value.overview} sx={{
-                position: "relative",
-                bottom: "16rem",
-                left: "3vw",
-                display: "inline"
-              }}
-              >
-                <Typography style={{
-                  fontSize: "2.5rem",
-                  color: "azure",
-                  zIndex: "10",
-                  position: "relative",
-                  fontStyle: "oblique",
-                  fontFamily: "emoji",
-                  fontWeight: "bold",
-                  textTransform: "uppercase"
-                }} className={index === currentIndex ? `${styles.slide} ${styles.active}` : `${styles.slide}`}>{value?.title || value?.name}</Typography>
+              <Box>
+                <Image style={{
+                  background: `url(https://image.tmdb.org/t/p/original/${value.poster_path})`
+                }} src={`https://image.tmdb.org/t/p/original/${value.poster_path}`} width={800} height={500} alt="image" className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.mainImage}` : `${styles.slide}  ${styles.mainImage}`}
+                />
+              </Box>
+              <Box key={value.overview} className={styles.typoHeader}>
+                <Typography className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.movieName}` : `${styles.slide} ${styles.movieName}`}>{value?.title || value?.name}</Typography>
                 <Typography sx={{
                   wordWrap: "break-word",
                   width: "80%"
                 }} className={index === currentIndex ? `${styles.slide} ${styles.active}` : `${styles.slide}`}>{value.overview}</Typography>
-                 <Link href={{
-                pathname: "trailer",
-                query: {
-                  id: value.id,
-                }
-              }}>
-               <button className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.watch}` : `${styles.slide} ${styles.watch}`}>Watch Now</button></Link>
+                <Link href={{
+                  pathname: "trailer",
+                  query: {
+                    id: value.id,
+                  }
+                }}>
+                  <button className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.watch}` : `${styles.slide} ${styles.watch}`}>Watch Now</button></Link>
               </Box>
             </>
           ))
         }
-       </Box>
+      </Box>
       <Box>
         <Image src="https://v3img.voot.com/resizeMedium,w_1920,h_411/v3Storage/assets/kaalkoot_launch_03_cta-14x3-1690815691064.jpg?imformat=chrome" width={1200} height={200} alt="image" />
       </Box>

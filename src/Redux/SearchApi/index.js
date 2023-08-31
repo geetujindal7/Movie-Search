@@ -66,5 +66,14 @@ export const Keyboard = (state = keywords, action) => {
     }
 }
 
+export const Popular = (state = keywords, action) => {
+    switch(action.type) {
+        case 'popular': 
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
 
 export default SearchApi
