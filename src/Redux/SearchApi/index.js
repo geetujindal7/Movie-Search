@@ -23,13 +23,9 @@ const SearchApi = (state= actorData, action) => {
 }
 
 export const SearchMovie = (state= movieData, action) => {
-    console.log(action.payload)
     switch(action.type) {
-        case 'SearchMovie': 
-            console.log(action.payload)
-          
+        case 'SearchMovie':           
             state =  {...state, state: action.payload}
-            console.log(state)
             return state
         default:
             return state;

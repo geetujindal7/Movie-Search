@@ -34,9 +34,6 @@ function ComingSoonMovie() {
     setPage(value);
   };
 
-  console.log(filter)
-
-
   useEffect(() => {
     if (genre) {
       setLoading(true);

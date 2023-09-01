@@ -29,7 +29,6 @@ export const SearchMovie = (p)  => {
     // Perform Axios request
     axios.request(movie(p))
       .then((response) => {
-        console.log(response)
         // Dispatch action with the received user data
         dispatch({
           type: 'SearchMovie',
@@ -44,7 +43,6 @@ export const SearchMovie = (p)  => {
 }
 
 export const ComingSoon = (p, genre, page)  => {
-  console.log(genre)
   return (dispatch) => {
     // Dispatch action to indicate that the API request has started
     dispatch({ type: 'ComingSoon' });

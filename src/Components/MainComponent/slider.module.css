@@ -52,6 +52,7 @@ Slider container .slider {
   background: aliceblue;
   color: black;
   border: 0;
+  cursor: pointer;
 }
 
 .mainImage {

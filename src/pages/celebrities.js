@@ -6,13 +6,17 @@ import axios from 'axios';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { SearchApi } from '@/Redux/actions';
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import Router from 'next/router'
+
 
 function Celebrities({ result }) {
     const dispatch = useDispatch()
     return (
         <Box className={styles.upcoming_header}>
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Box sx={{ fontSize: "23px", marginLeft: "10px" }}>Celebrities</Box>
+            <Box sx={{ display: "flex"}}>
+            <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
+                <Box sx={{ fontSize: "23px", marginTop: "4px" }}>Celebrities</Box>
             </Box>
             <Box className={styles.card_container} sx={{ flexWrap: "wrap" }}>
                 {

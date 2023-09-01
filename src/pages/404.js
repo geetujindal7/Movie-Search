@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -20,31 +20,34 @@ function NoData() {
             <Box sx={{
                 display: "flex",
                 justifyContent: "center",
-                padding: "5rem",
+                padding: "2rem",
             }}>
-                <Image src="https://cdn.iconscout.com/icon/premium/png-256-thumb/no-data-found-1965030-1662565.png?f=webp" alt="NoData" width={400} height={400} />
+                <Image src="https://cdn.iconscout.com/icon/premium/png-256-thumb/no-data-found-1965030-1662565.png?f=webp" alt="NoData" width={250} height={250} />
 
             </Box>
             <Box sx={{
                 display: "flex",
                 justifyContent: "center",
             }}>
-                <Typography sx={{ fontSize: "35px", color: "grey" }}>Result Not Found!! </Typography>
+                <Typography sx={{ fontSize: "26px", color: "grey" }}>Result Not Found!! </Typography>
             </Box>
             <Box sx={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "30px"
+                marginTop: "10px"
             }}>
                 <Typography sx={{ fontSize: "20px", color: "grey" }}>Whoops... This Information is not available at the moment</Typography>
             </Box>
             <Box sx={{
                 display: "flex",
                 justifyContent: "center",
-                marginTop: "30px"
+                marginTop: "40px"
             }}>
                 {/* <Link href="/"> */}
-                    <button onClick={() => Router.back()} style={handleBack}>Go Back</button>
+                    <Button onClick={() => Router.back()} sx={{
+                            color: "white",
+                            borderColor: "white"
+                        }} variant="outlined">Go Back</Button>
                 {/* </Link> */}
             </Box>
         </>

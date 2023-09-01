@@ -9,7 +9,6 @@ import Loading from '@/pages/loading'
 import RelatedDetails from '@/Components/RelatedDetails'
 
 function Detail({ result }) {
-    console.log(result)
     const overview = {
         fontSize: "17px",
         padding: "3px 0rem",
@@ -31,7 +30,6 @@ function Detail({ result }) {
     const { detail } = router.query
     const data = filter.filter((e) => e.id == detail)
     const [loading, setLoading] = useState(true)
-    console.log(filter)
 
     useEffect(() => {
         setTimeout(() => {

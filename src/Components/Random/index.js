@@ -11,7 +11,9 @@ import {
     Radio,
     RadioGroup,
     Slide,
+    ThemeProvider,
     Typography,
+    createTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styles from "@/Components/Upcoming/upcoming.module.css";
@@ -21,6 +23,23 @@ function Random({ handleGenreChange }) {
     const [genre, setgenre] = useState([]);
     const [category, setCategory] = useState('most_pop_movies');
     const [open, setOpen] = useState(false);
+
+    const theme = createTheme({
+        components: {
+            MuiDialog: {
+                styleOverrides: {
+                    paper: {
+                        backgroundColor: '#121212',
+                        color: "#c3c3c3",
+                        '& .PrivateSwitchBase-root': {
+                            backgroundColor: '#121212',
+                            color: "grey",
+                        }
+                    },
+                },
+            }
+        }
+    });
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -34,10 +53,6 @@ function Random({ handleGenreChange }) {
     const handleChange = (event) => {
         setCategory(event.target.value);
     };
-
-    useEffect(() => {
-        handleGenreChange(category)
-    }, [category])
 
     const fetchData = async () => {
         const options = {
@@ -62,7 +77,10 @@ function Random({ handleGenreChange }) {
     }, []);
 
     return (
-        <><Button style={{
+        <>
+    <ThemeProvider theme={theme}>
+
+        <Button style={{
             color: "white",
             borderColor: "white"
         }} variant="outlined" onClick={handleClickOpen}>
@@ -97,12 +115,16 @@ function Random({ handleGenreChange }) {
                     }
                 </Box>
             </DialogContent>
-            <DialogActions sx={{borderRadius: "15px"}}>
-                <Button onClick={handleClose} autoFocus>
+            <DialogActions sx={{borderRadius: "8px" , justifyContent: "center", marginBottom: "10px" }}>
+                <Button onClick={handleClose} autoFocus style={{
+                            color: "white",
+                            borderColor: "white"
+                        }} variant="outlined">
                     Submit
                 </Button>
             </DialogActions>
         </Dialog>
+        </ThemeProvider>
     </>
     );
 }

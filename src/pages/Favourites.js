@@ -20,6 +20,7 @@ import Stack from "@mui/material/Stack";
 import { randomMov } from "@/Redux/actions";
 import Random from "@/Components/Random";
 import Router from 'next/router'
+import NoData from "./404";
 
 function Favourites() {
   const filter = useSelector((state) => state.randomMovie.state);
@@ -53,11 +54,11 @@ function Favourites() {
           </Box>
         </Box>
       </Box>
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Box sx={{ padding: "20px", fontSize: "1.5rem" }}>
-        <Box className={styles.card_container_wrap}>
           {!(filter?.length === 0) ? (
-            filter?.map((value, key) => {
+            <Box className={styles.card_container_wrap}>
+            {filter?.map((value, key) => {
               return (
                 value?.primaryImage?.url && (
                   <Box key={key} className={styles.Card}>
@@ -73,16 +74,13 @@ function Favourites() {
                 )
               );
             })
-          ) : (
-            <Box>
-              <Typography sx={{ margin: "50px auto" }}>
-                No data Found
-              </Typography>
+            }
             </Box>
+          ) : (
+           <NoData />
           )}
           {/* <Typography onClick={() => setPage(page + 1)}>Load More...</Typography> */}
         </Box>
-      </Box>
     
     </Box>
   </>
