@@ -52,7 +52,7 @@ function MoviesItem() {
 							sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
 						>
 							<Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
-									<KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
+								<KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
 								<Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography>
 							</Box>
 						</Box>
@@ -61,11 +61,8 @@ function MoviesItem() {
 								filter?.map((value, key) => (
 									(value?.backdrop_path || value?.poster_path) &&
 									(<>
-										<Box>
-											<Image key={key} style={{
-												borderRadius: "15px", height: "27rem",
-												width: "25rem", margin: "20px 20px", opacity: "0.3"
-											}} src={`https://image.tmdb.org/t/p/original/${value?.backdrop_path || value?.poster_path}`} alt="values" width={1000} height={100} />
+										<Box className = {styles.main_trailer_image}>
+											<Image key={key} className={styles.trailer_image} src={`https://image.tmdb.org/t/p/original/${value?.backdrop_path || value?.poster_path}`} alt="values" width={1000} height={100} />
 											<Box sx={{
 												position: "relative",
 												bottom: "12rem",

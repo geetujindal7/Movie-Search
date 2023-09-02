@@ -125,3 +125,12 @@
   /* background: gray; */
   border-radius: 8px;
 }
+
+
+@media (max-width: 400px) {
+  .formHeader {  
+    gap: 0px
+  }
+  
+  /* Styles for screens with a maximum width of 768 pixels (e.g., mobile devices) */
+}

@@ -13,8 +13,7 @@ function MainComponent({ result }) {
   };
 
   useEffect(() => {
-    // Automatically advance to the next slide every 10 seconds
-    const timer = setInterval(nextSlide, 5000); // 10,000 milliseconds = 10 seconds
+    const timer = setInterval(nextSlide, 5000); 
     return () => clearInterval(timer);
   }, []);
 
@@ -32,10 +31,7 @@ function MainComponent({ result }) {
               </Box>
               <Box key={value.overview} className={styles.typoHeader}>
                 <Typography className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.movieName}` : `${styles.slide} ${styles.movieName}`}>{value?.title || value?.name}</Typography>
-                <Typography sx={{
-                  wordWrap: "break-word",
-                  width: "80%"
-                }} className={index === currentIndex ? `${styles.slide} ${styles.active}` : `${styles.slide}`}>{value.overview}</Typography>
+                <Typography className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.overview}` : `${styles.slide} ${styles.overview}`}>{value.overview}</Typography>
                 <Link href={{
                   pathname: "trailer",
                   query: {

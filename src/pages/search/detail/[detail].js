@@ -11,22 +11,7 @@ import Router from 'next/router'
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 function Detail({ result }) {
-    const overview = {
-        fontSize: "17px",
-        padding: "3px 0rem",
-        color: "white",
-        // marginLeft: "24px"
-    }
-    const overview_title = {
-        fontSize: "38px",
-        padding: "1rem 0rem",
-        color: "rgb(255 255 255)",
-        /* font-style: inherit; */
-        fontWeight: "bold",
-        width: "32%",
-        wordWrap: "break-word",
-    }
-
+    
     const filter = useSelector((state) => state.searchApi.state)
     const router = useRouter()
     const { detail } = router.query
@@ -63,7 +48,7 @@ function Detail({ result }) {
                                 }
                             </Box>
                             <Box sx={{ position: "relative", bottom: "14rem", padding: "18px" }}>
-                                <Typography style={overview_title}>{`${data[0].title}`}</Typography>
+                                <Typography className={styles.overview_title}>{`${data[0].title}`}</Typography>
                             </Box>
                         </Box>
                         <Box sx={{

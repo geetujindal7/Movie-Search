@@ -82,3 +82,17 @@
   /* padding: 24px 0px; */
   margin-top: 10px !important;
 }
+
+@media (max-width: 400px) {
+  .Image_Header{
+    display: block;
+  }
+  .Image_Header img{
+    height: 40rem;
+    width: 25rem;
+  }
+
+  .name_container{
+    width: 100%
+  }
+}

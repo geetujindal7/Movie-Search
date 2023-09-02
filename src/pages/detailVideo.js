@@ -33,6 +33,7 @@ function DetailVideo({ result }) {
                             background: "#121212"
                         }}>
                             <iframe
+                                className={styles.frame}
                                 width="1300"
                                 height="680"
                                 src={`https://www.youtube.com/embed/${result.results[0].key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${result.results[0].key};wmode=transparent`}

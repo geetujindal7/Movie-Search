@@ -67,7 +67,7 @@ function Favourites() {
                 value?.primaryImage?.url && (
                   <Box key={key} className={styles.Card}>
                     <Image
-                      style={{ borderRadius: "12px" }}
+                      className={styles.soonImage}
                       src={value?.primaryImage?.url}
                       width={250}
                       height={300}

@@ -64,6 +64,11 @@ Slider container .slider {
   border-radius: 8px
 }
 
+.overview { 
+  word-wrap: break-word;
+  width: 80%
+}
+
 .typoHeader {
   position: relative;
   bottom: 16rem;
@@ -79,4 +84,28 @@ Slider container .slider {
   font-family: emoji !important;
   font-weight: bold !important;
   text-transform: uppercase
+}
+
+
+@media (max-width: 400px){
+  .mainImage { 
+    background-size: 25pc 41pc !important;
+  }
+  .typoHeader { 
+    bottom: 21rem
+  }
+  .movieName { 
+    font-size: 1.5rem !important;
+  }
+  .overview { 
+    width: 97%;
+    font-size: 14px !important
+  }
+
+  .frame {
+    width: 24rem
+  }
+  /* .slide{
+    font-size: 13px !important;
+  } */
 }
