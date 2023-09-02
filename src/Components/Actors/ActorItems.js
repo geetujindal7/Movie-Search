@@ -42,9 +42,13 @@ function ActorItems({ search }) {
   }
 
   useEffect(() => {
+    setLoading(true)
     if (filter) {
       setData(filter)
         fetchData()
+        setTimeout(() => {
+          setLoading(false)
+        }, 3000)
     }
   }, [filter])
 
