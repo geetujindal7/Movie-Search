@@ -7,6 +7,8 @@ import styles from "@/Components/Movies/MovieItem.module.css"
 import axios from 'axios'
 import Loading from '@/pages/loading'
 import RelatedDetails from '@/Components/RelatedDetails'
+import Router from 'next/router'
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 function Detail({ result }) {
     const overview = {
@@ -34,14 +36,17 @@ function Detail({ result }) {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 2000)
+        }, 3000)
     }, [result])
 
     return (
         <>
+        {loading && <Loading />}
+        <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem", marginTop: "1rem" }} />
             {
-                loading ? <Loading /> : (
+                (
                     <>
+
                         <Box className={styles.mainimage}>
                             <Box>
                                 {
@@ -52,12 +57,13 @@ function Detail({ result }) {
                                             src={`https://www.youtube.com/embed/${result.results[0].key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${result.results[0].key};wmode=transparent`}
                                             title="YouTube Trailer"
                                             frameborder="0"
+                                            allowtransparency="true"
                                         ></iframe>
-                                    </Box>) : <Image style={{ borderRadius: "8px", width: "100%", height: "81vh", opacity: "0.2" }} src={data[0].backdrop_path ? `https://image.tmdb.org/t/p/original/${data[0].backdrop_path}` : `https://image.tmdb.org/t/p/original/${data[0].poster_path}`} alt="values" width={1100} height={450} />
+                                    </Box>) : <Image style={{ borderRadius: "8px", width: "100%", height: "76vh", opacity: "0.6" }} src={data[0].backdrop_path ? `https://image.tmdb.org/t/p/original/${data[0].backdrop_path}` : `https://image.tmdb.org/t/p/original/${data[0].poster_path}`} alt="values" width={1100} height={450} />
                                 }
                             </Box>
                             <Box sx={{ position: "relative", bottom: "14rem", padding: "18px" }}>
-                                <Typography style={overview_title}>{`${data[0].title} (${data[0].original_title})`}</Typography>
+                                <Typography style={overview_title}>{`${data[0].title}`}</Typography>
                             </Box>
                         </Box>
                         <Box sx={{

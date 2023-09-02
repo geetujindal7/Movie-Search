@@ -1,12 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Box, Typography } from '@mui/material';
 import styles from "@/Components/MainComponent/slider.module.css"
 import NoData from './404';
+import Router from 'next/router'
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import Loading from './loading';
 
 function DetailVideo({ result }) {
+
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 3000)
+    },[])
+
     return (
         <Box sx={{ marginTop: "1rem" }}>
+            {loading && <Loading />}
+            <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem", marginTop: "1rem" }} />
             <Box sx={{
                 display: "flex", justifyContent: "space-evenly",
                 flexWrap: "wrap",
@@ -16,16 +30,17 @@ function DetailVideo({ result }) {
                         <Box sx={{
                             borderRadius: "15px",
                             height: "100%",
-                            background: "grey"
+                            background: "#121212"
                         }}>
                             <iframe
                                 width="1300"
-                                height="700"
+                                height="680"
                                 src={`https://www.youtube.com/embed/${result.results[0].key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${result.results[0].key};wmode=transparent`}
                                 title="YouTube Trailer"
                                 frameborder="0"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                allowtransparency="true"
                             ></iframe>
-                            
                         </Box>
                         : (<Box> <NoData /></Box>)
                 }

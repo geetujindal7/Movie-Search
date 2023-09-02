@@ -53,17 +53,6 @@ import {
       }, 2000); // Simulate a 2-second delay
     }, []);
   
-  
-    // useEffect(() => {
-    //   if(!filter)
-    //   {
-    //     setLoading(true)
-    //   }
-    //   else{
-    //     setLoading(false)
-    //   }
-    // },[filter])
-  
     return (
       <>
         <Box

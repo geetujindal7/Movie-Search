@@ -12,12 +12,16 @@ import NoData from './404';
 function Trailer({ result, error }) {
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        if (result || error) {
-            setLoading(false)
+        if ((result || error)) {
+            setTimeout(() => {
+                setLoading(false)
+            }, 3000)
         }
+
     }, [result, error])
     return (
         <>
+        {loading && <Loading />}
             <Box
                 sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
             >
@@ -27,7 +31,6 @@ function Trailer({ result, error }) {
                 </Box>
             </Box>
             {
-                loading ? <Loading /> :
                     (result?.results?.length !== 0 && !error) ?
                         (<Box>
                             <Box sx={{
@@ -50,6 +53,7 @@ function Trailer({ result, error }) {
                                                 src={`https://www.youtube.com/embed/${value.key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${value.key};wmode=transparent`}
                                                 title="YouTube Trailer"
                                                 frameborder="0"
+                                                allowtransparency="true"
                                             ></iframe>
                                             <Typography sx={{
                                                 width: "100%",

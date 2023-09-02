@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import styles from '@/Components/RelatedDetails/Related.module.css'
 import { useSelector } from 'react-redux'
 import Image from 'next/image'
+import Link from 'next/link'
 
 function RelatedDetails({ data }) {
   const filter = useSelector((state) => state.searchApi.state)
@@ -26,7 +27,9 @@ function RelatedDetails({ data }) {
                 {
                   filter && filter?.slice(0, 15).map((val, key) => (
                     <Box key={key}>
+                    <Link  href={`/search/detail/${val.id}`}>
                       <Image style={{ borderRadius: "8px", opacity: "12" }} src={`https://image.tmdb.org/t/p/original/${val?.poster_path}`} alt="values" width={350} height={250} />
+                      </Link>
                     </Box>
                   ))
                 }

@@ -21,14 +21,17 @@ import { randomMov } from "@/Redux/actions";
 import Random from "@/Components/Random";
 import Router from 'next/router'
 import NoData from "./404";
+import Loading from "./loading";
 
 function Favourites() {
   const filter = useSelector((state) => state.randomMovie.state);
   const dispatch = useDispatch();
   const [genre, setGenre] = useState("most_pop_movies");
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     if (genre) {
+      setLoading(false)
       dispatch(randomMov(50, genre));
     }
   }, [dispatch, genre]);
@@ -43,6 +46,7 @@ function Favourites() {
   };
 
   return (<> 
+  {loading && <Loading />}
   <Box
         sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
       >

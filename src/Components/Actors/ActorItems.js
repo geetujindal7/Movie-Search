@@ -64,7 +64,7 @@ function ActorItems({ search }) {
       {loading ? (<Box><Loading /></Box>) : ((!filter?.error && filter?.length > 1 && !error)  ? (
         <Box>
           <Box className={styles.Image_Header}>
-            <Image style={{ opacity: "0.5" }} src={`https://image.tmdb.org/t/p/original/${actordetails?.profile_path || filter[0].poster_path}`} width={635} height={350} alt="actor image" />
+            <Image style={{ opacity: "0.9" }} src={`https://image.tmdb.org/t/p/original/${actordetails?.profile_path || filter[0].poster_path}`} width={635} height={350} alt="actor image" />
             <Box className={styles.name_container}>
               <Typography className={styles.name}>{actordetails?.name} ({actordetails?.also_known_as[0] || actordetails?.name})</Typography>
               {
@@ -92,8 +92,8 @@ function ActorItems({ search }) {
               {data?.map((e, key) => (
                 <Link key={key} href={`/search/detail/${e.id}`}>
                   {(e.poster_path || e.backdrop_path) && (<>
-                    <Image style={{ borderRadius: "8px", opacity: "0.5" }} src={`https://image.tmdb.org/t/p/w500/${e.poster_path || e.backdrop_path}`} alt="poster_path" width={320} height={200} />
-                    <Typography className={styles.title}>{e.title}</Typography>
+                    <Image style={{ borderRadius: "8px", opacity: "0.7" }} src={`https://image.tmdb.org/t/p/w500/${e.poster_path || e.backdrop_path}`} alt="poster_path" width={320} height={200} />
+                    <Typography className={styles.title}>{e.title.slice(0,30)}</Typography>
                   </>)}
 
                 </Link>

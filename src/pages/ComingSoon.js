@@ -25,7 +25,7 @@ import Router from 'next/router'
 function ComingSoonMovie() {
   const filter = useSelector((state) => state.comingSoon.state);
   const dispatch = useDispatch();
-  const [genre, setGenre] = useState("Drama");
+  const [genre, setGenre] = useState("Crime");
   const [year, setYear] = useState("2023");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true)
@@ -41,37 +41,25 @@ function ComingSoonMovie() {
     }
 
     setTimeout(() => {
-      setLoading(false); // Set loading to false when rendering is complete
+      setLoading(false); 
     }, 3000);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, genre, page, year]);
 
   const handleGenreChange = (value, year) => {
     setGenre(value);
     setYear(year);
+    setPage(1)
   };
 
   useEffect(() => {
-    // Simulate an asynchronous operation (e.g., data fetching)
-    // Replace this with your actual async operation
     setTimeout(() => {
-      setLoading(false); // Set loading to false when rendering is complete
-    }, 2000); // Simulate a 2-second delay
+      setLoading(false); 
+    }, 2000); 
   }, []);
-
-
-  // useEffect(() => {
-  //   if(!filter)
-  //   {
-  //     setLoading(true)
-  //   }
-  //   else{
-  //     setLoading(false)
-  //   }
-  // },[filter])
 
   return (
     <>
+    {loading && <Loading />}
       <Box
         sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
       >
@@ -84,7 +72,7 @@ function ComingSoonMovie() {
         </Box>
       </Box>
       {
-        loading ? <Box><Loading /></Box> : (
+        (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box sx={{ padding: "20px", fontSize: "1.5rem" }}>
               <Box className={styles.card_container_wrap}>
