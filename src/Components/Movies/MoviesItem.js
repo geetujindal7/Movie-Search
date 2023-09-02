@@ -65,13 +65,13 @@ function MoviesItem() {
 											<Image key={key} className={styles.trailer_image} src={`https://image.tmdb.org/t/p/original/${value?.backdrop_path || value?.poster_path}`} alt="values" width={1000} height={100} />
 											<Box sx={{
 												position: "relative",
-												bottom: "12rem",
+												bottom: "13rem",
 												width: "100%",
 												height: "20%",
 												marginLeft: "44px"
 											}}>
-												<Typography sx={{ fontSize: "25px", color: "yellow" }}>{value.original_title.slice(0, 27)}</Typography>
-												<Typography sx={{ fontSize: "17px", wordBreak: "break-word", width: "350px" }}>{value.overview.slice(0, 100)}...</Typography>
+												<Typography sx={{ fontSize: "18px !important", color: "yellow", wordBreak: "break-word", width: "350px" }}>{value.original_title.slice(0, 27)}</Typography>
+												<Typography sx={{ fontSize: "16px", wordBreak: "break-word", width: "350px" }}>{value.overview.slice(0, 100)}...</Typography>
 												<Link href={{
 													pathname: "detailVideo",
 													query: {

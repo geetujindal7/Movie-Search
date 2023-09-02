@@ -58,6 +58,10 @@
         word-wrap: break-word
     }
 
+    .main_trailer_image{
+        height: 30rem
+       }
+
 .trailer_image { 
     border-radius: 15px; 
     height: 27rem;
@@ -73,10 +77,6 @@
 
        .trailer_image {
         width : 22rem
-       }
-
-       .main_trailer_image{
-        height: 30rem
        }
 
        .frame{
