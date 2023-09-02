@@ -25,7 +25,7 @@ function Celebrities({ result }) {
                             value?.primaryImage?.imageUrl &&
                             <Box key={key} className={styles.Card}>
                             <Link href={{ pathname: `/search`, query: { select: "Actor", search: `${value.nameText.text}`}}}>
-                                <Image style={{ borderRadius: "12px", opacity: "0.6" }} src={value?.primaryImage?.imageUrl} width={250} height={300} alt="s" onClick={() => dispatch(SearchApi(value.nameText.text))} />
+                                <Image className={styles.celebrities} src={value?.primaryImage?.imageUrl} width={250} height={300} alt="s" onClick={() => dispatch(SearchApi(value.nameText.text))} />
                                 <Typography sx={{
                                     position: "relative",
                                     bottom: "2.5rem",

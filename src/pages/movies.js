@@ -21,7 +21,7 @@ function Movies({ result }) {
                             value?.title.primaryImage?.imageUrl &&
                             <Box key={key} className={styles.Card}>
                             <Link href={{ pathname: `/search`, query: { select: "Movie", search: `${value.title.originalTitleText.text}`}}}>
-                                <Image style={{ borderRadius: "12px", opacity: "0.6" }} src={value?.title.primaryImage?.imageUrl} width={250} height={300} alt="s" onClick={() => dispatch(SearchMovie(value.title.originalTitleText.text))} />
+                                <Image className={styles.celebrities} src={value?.title.primaryImage?.imageUrl} width={250} height={300} alt="s" onClick={() => dispatch(SearchMovie(value.title.originalTitleText.text))} />
                                 <Typography sx={{
                                     position: "relative",
                                     bottom: "2.5rem",
