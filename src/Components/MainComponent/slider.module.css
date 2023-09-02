@@ -105,6 +105,9 @@ Slider container .slider {
   .frame {
     width: 24rem
   }
+  .iframe {
+    width: 23rem
+  }
   /* .slide{
     font-size: 13px !important;
   } */

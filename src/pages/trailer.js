@@ -48,6 +48,7 @@ function Trailer({ result, error }) {
                                             background: "#121212"
                                         }}>
                                             <iframe
+                                                className = {styles.iframe}
                                                 width="640"
                                                 height="360"
                                                 src={`https://www.youtube.com/embed/${value.key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${value.key};wmode=transparent`}
