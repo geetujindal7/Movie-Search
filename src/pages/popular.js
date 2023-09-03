@@ -101,15 +101,7 @@ import {
                 >
                   <Stack
                     spacing={3}
-                    sx={{
-                      marginTop: "20px",
-                      backgroundColor: "#242424",
-                      borderRadius: "18px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      height: "2.8rem",
-                    }}
+                    className = {styles.pagina}
                   >
                     <Pagination
                       onChange={handlePageChange}

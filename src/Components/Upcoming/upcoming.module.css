@@ -1,9 +1,9 @@
-.upcoming_header{
+.upcoming_header {
     /* margin-top: 10px; */
     padding: 1rem;
 }
 
-.Card{
+.Card {
     width: 250px;
     height: 300px;
     border: 1px solid transparent;
@@ -12,7 +12,7 @@
     margin: 10px;
 }
 
-.card_container{
+.card_container {
     display: flex;
     width: 100%;
     overflow: auto
@@ -20,33 +20,33 @@
 
 .card_container::-webkit-scrollbar {
     display: none;
-  }
+}
 
-.card_container_wrap{
+.card_container_wrap {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
 }
 
-.stack{
+.stack {
     width: 40%;
     border-radius: 10px;
     background-color: grey !important
 }
 
-.dropdown{
+.dropdown {
     width: 7rem;
-     height: 2rem; 
-     border-radius: 12px;
-     padding: 6px;
+    height: 2rem;
+    border-radius: 12px;
+    padding: 6px;
 }
 
 .vl {
-  border-left: 1px solid grey;
-  height: auto;
+    border-left: 1px solid grey;
+    height: auto;
 }
 
-.name{
+.name {
     position: relative;
     bottom: 2.5rem;
     margin-left: 20px;
@@ -60,16 +60,31 @@
     opacity: 0.6
 }
 
-.soonImage{
+.soonImage {
     border-radius: 12px;
 }
 
+.pagina {
+    margin-top: 20px;
+    background-color: #242424;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.8rem,
+}
+
 @media (max-width: 400px) {
-.soonImage{
-    width: 330px
-}
-.celebrities {
-    width: 21rem
-}
-    
+    .soonImage {
+        width: 330px
+    }
+
+    .celebrities {
+        width: 21rem
+    }
+
+    .pagina{
+        height: 5.5rem;
+    }
+
 }

@@ -25,7 +25,7 @@ import Router from 'next/router'
 function ComingSoonMovie() {
   const filter = useSelector((state) => state.comingSoon.state);
   const dispatch = useDispatch();
-  const [genre, setGenre] = useState("Crime");
+  const [genre, setGenre] = useState("Action");
   const [year, setYear] = useState("2023");
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true)
