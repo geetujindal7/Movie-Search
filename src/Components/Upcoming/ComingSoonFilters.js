@@ -23,7 +23,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 function ComingSoonFilters({ handleGenreChange }) {
     const [genre, setgenre] = useState([]);
-    const [category, setCategory] = useState('Crime');
+    const [category, setCategory] = useState('Action');
     const [years, setYear] = useState("2023")
 
     const year = ["2020", "2021", "2022", "2023", "2024", "2025"]

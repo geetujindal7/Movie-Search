@@ -20,7 +20,7 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
     useEffect(() => {
         // setLoading(true)
         if (comingSoon === "comingSoon") {
-            dispatch(ComingSoon(50, "Crime", "1", "2023"))
+            dispatch(ComingSoon(50, "Action", "1", "2023"))
         }
         else if (comingSoon === "popular") {
             dispatch(ComingSoon())
