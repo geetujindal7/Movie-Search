@@ -88,9 +88,9 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
                 <Box sx={{ fontSize: "20px", }}>{title}</Box>
                 {
                     comingSoon==="comingSoon" ? <Link href={"/ComingSoon"}>
-                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50))} />
+                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50, "Action", "1", "2023"))} />
                     </Link> : (comingSoon === "random" ? <Link href={"/Favourites"}>
-                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50))} />
+                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50, "most_pop_movies"))} />
                     </Link> : <Link href={"/popular"}>
                         <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
                     </Link>)
