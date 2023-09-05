@@ -24,9 +24,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 function ComingSoonFilters({ handleGenreChange }) {
     const [genre, setgenre] = useState([]);
     const [category, setCategory] = useState('Action');
-    const [years, setYear] = useState("2023")
-
-    const year = ["2020", "2021", "2022", "2023", "2024", "2025"]
+    const [id, setId] = useState(28)
+    // const [years, setYear] = useState("2023")
+    // const year = ["2020", "2021", "2022", "2023", "2024", "2025"]
 
     const handleChange = (event) => {
         setCategory(event.target.value);
@@ -52,9 +52,9 @@ function ComingSoonFilters({ handleGenreChange }) {
     //     handleGenreChange(category, years)
     // }, [category, years])
 
-    const handleYearChange = (event) => {
-        setYear(event.target.value)
-    }
+    // const handleYearChange = (event) => {
+    //     setYear(event.target.value)
+    // }
 
     const [open, setOpen] = useState(false);
 
@@ -63,23 +63,22 @@ function ComingSoonFilters({ handleGenreChange }) {
     };
 
     const handleClose = () => {
-        handleGenreChange(category, years)
+        handleGenreChange(category, id)
         setOpen(false);
     };
 
     const fetchData = async () => {
         const options = {
-            method: "GET",
-            url: "https://moviesdatabase.p.rapidapi.com/titles/utils/genres",
+            method: 'GET',
+            url: 'https://api.themoviedb.org/3/genre/movie/list',
             headers: {
-                "X-RapidAPI-Key": "764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe",
-                "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com",
-            },
-        };
-
+              accept: 'application/json',
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1M2Q5NTBmZWFkOTdhOWExZGY1MDkxYzhjYWE3MTcxZiIsInN1YiI6IjY0YmJhOTRiNThlZmQzMDBhY2UxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WjCdrGAmI8x4ke-TMl3eimgJlrAjJqEzsy19UyT42ro'
+            }
+          };
         try {
             const response = await axios.request(options);
-            setgenre(response.data.results);
+            setgenre(response.data.genres);
         } catch (error) {
             console.error(error);
         }
@@ -123,15 +122,16 @@ function ComingSoonFilters({ handleGenreChange }) {
                                             <RadioGroup
                                                 value={category}
                                                 onChange={handleChange}
+                                                onClick={() => setId(value.id)}
                                             >
-                                                <FormControlLabel style={{ width: "120px" }} value={value} control={<Radio />} label={value} />
+                                                <FormControlLabel style={{ width: "120px" }} value={value.name} control={<Radio />} label={value.name} />
                                             </RadioGroup>
                                         </FormControl>}
                                     </Box>
                                 ))
                             }
                         </Box>
-                        <Box>
+                        {/* <Box>
                             <Box sx={{ margin: "9px 0px 13px 0px" }}>
                                 YEAR
                             </Box>
@@ -147,7 +147,7 @@ function ComingSoonFilters({ handleGenreChange }) {
                                     </FormControl>
                                 ))
                             }
-                        </Box>
+                        </Box> */}
                     </DialogContent>
                     <DialogActions sx={{ borderRadius: "8px", justifyContent: "center", marginBottom: "10px" }}>
                         <Button onClick={handleClose} autoFocus style={{

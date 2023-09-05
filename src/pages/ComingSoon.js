@@ -23,10 +23,11 @@ import Loading from "./loading";
 import Router from 'next/router'
 
 function ComingSoonMovie() {
-  const filter = useSelector((state) => state.comingSoon.state);
+  const filters = useSelector((state) => state.comingSoon.state);
   const dispatch = useDispatch();
   const [genre, setGenre] = useState("Action");
-  const [year, setYear] = useState("2023");
+  // const [data, setData] = useState(filters);
+  const [id, setID] = useState(28);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true)
   // const [count, setCount] = useState(2)
@@ -37,57 +38,64 @@ function ComingSoonMovie() {
   useEffect(() => {
     if (genre) {
       setLoading(true);
-      dispatch(ComingSoon(50, genre, page, year));
+      dispatch(ComingSoon(id, genre, page));
     }
 
     setTimeout(() => {
-      setLoading(false); 
+      setLoading(false);
     }, 3000);
-  }, [dispatch, genre, page, year]);
+  }, [dispatch, genre, page, id]);
 
-  const handleGenreChange = (value, year) => {
+  const handleGenreChange = (value, id) => {
     setGenre(value);
-    setYear(year);
+    setID(id);
     setPage(1)
   };
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false); 
-    }, 2000); 
+      setLoading(false);
+    }, 2000);
   }, []);
 
   return (
     <>
-    {loading && <Loading />}
-      <Box
-        sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
-      >
-        <Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
-            <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
-          <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Coming Soon</Typography>
-          <Box sx={{ position: "absolute", right: "40px" }}>
+      {loading ? <Loading /> : (
+        <>
+          <Box
+            sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
+          >
+            <Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
+              <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
+              <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Coming Soon</Typography>
+              {/* <Box sx={{ position: "absolute", right: "40px" }}>
             <ComingSoonFilters handleGenreChange={handleGenreChange} />
+          </Box> */}
+            </Box>
           </Box>
-        </Box>
-      </Box>
-      {
-        (
+
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box sx={{ padding: "20px", fontSize: "1.5rem" }}>
               <Box className={styles.card_container_wrap}>
-                {!(filter?.results?.length === 0) ? (
-                  filter?.results?.map((value, key) => {
+                {!(filters?.results?.length === 0) ? (
+                  filters?.results?.map((value, key) => {
                     return (
-                      value?.primaryImage?.url ? (
+                      value?.backdrop_path || value?.poster_path ? (
                         <Box key={key} className={styles.Card}>
-                          <Image
-                            className={styles.soonImage}
-                            src={value?.primaryImage?.url}
-                            width={250}
-                            height={300}
-                            alt="primaryImage"
-                          />
+                          <Link href={{
+                            pathname: "video",
+                            query: {
+                              id: value.id,
+                            }
+                          }}>
+                            <Image
+                              className={styles.soonImage}
+                              src={`https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}`}
+                              width={250}
+                              height={300}
+                              alt="primaryImage"
+                            />
+                          </Link>
                         </Box>
                       ) : (
                         <Box className={styles.Card}>
@@ -131,7 +139,7 @@ function ComingSoonMovie() {
                   <Pagination
                     onChange={handlePageChange}
                     page={page}
-                    count={5}
+                    count={filters?.total_pages}
                     size="large"
                     color="primary"
                   />
@@ -140,8 +148,8 @@ function ComingSoonMovie() {
             </Box>
           </Box>
 
-        )
-      }
+        </>
+      )}
     </>
   );
 }

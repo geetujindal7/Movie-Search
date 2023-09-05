@@ -61,52 +61,83 @@ Slider container .slider {
   background-size: 90pc 50pc !important;
   background-repeat: no-repeat !important;
   opacity: 0.3;
-  border-radius: 8px
+  border-radius: 8px;
 }
 
-.overview { 
+.overview {
   word-wrap: break-word;
-  width: 80%
+  width: 80%;
 }
 
 .typoHeader {
   position: relative;
   bottom: 16rem;
   left: 3vw;
-  display: inline
+  display: inline;
 }
 
 .movieName {
   font-size: 2.5rem !important;
   color: azure;
-  z-Index: 10;
+  z-index: 10;
   position: relative;
   font-family: emoji !important;
   font-weight: bold !important;
-  text-transform: uppercase
+  text-transform: uppercase;
 }
 
+.review {
+  margin: 20px;
+  /* border: 1px solid #212121; */
+  padding: 30px;
+  /* overflow: scroll; */
+  /* box-shadow: 5px 1px 9px 1px rgba(255, 255, 255, 0.5); */
+}
 
-@media (max-width: 400px){
-  .mainImage { 
+.userHeading {
+  font-size: 1.7rem;
+  font-family: fangsong;
+  font-weight: 600;
+}
+
+.reviewCont {
+  margin-top: 35px;
+  border: 1px solid #212121;
+  height: 100%;
+  padding: 34px;
+  background: #c8c8c8;
+  color: black;
+  border-radius: 8px;
+}
+
+.reviewCard {
+  border: 1px solid #b8acac;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 5px 1px 9px rgba(255, 255, 255, 0.5);
+  margin-top: 10px;
+}
+
+@media (max-width: 400px) {
+  .mainImage {
     background-size: 25pc 41pc !important;
   }
-  .typoHeader { 
-    bottom: 21rem
+  .typoHeader {
+    bottom: 21rem;
   }
-  .movieName { 
+  .movieName {
     font-size: 1.5rem !important;
   }
-  .overview { 
+  .overview {
     width: 97%;
-    font-size: 14px !important
+    font-size: 14px !important;
   }
 
   .frame {
-    width: 24rem
+    width: 24rem;
   }
   .iframe {
-    width: 23rem
+    width: 23rem;
   }
   /* .slide{
     font-size: 13px !important;

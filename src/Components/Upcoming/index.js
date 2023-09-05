@@ -20,7 +20,7 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
     useEffect(() => {
         // setLoading(true)
         if (comingSoon === "comingSoon") {
-            dispatch(ComingSoon(50, "Action", "1", "2023"))
+            dispatch(ComingSoon())
         }
         else if (comingSoon === "popular") {
             dispatch(ComingSoon())
@@ -42,41 +42,39 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
         }
     }, [filter, randm])
 
+    const imagee = (value, key) => (
+            (value?.backdrop_path || value?.poster_path) &&
+            <Box key={key} className={styles.Card}>
+             <Link href={{
+                pathname: "video",
+                query: {
+                  id: value.id,
+                }
+              }}>
+                <Image style={{ borderRadius: "12px" }} src={(value?.backdrop_path || value?.poster_path) ? `https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s" onError={handleImageError}
+                />
+                </Link>
+            </Box>
+        )
+
     const components = () => {
         if (comingSoon === "comingSoon") {
             return (
                 filter?.results?.map((value, key) => {
-                    return (
-                        value?.primaryImage?.url &&
-                        <Box key={key} className={styles.Card}>
-                            <Image style={{ borderRadius: "12px" }} src={value?.primaryImage?.url} width={250} height={300} alt="s" />
-                        </Box>
-                    )
+                  return imagee(value, key)
                 }))
         }
         else if (comingSoon === "random") {
             return (
-                randm?.map((value, key) => {
-                    return (
-                        value?.primaryImage?.url &&
-                        <Box key={key} className={styles.Card}>
-                            <Image style={{ borderRadius: "12px" }} src={value?.primaryImage?.url ? value?.primaryImage?.url : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s" onError={handleImageError}
-                            />
-                        </Box>
-                    )
+                randm?.results?.map((value, key) => {
+                    return imagee(value, key)
                 })
             )
         }
         else {
             return (
                 popular?.results?.map((value, key) => {
-                    return (
-                        value?.backdrop_path &&
-                        <Box key={key} className={styles.Card}>
-                            <Image style={{ borderRadius: "12px" }} src={value?.backdrop_path ? `https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s" onError={handleImageError}
-                            />
-                        </Box>
-                    )
+                    return imagee(value, key)
                 })
             )
         }
@@ -88,9 +86,9 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
                 <Box sx={{ fontSize: "20px", }}>{title}</Box>
                 {
                     comingSoon==="comingSoon" ? <Link href={"/ComingSoon"}>
-                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50, "Action", "1", "2023"))} />
+                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
                     </Link> : (comingSoon === "random" ? <Link href={"/Favourites"}>
-                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon(50, "most_pop_movies"))} />
+                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
                     </Link> : <Link href={"/popular"}>
                         <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
                     </Link>)

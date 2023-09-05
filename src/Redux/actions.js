@@ -42,17 +42,18 @@ export const SearchMovie = (p)  => {
   };
 }
 
-export const ComingSoon = (p, genre, page)  => {
+export const ComingSoon = (id, genre, page)  => {
   return (dispatch) => {
     // Dispatch action to indicate that the API request has started
     dispatch({ type: 'ComingSoon' });
     // Perform Axios request
-    axios.request(comingSoon(p, genre, page))
+    axios.request(comingSoon(id, genre, page))
       .then((response) => {
         // Dispatch action with the received user data
         dispatch({
           type: 'ComingSoon',
           payload: response.data,
+          id: id
         });
       })
       .catch((error) => {
@@ -72,7 +73,7 @@ export const randomMov = (l, list)  => {
         // Dispatch action with the received user data
         dispatch({
           type: 'randomMovie',
-          payload: response.data.results,
+          payload: response.data,
         });
       })
       .catch((error) => {

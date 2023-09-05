@@ -74,6 +74,12 @@ import {
                       return (
                         value?.backdrop_path && (
                           <Box key={key} className={styles.Card}>
+                          <Link href={{
+                            pathname: "video",
+                            query: {
+                              id: value.id,
+                            }
+                          }}>
                             <Image
                               className={styles.soonImage}
                               src={value?.backdrop_path ? `https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="}
@@ -81,6 +87,7 @@ import {
                               height={300}
                               alt="primaryImage"
                             />
+                            </Link>
                           </Box>
                         )
                       );

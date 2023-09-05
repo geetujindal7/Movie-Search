@@ -29,19 +29,34 @@ export const movie = (search) => {
   })
 };
 
-export const comingSoon = (l, genre, page = "2", year = '2023') => {
+export const comingSoon = (id, genre, page) => {
+  // return ({
+  //   method: 'GET',
+  //   url: 'https://moviesdatabase.p.rapidapi.com/titles/x/upcoming',
+  //   params: {
+  //     year: year,
+  //     limit: l,
+  //     genre: genre,
+  //     page: page
+  //   },
+  //   headers: {
+  //     'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
+  //     'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+  //   }
+  // })
+
   return ({
     method: 'GET',
-    url: 'https://moviesdatabase.p.rapidapi.com/titles/x/upcoming',
+    url: 'https://api.themoviedb.org/3/discover/movie',
     params: {
-      year: year,
-      limit: l,
-      genre: genre,
-      page: page
+      page: page,
+      'primary_release_date.gte': '2023-09-09',
+      'primary_release_date.lte': '2024-12-09',
+      sort_by: 'popularity.desc'
     },
     headers: {
-      'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
-      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1M2Q5NTBmZWFkOTdhOWExZGY1MDkxYzhjYWE3MTcxZiIsInN1YiI6IjY0YmJhOTRiNThlZmQzMDBhY2UxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WjCdrGAmI8x4ke-TMl3eimgJlrAjJqEzsy19UyT42ro'
     }
   })
 };
@@ -50,14 +65,11 @@ export const comingSoon = (l, genre, page = "2", year = '2023') => {
 export const randomMovie = (l, lists) => {
   return ({
     method: 'GET',
-    url: 'https://moviesdatabase.p.rapidapi.com/titles',
-    params: {
-      limit: l,
-      list: lists
-    },
+    url: 'https://api.themoviedb.org/3/movie/popular',
+    params: {language: 'hi', page: l},
     headers: {
-      'X-RapidAPI-Key': '764509eademsh39464646cc1b53ep154ca9jsnc80276461cfe',
-      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1M2Q5NTBmZWFkOTdhOWExZGY1MDkxYzhjYWE3MTcxZiIsInN1YiI6IjY0YmJhOTRiNThlZmQzMDBhY2UxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WjCdrGAmI8x4ke-TMl3eimgJlrAjJqEzsy19UyT42ro'
     }
   })
 }
