@@ -15,6 +15,10 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
     const filter = useSelector((state) => state.comingSoon.state)
     const randm = useSelector((state) => state.randomMovie.state)
     const popular = useSelector((state) => state.popular.state)
+    const airToday = useSelector((state) => state.airToday.state)
+    const onAir = useSelector((state) => state.onAir.state)
+    const topRatedSeries = useSelector((state) => state.topRatedSeries.state)
+    const punjabi = useSelector((state) => state.punjabi.state)
 
     const [loading, setLoading] = useState(true)
     useEffect(() => {
@@ -25,8 +29,20 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
         else if (comingSoon === "popular") {
             dispatch(ComingSoon())
         }
+        else if (comingSoon === "Series") {
+            dispatch(ComingSoon())
+        }
+        else if (comingSoon === "onAir") {
+            dispatch(ComingSoon())
+        }
+        else if(comingSoon === "topRatedSeries"){
+            dispatch(ComingSoon(1))
+        }
+        else if(comingSoon === "punjabi"){
+            dispatch(ComingSoon())
+        }
         else {
-            dispatch(ComingSoon(50, "most_pop_movies"))
+            dispatch(ComingSoon())
         }
     }, [])
 
@@ -42,31 +58,59 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
         }
     }, [filter, randm])
 
-    const imagee = (value, key) => (
-            (value?.backdrop_path || value?.poster_path) &&
-            <Box key={key} className={styles.Card}>
-             <Link href={{
-                pathname: "video",
+    const imagee = (value, key, check) => (
+        (value?.backdrop_path || value?.poster_path) &&
+        <Box key={key} className={styles.Card}>
+            <Link href={{
+                pathname: check ? "Newvideo" : "video",
                 query: {
-                  id: value.id,
+                    id: value.id,
                 }
-              }}>
+            }}>
                 <Image style={{ borderRadius: "12px" }} src={(value?.backdrop_path || value?.poster_path) ? `https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s" onError={handleImageError}
                 />
-                </Link>
-            </Box>
-        )
+            </Link>
+        </Box>
+    )
 
     const components = () => {
         if (comingSoon === "comingSoon") {
             return (
                 filter?.results?.map((value, key) => {
-                  return imagee(value, key)
+                    return imagee(value, key, false)
                 }))
         }
         else if (comingSoon === "random") {
             return (
                 randm?.results?.map((value, key) => {
+                    return imagee(value, key, false)
+                })
+            )
+        }
+        else if (comingSoon === "Series") {
+            return (
+                airToday?.results?.map((value, key) => {
+                    return imagee(value, key, true)
+                })
+            )
+        }
+        else if (comingSoon === "onAir") {
+            return (
+                onAir?.results?.map((value, key) => {
+                    return imagee(value, key, true)
+                })
+            )
+        }
+        else if (comingSoon === "topRatedSeries") {
+            return (
+                topRatedSeries?.results?.map((value, key) => {
+                    return imagee(value, key, true)
+                })
+            )
+        }
+        else if (comingSoon === "punjabi") {
+            return (
+                punjabi?.results?.map((value, key) => {
                     return imagee(value, key)
                 })
             )
@@ -80,23 +124,55 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
         }
     }
 
+    const hrefDispatch = [{
+        comingSoon: "comingSoon",
+        href: "/ComingSoon"
+    },
+    {
+        comingSoon: "random",
+        href: "/Favourites"
+    },
+    {
+        comingSoon: "popular",
+        href: "/popular"
+    },
+    {
+        comingSoon: "Series",
+        href: "/series"
+    },
+    {
+        comingSoon: "onAir",
+        href: "/oldSeries"
+    },
+    {
+        comingSoon: "topRatedSeries",
+        href: "/TopRatedSeries"
+    },
+    {
+        comingSoon: "punjabi",
+        href: "/punjabi"
+    },
+
+    ]
+
     return (
         <Box className={styles.upcoming_header}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Box sx={{ fontSize: "20px", }}>{title}</Box>
                 {
-                    comingSoon==="comingSoon" ? <Link href={"/ComingSoon"}>
-                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
-                    </Link> : (comingSoon === "random" ? <Link href={"/Favourites"}>
-                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
-                    </Link> : <Link href={"/popular"}>
-                        <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
-                    </Link>)
+
+                    hrefDispatch.map((val, key) => (
+                        <>
+                            {comingSoon === val.comingSoon && <Link href={val.href}>
+                                <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
+                            </Link>}
+                        </>
+                    ))
                 }
             </Box>
             <Box className={styles.card_container}>
                 {
-                    loading ? <><div style={{ display: "flex", justifyContent: "center", width: "100%", height: "250px", marginTop: "80px" }}><CircularProgress style={{color: "white"}}/></div></> : components()
+                    loading ? <><div style={{ display: "flex", justifyContent: "center", width: "100%", height: "250px", marginTop: "80px" }}><CircularProgress style={{ color: "white" }} /></div></> : components()
                 }
             </Box>
 

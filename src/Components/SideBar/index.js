@@ -17,7 +17,7 @@ import SideBarMenu from "./SideBarMenu";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { SearchApi, SearchMovie, Keyword } from "@/Redux/actions";
+import { SearchApi, SearchMovie, Keyword, SearchTVAction } from "@/Redux/actions";
 import { styled } from "@mui/material/styles";
 
 const Sidebar = () => {
@@ -98,6 +98,7 @@ const Sidebar = () => {
       dispatch(SearchApi(search));
     } else {
       dispatch(SearchMovie(search));
+      dispatch(SearchTVAction(search));
     }
     setSearch("");
   };
@@ -107,6 +108,7 @@ const Sidebar = () => {
       dispatch(SearchApi(val));
     } else {
       dispatch(SearchMovie(val));
+      dispatch(SearchTVAction(val));
     }
     setOpen(false);
     setSearch("");

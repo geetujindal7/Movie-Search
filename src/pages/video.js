@@ -101,7 +101,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                       <Box
                         sx={{
                           position: "relative",
-                          bottom: "18rem",
+                          bottom: "20rem",
                           left: "4rem",
                           right: "7rem",
                         }}
@@ -123,7 +123,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                             color: "#b5b5b5",
                           }}
                         >
-                          {resultData?.overview}
+                          {resultData?.overview.slice(0,550)}..
                         </Typography>
                         <Box
                           sx={{

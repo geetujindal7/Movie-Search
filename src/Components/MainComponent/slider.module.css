@@ -102,20 +102,25 @@ Slider container .slider {
 
 .reviewCont {
   margin-top: 35px;
-  border: 1px solid #212121;
+  border: 1px solid #000000;
   height: 100%;
   padding: 34px;
-  background: #c8c8c8;
-  color: black;
+  background: transparent;
+  /* color: black; */
   border-radius: 8px;
 }
 
 .reviewCard {
-  border: 1px solid #b8acac;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 5px 1px 9px rgba(255, 255, 255, 0.5);
+  box-shadow: 2px 1px 4px rgba(255, 255, 255, 0.5);
   margin-top: 10px;
+}
+
+.frame{
+  width: 100vw;
+  height: 91vh
+
 }
 
 @media (max-width: 400px) {

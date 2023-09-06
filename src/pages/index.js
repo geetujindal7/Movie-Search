@@ -4,7 +4,7 @@
 import MainComponent from '@/Components/MainComponent'
 import React, { lazy, Suspense } from 'react';
 import Upcoming from '@/Components/Upcoming'
-import { ComingSoon, PopularAPI, randomMov } from '@/Redux/actions'
+import { airToday, ComingSoon, onAirAction, PopularAPI, punjabiAction, randomMov, topRatedSeriesAction } from '@/Redux/actions'
 import { Box } from '@mui/material'
 import axios from 'axios';
 // import styles from '@/styles/Home.module.css'
@@ -17,7 +17,10 @@ function Home({ result }) {
       <Upcoming comingSoon={"comingSoon"} ComingSoon={ComingSoon} title={"Coming Soon"} />
       <Upcoming comingSoon={"random"} ComingSoon={randomMov} title={"Favourite"} />
       <Upcoming comingSoon={"popular"} ComingSoon={PopularAPI} title={"Popular"} />
-
+      <Upcoming comingSoon={"punjabi"} ComingSoon={punjabiAction} title={"Punjabi Movies"} />
+      <Upcoming comingSoon={"Series"} ComingSoon={airToday} title={"Series"} />
+      <Upcoming comingSoon={"topRatedSeries"} ComingSoon={topRatedSeriesAction} title={"Top Rated Series"} />
+      <Upcoming comingSoon={"onAir"} ComingSoon={onAirAction} title={"Old Series"} />
     </Box>
   </>
 }

@@ -1,0 +1,32 @@
+.selec {
+    /* width: 9.5rem;
+    text-align: center;
+    height: 3rem;
+    margin: 2rem 3rem;
+    background: #212121;
+    color: white;
+    border: transparent;
+    border-radius: 8px;
+    font-size: 1.2rem; */
+    width: 200px; /* Set the width of the select box */
+    padding: 10px; /* Add some padding for better readability */
+    border: transparent;/* Add a border */
+    border-radius: 8px; /* Add border radius */
+    background: #212121;/* Set the background color */
+    appearance: none; /* Remove the default arrow icon in some browsers */
+    cursor: pointer;
+    color: #fff;
+    margin: 2rem 3rem;
+    height: 3rem;
+    font-size: 1.2rem;
+}
+
+.selec option {
+    font-size: 14px; /* Set the font size for options */
+    padding: 5px; /* Add some padding for better readability */
+}
+
+.selec option:checked {
+    background-color: #007bff; /* Set a background color for the selected option */
+    color: #fff; /* Set the text color for the selected option */
+}

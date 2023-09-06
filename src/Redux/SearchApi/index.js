@@ -11,6 +11,13 @@ const comingSoon = [
 ];
 const keywords = [];
 const randomMovie = [];
+const airToday = [];
+const onAir = [];
+const topRatedSeries = [];
+const episodeDetail =[];
+const punjabi = [];
+const SearchTV = [];
+
 
 const SearchApi = (state= actorData, action) => {
     switch(action.type) {
@@ -25,6 +32,16 @@ const SearchApi = (state= actorData, action) => {
 export const SearchMovie = (state= movieData, action) => {
     switch(action.type) {
         case 'SearchMovie':           
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
+
+export const SearchTVReducer = (state= SearchTV, action) => {
+    switch(action.type) {
+        case 'SearchTV':           
             state =  {...state, state: action.payload}
             return state
         default:
@@ -77,5 +94,56 @@ export const Popular = (state = keywords, action) => {
             return state;
     }
 }
+
+export const airTodayReducer = (state = airToday, action) => {
+    switch(action.type) {
+        case 'airToday': 
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
+
+export const onAirReducer = (state = onAir, action) => {
+    switch(action.type) {
+        case 'onAir': 
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
+
+export const topRatedSeriesReducer = (state = topRatedSeries, action) => {
+    switch(action.type) {
+        case 'topRatedSeries': 
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
+
+export const episodeDetailReducer = (state = episodeDetail, action) => {
+    switch(action.type) {
+        case 'episodeDetail': 
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
+
+export const punjabiReducer = (state = punjabi, action) => {
+    switch(action.type) {
+        case 'punjabi': 
+            state =  {...state, state: action.payload}
+            return state
+        default:
+            return state;
+    }
+}
+
 
 export default SearchApi
