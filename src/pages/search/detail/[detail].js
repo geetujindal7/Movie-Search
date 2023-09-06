@@ -26,33 +26,41 @@ function Detail({ result }) {
 
     return (
         <>
-        {loading && <Loading />}
-        <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem", marginTop: "1rem" }} />
+        {loading ? <Loading /> : (
+            <Box>
+            <Box sx={{ position: "relative", top: "10px", zIndex: "10" }}>
+              <KeyboardArrowLeftIcon
+                onClick={() => Router.back()}
+                sx={{ fontSize: "2rem" }}
+              />
+              {/* <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography> */}
+            </Box>           
             {
-                (
+                
                     <>
 
                         <Box className={styles.mainimage}>
                             <Box>
                                 {
-                                    result.results.length !== 0 ? (<Box>
+                                    result.results.length !== 0 ? (<Box sx={{marginTop: "-30px"}}>
                                         <iframe
                                             className={styles.frame}
-                                            width="1400"
-                                            height="600"
+                                            width="1450"
+                                            height="680"
                                             src={`https://www.youtube.com/embed/${result.results[0].key}?modestbranding=0&autohide=1&rel=0&showinfo=0&controls=0&autoplay=0&modestbranding=0&loop=1&playlist=${result.results[0].key};wmode=transparent`}
                                             title="YouTube Trailer"
                                             frameborder="0"
                                             allowtransparency="true"
                                         ></iframe>
-                                    </Box>) : <Image style={{ borderRadius: "8px", width: "100%", height: "76vh", opacity: "0.6" }} src={data[0].backdrop_path ? `https://image.tmdb.org/t/p/original/${data[0].backdrop_path}` : `https://image.tmdb.org/t/p/original/${data[0].poster_path}`} alt="values" width={1100} height={450} />
+                                    </Box>) : <Image style={{ borderRadius: "8px", width: "100%", height: "85vh", opacity: "0.6", marginTop: "-30px" }} src={data[0].backdrop_path ? `https://image.tmdb.org/t/p/original/${data[0].backdrop_path}` : `https://image.tmdb.org/t/p/original/${data[0].poster_path}`} alt="values" width={1100} height={450} />
                                 }
                             </Box>
-                            <Box sx={{ position: "relative", bottom: "14rem", padding: "18px" }}>
+                            {/* <Box sx={{ position: "relative", bottom: "14rem", padding: "18px" }}>
                                 <Typography className={styles.overview_title}>{`${data[0].title}`}</Typography>
-                            </Box>
+                            </Box> */}
                         </Box>
                         <Box sx={{
+                            marginTop: "50px"
                             // bottom: "17rem",
                             // display: "flex",
                             // justifyContent: "center"
@@ -60,8 +68,12 @@ function Detail({ result }) {
                             <RelatedDetails data={data}/>
                         </Box>
                     </>
-                )
+                
             }
+            </Box>
+        )
+        
+        }
         </>
     )
 }
