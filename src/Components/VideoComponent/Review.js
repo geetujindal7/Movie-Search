@@ -9,7 +9,7 @@ function Review({ getReviews }) {
     return (
         <>
             {getReviews?.results?.length !== 0 && (<Box className={style.review}>
-                <Box className={style.userHeading}>User Reviews</Box>
+                <Typography variant="h5" className={style.userHeading}>User Reviews</Typography>
                 <Box className={style.reviewCont}>
                     {
                         getReviews?.results?.map((val, key) => (

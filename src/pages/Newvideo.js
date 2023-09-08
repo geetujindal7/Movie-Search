@@ -124,7 +124,7 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                 }}
                                             >
                                                 <Typography
-                                                    variant="h2"
+                                                    variant="h1"
                                                     sx={{
                                                         width: "100%",
                                                     }}
