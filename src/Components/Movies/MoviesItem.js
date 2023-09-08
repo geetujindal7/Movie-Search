@@ -21,15 +21,15 @@ function MoviesItem() {
   const [key, setKey] = useState(0);
 
   useEffect(() => {
-	setLoading(true)
+    setLoading(true)
     if (filter && filtertv) {
       setLoading(false);
-	  setnewUpdated([...filter, ...filtertv])
+      setnewUpdated([...filtertv, ...filter])
       // setKey(filter.length - 1)
     }
   }, [filter, key, loading, filtertv]);
 
- return (
+  return (
     <>
       {loading ? (
         <Box>
@@ -41,92 +41,141 @@ function MoviesItem() {
         </Box>
       ) : (
         <>
-          <Box
-            sx={{
-              display: "flex",
-              gap: "5px",
-              justifyContent: "space-between",
-            }}
-          >
-            <Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
-              <KeyboardArrowLeftIcon
+          <Box sx={{ margin: "30px" }}>
+            <Box>
+              {/* <KeyboardArrowLeftIcon
                 onClick={() => Router.back()}
                 sx={{ fontSize: "2rem" }}
-              />
-              <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>
+              /> */}
+              <Typography variant="h2">
                 Results
               </Typography>
             </Box>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-			  margin : "0px 50px"
-            }}
-          >
-            {newUpdated?.map(
-              (value, key) =>
-                (value?.backdrop_path || value?.poster_path) && (
-                  <>
-                    <Box className={styles.main_trailer_image}>
-                      <Image
-                        key={key}
-                        className={styles.trailer_image}
-                        src={`https://image.tmdb.org/t/p/original/${
-                          value?.backdrop_path || value?.poster_path
-                        }`}
-                        alt="values"
-                        width={1000}
-                        height={100}
-                      />
-                      <Box
-                        sx={{
-                          position: "relative",
-                          bottom: "13rem",
-                          width: "100%",
-                          height: "20%",
-                          marginLeft: "44px",
-                        }}
-                      >
-                        <Typography
+
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0px 5.4rem",
+                marginTop: "24px"
+              }}
+            >
+              {newUpdated?.map(
+                (value, key) =>
+                  (value?.backdrop_path || value?.poster_path) && (
+                    <>
+                      <Box className={styles.main_trailer_image}>
+                        <Box sx={{
+                          boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+                          transition: "0.9s",
+                        }}>
+                          <Image
+                            key={key}
+                            className={styles.trailer_image}
+                            src={`https://image.tmdb.org/t/p/original/${value?.backdrop_path || value?.poster_path
+                              }`}
+                            alt="values"
+                            width={1000}
+                            height={100}
+                          />
+                        </Box>
+
+                        <Box
                           sx={{
-                            fontSize: "18px !important",
-                            color: "yellow",
-                            wordBreak: "break-word",
-                            width: "350px",
+                            padding: "16px",
+                            backgroundColor: "black",
+                            opacity: "0.6",
+                            marginTop: "-14rem",
+                            height: "14rem",
+                            borderRadius: "0px 0px 8px 8px",
                           }}
                         >
-                          {value?.original_title?.slice(0, 27) ||
-                            value?.original_name}
-                        </Typography>
-                        <Typography
+                          <Box sx={{
+                            display: 'flex',
+                            flexDirection: "column",
+                            gap: "14px"
+                          }}>
+                            <Typography sx={{
+                              wordWrap: "break-word",
+                              width: "100%"
+                            }} variant="h4">
+                              {value?.original_title ||
+                                value?.original_name}
+                            </Typography>
+                            <Typography
+                              variant="h3"
+                              sx={{
+                                wordBreak: "break-word",
+                                width: "360px",
+                                minHeight: "4rem",
+                              }}
+                            >
+                              {value.overview.slice(0, 100)}...
+                            </Typography>
+                            <Link
+                              href={{
+                                pathname: "detailVideo",
+                                query: {
+                                  id: value.id,
+                                },
+                              }}
+                            >
+                              {" "}
+                              <Button className={styles.buttn}>
+                                Watch Trailer
+                              </Button>
+                            </Link>
+                          </Box>
+
+                        </Box>
+                        {/* <Box
                           sx={{
-                            fontSize: "16px",
-                            wordBreak: "break-word",
-                            width: "350px",
+                            position: "relative",
+                            bottom: "13rem",
+                            width: "100%",
+                            height: "20%",
+                            marginLeft: "44px",
                           }}
                         >
-                          {value.overview.slice(0, 100)}...
-                        </Typography>
-                        <Link
-                          href={{
-                            pathname: "detailVideo",
-                            query: {
-                              id: value.id,
-                            },
-                          }}
-                        >
-                          {" "}
-                          <Button className={styles.buttn}>
-                            Watch Trailer
-                          </Button>
-                        </Link>
+                          <Typography
+                            sx={{
+                              fontSize: "18px !important",
+                              color: "yellow",
+                              wordBreak: "break-word",
+                              width: "350px",
+                            }}
+                          >
+                            {value?.original_title?.slice(0, 27) ||
+                              value?.original_name}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "16px",
+                              wordBreak: "break-word",
+                              width: "350px",
+                            }}
+                          >
+                            {value.overview.slice(0, 100)}...
+                          </Typography>
+                          <Link
+                            href={{
+                              pathname: "detailVideo",
+                              query: {
+                                id: value.id,
+                              },
+                            }}
+                          >
+                            {" "}
+                            <Button className={styles.buttn}>
+                              Watch Trailer
+                            </Button>
+                          </Link>
+                        </Box> */}
                       </Box>
-                    </Box>
-                  </>
-                )
-            )}
+                    </>
+                  )
+              )}
+            </Box>
           </Box>
         </>
       )}

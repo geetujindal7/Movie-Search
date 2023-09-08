@@ -19,7 +19,7 @@ function Review({ getReviews }) {
                                     <Typography sx={{ marginTop: "2px" }}>{val?.author_details?.rating || 9}/10</Typography>
 
                                 </Box>
-                                <Box sx={{ display: "flex", gap: "10px", marginBottom: "18px" }}>
+                                <Box sx={{ display: "flex", gap: "20px", marginBottom: "18px" }}>
                                     <Image
                                         style={{
                                             width: "7%",
@@ -31,12 +31,11 @@ function Review({ getReviews }) {
                                         height={1000}
                                         alt="primaryImage"
                                     />
-                                    <Typography sx={{
-                                        marginTop: "12px",
-                                        fontWeight: "700"
+                                    <Typography variant="h5" sx={{
+                                        marginTop: "7px",
                                     }}>{val?.author}</Typography>
                                 </Box>
-                                <Typography sx={{color: "#727272"}}>{val?.content}</Typography>
+                                <Typography variant="h3">{val?.content}</Typography>
                             </Box>
                         ))
                     }

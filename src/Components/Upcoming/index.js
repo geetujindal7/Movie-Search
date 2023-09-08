@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import styles from '@/Components/Upcoming/upcoming.module.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -67,7 +67,7 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
                     id: value.id,
                 }
             }}>
-                <Image style={{ borderRadius: "12px" }} src={(value?.backdrop_path || value?.poster_path) ? `https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={300} alt="s" onError={handleImageError}
+                <Image style={{ borderRadius: "8px" }} src={(value?.backdrop_path || value?.poster_path) ? `https://image.tmdb.org/t/p/original/${value?.poster_path || value?.backdrop_path}` : "https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="} width={250} height={290} alt="s" onError={handleImageError}
                 />
             </Link>
         </Box>
@@ -158,21 +158,21 @@ function Upcoming({ title, comingSoon, ComingSoon }) {
     return (
         <Box className={styles.upcoming_header}>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Box sx={{ fontSize: "20px", }}>{title}</Box>
+                <Typography variant="h2">{title}</Typography>
                 {
 
                     hrefDispatch.map((val, key) => (
-                        <>
+                        <React.Fragment key={key}>
                             {comingSoon === val.comingSoon && <Link href={val.href}>
-                                <KeyboardArrowRightIcon onClick={() => dispatch(ComingSoon())} />
+                                <KeyboardArrowRightIcon sx={{fontSize: "2.5rem"}} onClick={() => dispatch(ComingSoon())} />
                             </Link>}
-                        </>
+                        </React.Fragment>
                     ))
                 }
             </Box>
             <Box className={styles.card_container}>
                 {
-                    loading ? <><div style={{ display: "flex", justifyContent: "center", width: "100%", height: "250px", marginTop: "80px" }}><CircularProgress style={{ color: "white" }} /></div></> : components()
+                    loading ? <><div style={{ display: "flex", justifyContent: "center", width: "100%", height: "250px", marginTop: "90px" }}><CircularProgress style={{ color: "white" }} /></div></> : components()
                 }
             </Box>
 

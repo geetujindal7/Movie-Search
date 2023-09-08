@@ -109,7 +109,7 @@ function ComingSoonFilters({ handleGenreChange }) {
                         },
                     }}
                 >
-                    <DialogTitle sx={{ borderRadius: "15px" }} id="alert-dialog-title">
+                    <DialogTitle sx={{ borderRadius: "8px" }} id="alert-dialog-title">
                         {"Filters"}
                     </DialogTitle>
                     <DialogContent >

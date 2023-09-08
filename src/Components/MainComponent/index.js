@@ -19,14 +19,12 @@ function MainComponent({ result }) {
 
   return (
     <Box>
-      <Box sx={{ height: "36rem" }}>
+      <Box sx={{ height: "34rem" }}>
         {
           result?.results?.map((value, index) => (
-            <>
+            <React.Fragment key={index}>
               <Box>
-                <Image style={{
-                  background: `url(https://image.tmdb.org/t/p/original/${value.poster_path})`
-                }} src={`https://image.tmdb.org/t/p/original/${value.poster_path}`} width={800} height={500} alt="image" className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.mainImage}` : `${styles.slide}  ${styles.mainImage}`}
+                <Image src={`https://image.tmdb.org/t/p/original/${value.backdrop_path}`} width={800} height={500} alt="image" className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.mainImage}` : `${styles.slide}  ${styles.mainImage}`}
                 />
               </Box>
               <Box key={value.overview} className={styles.typoHeader}>
@@ -40,7 +38,7 @@ function MainComponent({ result }) {
                 }}>
                   <button className={index === currentIndex ? `${styles.slide} ${styles.active} ${styles.watch}` : `${styles.slide} ${styles.watch}`}>Watch Now</button></Link>
               </Box>
-            </>
+            </React.Fragment>
           ))
         }
       </Box>

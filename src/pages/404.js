@@ -8,7 +8,7 @@ import Router from 'next/router'
 function NoData() {
 
     const handleBack = {
-        borderRadius: "10px",
+        borderRadius: "8px",
         backgroundColor: "rgb(118 143 152)",
         borderColor: "transparent",
         width: "7rem",
@@ -29,14 +29,14 @@ function NoData() {
                 display: "flex",
                 justifyContent: "center",
             }}>
-                <Typography sx={{ fontSize: "26px", color: "grey" }}>Result Not Found!! </Typography>
+                <Typography variant="h5">Result Not Found!! </Typography>
             </Box>
             <Box sx={{
                 display: "flex",
                 justifyContent: "center",
                 marginTop: "10px"
             }}>
-                <Typography sx={{ fontSize: "20px", color: "grey" }}>Whoops... This Information is not available at the moment</Typography>
+                <Typography variant="h3">Whoops... This Information is not available at the moment</Typography>
             </Box>
             <Box sx={{
                 display: "flex",
@@ -44,10 +44,7 @@ function NoData() {
                 marginTop: "40px"
             }}>
                 {/* <Link href="/"> */}
-                    <Button onClick={() => Router.back()} sx={{
-                            color: "white",
-                            borderColor: "white"
-                        }} variant="outlined">Go Back</Button>
+                    <Button onClick={() => Router.back()} >Go Back</Button>
                 {/* </Link> */}
             </Box>
         </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { Box, Typography } from '@mui/material';
 import styles from "@/Components/MainComponent/slider.module.css"
@@ -6,10 +6,13 @@ import NoData from './404';
 import Router from 'next/router'
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Loading from './loading';
+import { AppContext } from '@/Components/AppContext';
 
 function DetailVideo({ result }) {
     console.log(result)
     const [loading, setLoading] = useState(true)
+    const { setIsOpen } = useContext(AppContext);
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -18,26 +21,17 @@ function DetailVideo({ result }) {
     }, [])
 
     return (
-        <Box>
-            {loading && <Loading />}
-            <Box sx={{ position: "relative", top: "10px", zIndex: "10" }}>
-                <KeyboardArrowLeftIcon
-                    onClick={() => Router.back()}
-                    sx={{ fontSize: "2rem" }}
-                />
-                {/* <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography> */}
-            </Box>
-            <Box sx={{
+        <Box onClick={() => setIsOpen(false)}>
+            {loading ? <Loading /> : (
+                <Box sx={{
                 display: "flex", justifyContent: "space-evenly",
                 flexWrap: "wrap",
             }}>
                 {
                     result?.results[0]?.key ?
                         <Box sx={{
-                            borderRadius: "15px",
-                            height: "100%",
+                            borderRadius: "8px",
                             background: "#121212",
-                            marginTop: "-30px"
                         }}>
                             <iframe
                                 className={styles.frame}
@@ -53,6 +47,15 @@ function DetailVideo({ result }) {
                         : (<Box> <NoData /></Box>)
                 }
             </Box>
+            )}
+            {/* <Box sx={{ position: "relative", top: "10px", zIndex: "10" }}>
+                <KeyboardArrowLeftIcon
+                    onClick={() => Router.back()}
+                    sx={{ fontSize: "2rem" }}
+                /> */}
+                {/* <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography> */}
+            {/* </Box> */}
+        
         </Box>
     )
 }

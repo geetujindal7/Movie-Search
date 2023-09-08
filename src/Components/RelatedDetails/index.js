@@ -11,17 +11,16 @@ function RelatedDetails({ data }) {
 
   return (
     <>
-      <Box sx={{ display: "flex", gap: "30px", justifyContent: "center" }}>
-        <Typography className={selected === "Related" ? `${styles.related} ${styles.active}` : `${styles.related}`} onClick={() => setSelected("Related")}>Related</Typography>
-        <Typography className={selected === "Details" ? `${styles.related} ${styles.active}` : `${styles.related}`} onClick={() => setSelected("Details")}>Details</Typography>
+      <Box sx={{ display: "flex", gap: "30px", justifyContent: "center", marginTop: "10px" }}>
+        <Typography variant="h1" className={selected === "Related" && `${styles.related} ${styles.active}` } onClick={() => setSelected("Related")}>Related</Typography>
+        <Typography variant="h1" className={selected === "Details" && `${styles.active}`} onClick={() => setSelected("Details")}>Details</Typography>
       </Box>
       <Box>
         {
           selected === "Related" ? (
             <>
-              <Typography sx={{
+              <Typography variant="h5" sx={{
                 padding: "1px 25px 15px 29px",
-                fontSize: "1.5rem"
               }}>Customers also watched</Typography>
               <Box sx={{ display: "flex", overflow: "scroll", gap: "2rem", padding: "5px 29px 3rem 29px" }}>
                 {
@@ -39,26 +38,26 @@ function RelatedDetails({ data }) {
           ) : (
             <>
               <Box sx={{ padding: "3rem 6rem" }}>
-                <Typography className={styles.heading}>More Info</Typography>
+                <Typography variant="h5" className={styles.heading}>More Info</Typography>
                 <Box className = {styles.container}>
-                  <Typography className={styles.heading}>Title</Typography>
-                  <Typography className={styles.detail}>{data[0].original_title}</Typography>
+                  <Typography variant="h5" className={styles.heading}>Title</Typography>
+                  <Typography variant="h3" className={styles.detail}>{data[0].original_title}</Typography>
                 </Box>
                 <Box className = {styles.container}>
-                  <Typography className={styles.heading}>Info</Typography>
-                  <Typography className={styles.detail}>{data[0].overview}</Typography>
+                  <Typography variant="h5" className={styles.heading}>Info</Typography>
+                  <Typography variant="h3" className={styles.detail}>{data[0].overview}</Typography>
                 </Box>
                 <Box className = {styles.container}>
-                  <Typography className={styles.heading}>Language</Typography>
-                  <Typography className={styles.detail}>English (US) [CC], हिन्दी, தமிழ், తెలుగు, Deutsch, English (Australia), Español (Latinoamérica), Español (España), Français (Canada), Français (France), Italiano, 日本語, Nederlands, Polski, Português, Svenska</Typography>
+                  <Typography variant="h5" className={styles.heading}>Language</Typography>
+                  <Typography variant="h3" className={styles.detail}>English (US) [CC], हिन्दी, தமிழ், తెలుగు, Deutsch, English (Australia), Español (Latinoamérica), Español (España), Français (Canada), Français (France), Italiano, 日本語, Nederlands, Polski, Português, Svenska</Typography>
                 </Box>
                 <Box className = {styles.container}>
-                  <Typography className={styles.heading}>Release Date</Typography>
-                  <Typography className={styles.detail}>{data[0].release_date}</Typography>
+                  <Typography variant="h5" className={styles.heading}>Release Date</Typography>
+                  <Typography variant="h3" className={styles.detail}>{data[0].release_date}</Typography>
                 </Box>
                 <Box className = {styles.container}>
-                  <Typography className={styles.heading}>IMDB</Typography>
-                  <Typography className={styles.detail}>{data[0].vote_average}/10</Typography>
+                  <Typography variant="h5" className={styles.heading}>IMDB</Typography>
+                  <Typography variant="h3" className={styles.detail}>{data[0].vote_average.toFixed(1)}/10</Typography>
                 </Box>
               </Box>
             </>

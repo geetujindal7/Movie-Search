@@ -7,23 +7,23 @@ function Detail({ resultData, actors }) {
   return (
     <Box>
       <Box sx={{ padding: "3rem 6rem" }}>
-        <Typography className={styles.heading}>More Info</Typography>
+        <Typography variant="h2">More Info</Typography>
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Title</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Title</Typography>
+          <Typography variant="h3">
             {resultData?.original_name}
           </Typography>
         </Box>
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Info</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Info</Typography>
+          <Typography variant="h3">
             {resultData?.overview}
           </Typography>
         </Box>
 
         <Box className={styles.container}>
-          <Typography className={styles.heading}>IMDB</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">IMDB</Typography>
+          <Typography variant="h3">
             {resultData?.vote_average.toFixed(1)}/10
           </Typography>
         </Box>
@@ -31,8 +31,8 @@ function Detail({ resultData, actors }) {
        
 
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Genre</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Genre</Typography>
+          <Typography variant="h3">
             {resultData?.genres.map((val, key) => (
               <span key={key} style={{ marginRight: "10px" }}>
                 | {val.name} |{" "}
@@ -41,14 +41,14 @@ function Detail({ resultData, actors }) {
           </Typography>
         </Box>
         <Box className={styles.container}>
-          <Typography className={styles.heading}>No. of Seasons</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">No. of Seasons</Typography>
+          <Typography variant="h3">
             {resultData?.number_of_seasons}
           </Typography>
         </Box>
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Language</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Language</Typography>
+          <Typography variant="h3">
             {resultData?.spoken_languages.map((val, key) => (
               <span key={key} style={{ marginRight: "10px" }}>
                 {val.name}
@@ -58,8 +58,8 @@ function Detail({ resultData, actors }) {
         </Box>
 
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Cast</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Cast</Typography>
+          <Typography variant="h3">
             {" "}
             {actors?.cast?.map((val, key) => (
               <span key={key} style={{ marginRight: "10px" }}>
@@ -69,15 +69,15 @@ function Detail({ resultData, actors }) {
           </Typography>
         </Box>
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Director</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Director</Typography>
+          <Typography variant="h3">
             {resultData?.created_by[0]?.name}
           </Typography>
         </Box>
 
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Production</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Production</Typography>
+          <Typography variant="h3">
             {resultData?.production_companies.map((val, key) => (
               <span key={key} style={{ marginRight: "10px" }}>
                 {val.name}{"       "}
@@ -87,8 +87,8 @@ function Detail({ resultData, actors }) {
         </Box>
 
         <Box className={styles.container}>
-          <Typography className={styles.heading}>Production Countries</Typography>
-          <Typography className={styles.detail}>
+          <Typography variant="h5">Production Countries</Typography>
+          <Typography variant="h3">
             {resultData?.production_countries.map((val, key) => (
               <span key={key} style={{ marginRight: "10px" }}>
                 {val.name}{"       "}

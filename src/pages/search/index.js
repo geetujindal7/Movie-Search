@@ -5,23 +5,24 @@ import { Box, Button, Typography } from '@mui/material'
 import axios from 'axios'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import styles from "@/styles/search.module.css"
 import ActorItems from '@/Components/Actors/ActorItems'
 import MoviesItem from '@/Components/Movies/MoviesItem'
+import { AppContext } from '@/Components/AppContext'
 
 const User = ({ }) => {
     const router = useRouter()
     const { search, select } = router.query
-    const filter = useSelector((state) => state.searchApi.state)
-
+    const { setIsOpen } = useContext(AppContext);
+    
     return (
-        <>
+        <Box onClick={() => setIsOpen(false)}>
             {select === "Actor" ? (
                 <ActorItems search={search} />) : (<MoviesItem />)
             }
-        </>
+        </Box>
     )
 }
 

@@ -29,10 +29,10 @@ function Random({ handleGenreChange }) {
             MuiDialog: {
                 styleOverrides: {
                     paper: {
-                        backgroundColor: '#121212',
+                        backgroundColor: '#212121',
                         color: "#c3c3c3",
                         '& .PrivateSwitchBase-root': {
-                            backgroundColor: '#121212',
+                            backgroundColor: '#212121',
                             color: "grey",
                         }
                     },
@@ -93,7 +93,7 @@ function Random({ handleGenreChange }) {
             aria-describedby="alert-dialog-description"
             style={{ width: "100%" }}
         >
-            <DialogTitle sx={{ borderRadius: "15px"}} id="alert-dialog-title">
+            <DialogTitle sx={{ borderRadius: "8px"}} id="alert-dialog-title">
                 {"Filters"}
             </DialogTitle>
             <DialogContent >

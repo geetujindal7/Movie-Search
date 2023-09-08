@@ -6,9 +6,8 @@ import { episodeDetailAction } from "@/Redux/actions";
 import Image from "next/image";
 import Loading from "@/pages/loading";
 
-function Episodes({ season, id }) {
+function Episodes({ season, id, resultData }) {
   const episode = useSelector((state) => state.episodeDetail.state);
-
   const [seasons, setSeason] = useState(1)
   const [loading, setLoading] = useState(true)
 
@@ -44,55 +43,49 @@ function Episodes({ season, id }) {
           <Box sx={{ display: "flex" }}>
             <Image
               style={{
-                width: "27%",
                 height: "17rem",
                 margin: "1rem 3rem",
                 borderRadius: "8px",
+                width: "26%"
               }}
               src={
                 val?.still_path
                   ? `https://image.tmdb.org/t/p/original/${val?.still_path}`
-                  : `https://img.lovepik.com/element/40128/7461.png_1200.png`
+                  : `https://image.tmdb.org/t/p/original/${val?.poster_path || resultData?.backdrop_path || resultData?.poster_path}`
               }
               width={1600}
               height={1000}
               alt="primaryImage"
             />
-            <Box sx={{ margin: "32px 5px" }}>
+            <Box sx={{ margin: "20px 5px" }}>
               <Typography
-                sx={{
-                  fontSize: "1.5rem",
-                  fontWeight: "500",
-                  color: "#fff",
-                }}
+               variant="h5"
+               sx={{marginTop :"10px"}}
               >
                 S{val?.season_number} E{val?.episode_number} - {val?.name}
               </Typography>
               <Box
                 sx={{
                   display: "flex",
-                  marginTop: "20px",
                   fontSize: "1.2rem",
                   color: "#aaa",
                   gap: "35px",
+                  marginTop: "10px",
                 }}
               >
                 <Typography
-                  sx={{
-                    fontSize: "1.2rem",
-                  }}
+                 variant="h3"
                 >
                   {formatDate(val?.air_date)}
                 </Typography>
                 <Typography
-                  sx={{
-                    fontSize: "1.2rem",
-                  }}
+                  variant="h3"
                 >
                   {val?.runtime}min
                 </Typography>
               </Box>
               <Typography
+               variant="h3"
                 sx={{
                   fontSize: "1.2rem",
                   color: "#aaa",
@@ -102,13 +95,14 @@ function Episodes({ season, id }) {
                 {val?.overview}
               </Typography>
               <Typography
+               variant="h3"
                 sx={{
                   fontSize: "1.2rem",
                   color: "#aaa",
                   marginTop: "10px",
                 }}
               >
-                {val?.vote_average.toFixed(1)}/10
+                {(val?.vote_average === 0 || !val?.vote_average) ? "9.0" : val?.vote_average.toFixed(1)}/10
               </Typography>
             </Box>
           </Box>

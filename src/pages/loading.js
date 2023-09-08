@@ -24,7 +24,7 @@ position: relative;
 const Balls = styled.div`  
 display: flex;
 position: absolute;
-top: 50%;
+top: 38%;
 left: 50%;
 background-color: transparent;
 transform: translate(-50%, -50%);

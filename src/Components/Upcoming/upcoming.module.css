@@ -1,5 +1,9 @@
 .upcoming_header {
-    /* margin-top: 10px; */
+    padding: 1rem;
+}
+
+.upcoming_header_movie{
+    margin: 8px 36px;
     padding: 1rem;
 }
 
@@ -8,14 +12,22 @@
     height: 300px;
     border: 1px solid transparent;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-    border-radius: 12px;
-    margin: 10px;
+    border-radius: 8px;
 }
 
 .card_container {
     display: flex;
     width: 100%;
-    overflow: auto
+    gap: 20px;
+    overflow: scroll
+}
+
+
+.card_container_movie{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+
 }
 
 .card_container::-webkit-scrollbar {
@@ -26,18 +38,19 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
 .stack {
     width: 40%;
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: grey !important
 }
 
 .dropdown {
     width: 7rem;
     height: 2rem;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 6px;
 }
 
@@ -56,18 +69,18 @@
 }
 
 .celebrities {
-    border-radius: 12px;
+    border-radius: 8px;
     opacity: 0.6
 }
 
 .soonImage {
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 .pagina {
     margin-top: 20px;
     background-color: #242424;
-    border-radius: 18px;
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     align-items: center;

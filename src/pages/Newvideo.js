@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "@/Components/MainComponent/slider.module.css";
@@ -14,12 +14,15 @@ import style from "@/Components/MainComponent/slider.module.css";
 import Review from "@/Components/VideoComponent/Review";
 import Episodes from "@/Components/VideoComponent/Episodes";
 import Detail from "@/Components/VideoComponent/detail";
+import { useSelector } from "react-redux";
+import { AppContext } from "@/Components/AppContext";
 
 function Newvideo({ result, error, resultData, actors, getImages, getReviews }) {
     const [loading, setLoading] = useState(true);
     const [trailer, setTrailer] = useState(false);
-    const [show, setShow] = useState("Episode")
+    const [show, setShow] = useState("Detail")
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { setIsOpen } = useContext(AppContext);
 
     // Function to go to the next slide
     const nextSlide = () => {
@@ -29,7 +32,7 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
     };
 
     useEffect(() => {
-        const timer = setInterval(nextSlide, 500000);
+        const timer = setInterval(nextSlide, 5000);
         return () => clearInterval(timer);
     }, []);
 
@@ -41,6 +44,7 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
     function scrollToSection() {
         // Scroll to a specific Y position (e.g., 500 pixels from the top)
         window.scrollTo(0, 800);
+        setShow("Detail")
     }
 
     useEffect(() => {
@@ -56,7 +60,7 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                 <Loading />
             ) : (
                 <>
-                    <Box
+                    {/* <Box
                         sx={{
                             display: "flex",
                             gap: "5px",
@@ -67,11 +71,11 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                             <KeyboardArrowLeftIcon
                                 onClick={() => Router.back()}
                                 sx={{ fontSize: "2rem" }}
-                            />
-                            {/* <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography> */}
-                        </Box>
-                    </Box>
-                    <Box sx={getReviews?.results?.length !== 0 && { height: "210vh" }}>
+                            /> */}
+                    {/* <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography> */}
+                    {/* </Box>
+                    </Box> */}
+                    <Box onClick={() => setIsOpen(false)} sx={getReviews?.results?.length !== 0 && { height: "210vh" }}>
                         {(result?.results?.length !== 0 && !error) ||
                             resultData?.backdrop_path ||
                             resultData?.poster_path ? (
@@ -79,7 +83,20 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                 <Box sx={getReviews?.results?.length !== 0 ? { height: "95vh" } : { height: "90vh" }}>
                                     {!trailer ? (
                                         <>
-                                            {getImages?.backdrops?.map((val, index) => (
+                                            {getImages?.backdrops?.length === 0 ? (<Box>
+                                                <Image
+                                                    style={{
+                                                        width: "100%",
+                                                        height: "90vh",
+                                                        opacity: "0.4",
+                                                    }}
+                                                    src={`https://image.tmdb.org/t/p/original/${resultData?.poster_path || resultData?.backdrop_path}`}
+                                                    width={1150}
+                                                    height={600}
+                                                    alt="primaryImage"
+                                                />
+
+                                            </Box>) : (getImages?.backdrops?.map((val, index) => (
                                                 <Image
                                                     key={index}
                                                     className={
@@ -91,14 +108,13 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                         width: "100%",
                                                         height: "90vh",
                                                         opacity: "0.4",
-                                                        marginTop: "-28px",
                                                     }}
                                                     src={`https://image.tmdb.org/t/p/original/${val?.file_path}`}
                                                     width={1150}
                                                     height={650}
                                                     alt="primaryImage"
                                                 />
-                                            ))}
+                                            )))}
                                             <Box
                                                 sx={{
                                                     position: "relative",
@@ -108,37 +124,33 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                 }}
                                             >
                                                 <Typography
+                                                    variant="h2"
                                                     sx={{
                                                         width: "100%",
-                                                        fontSize: "1.7rem",
-                                                        color: "white",
                                                     }}
                                                 >
                                                     {resultData?.original_name}
                                                 </Typography>
                                                 <Typography
+                                                    variant="h3"
                                                     sx={{
                                                         width: "40%",
                                                         marginTop: "5px",
-                                                        fontSize: "1.2rem",
-                                                        color: "#b5b5b5",
                                                     }}
                                                 >
-                                                    {resultData?.overview.slice(0,550)} ..
+                                                    {resultData?.overview.slice(0, 550)}
                                                 </Typography>
                                                 <Box
                                                     sx={{
                                                         position: "absolute",
-                                                        top: "10px",
+                                                        top: "0px",
                                                         right: "0rem",
                                                         left: "51rem"
                                                     }}
                                                 >
                                                     <Typography
-                                                        sx={{
-                                                            fontSize: "1.2rem",
-                                                            color: "white",
-                                                        }}
+                                                        variant="h4"
+
                                                     >
                                                         {actors?.cast?.slice(0, 3).map((val, key) => (
                                                             <span key={key} style={{ marginRight: "10px" }}>
@@ -147,10 +159,8 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                         ))}
                                                     </Typography>
                                                     <Typography
-                                                        sx={{
-                                                            fontSize: "1.2rem",
-                                                            color: "#b5b5b5",
-                                                        }}
+                                                        variant="h3"
+                                                        sx={{ marginTop: "10px" }}
                                                     >
                                                         {resultData?.genres.map((val, key) => (
                                                             <span key={key} style={{ marginRight: "10px" }}>
@@ -165,40 +175,38 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                         }}
                                                     >
                                                         <Typography
+                                                            variant="h3"
+
                                                             sx={{
-                                                                marginTop: "5px",
-                                                                fontSize: "1.2rem",
-                                                                color: "#b5b5b5",
+                                                                marginTop: "10px",
                                                             }}
                                                         >
                                                             IMDB {resultData?.vote_average.toFixed(1)}
                                                         </Typography>
                                                         {/* <AttachMoneyIcon sx={{color: "#b5b5b5", marginTop:" 7px"}}/> */}
                                                         <Typography
+                                                            variant="h3"
                                                             sx={{
-                                                                marginTop: "5px",
-                                                                fontSize: "1.2rem",
-                                                                color: "#b5b5b5",
+                                                                marginTop: "10px",
                                                             }}
                                                         >
-                                                            {resultData?.number_of_seasons} Seasons
+                                                            {resultData?.revenue && `${resultData?.revenue} $`}
+
                                                         </Typography>
                                                     </Box>
                                                     <Typography
+                                                        variant="h3"
                                                         sx={{
-                                                            marginTop: "5px",
-                                                            fontSize: "1.2rem",
-                                                            color: "#b5b5b5",
+                                                            marginTop: "10px",
                                                         }}
                                                     >
-                                                        Release: {formatDate(resultData?.first_air_date)}
+                                                        Release: {resultData?.release_date ? formatDate(resultData?.release_date) : "No data"}
                                                     </Typography>
                                                     <Typography
+                                                        variant="h3"
                                                         sx={{
                                                             width: "80%",
-                                                            marginTop: "5px",
-                                                            fontSize: "1.2rem",
-                                                            color: "#b5b5b5",
+                                                            marginTop: "10px",
                                                         }}
                                                     >
                                                         {resultData?.spoken_languages.map((val, key) => (
@@ -207,11 +215,9 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                             </span>
                                                         ))}
                                                     </Typography>
-                                                    <Box sx={{ display: "flex", gap: "20px" }}>
+                                                    <Box sx={{ display: "flex", gap: "20px", marginTop: "10px" }}>
                                                         {result?.results?.length !== 0 && <Button
                                                             style={{
-                                                                color: "white",
-                                                                borderColor: "white",
                                                                 marginTop: "10px",
                                                             }}
                                                             variant="outlined"
@@ -221,17 +227,16 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                         </Button>
                                                         }
 
-                                                       <Button
-                                                                style={{
-                                                                    color: "white",
-                                                                    borderColor: "white",
-                                                                    marginTop: "10px",
-                                                                }}
-                                                                variant="outlined"
-                                                                onClick={scrollToSection}
-                                                            >
-                                                                Episodes
-                                                            </Button>
+                                                        <Button
+                                                            style={{
+                                                                marginTop: "10px",
+                                                            }}
+                                                            variant="outlined"
+                                                            onClick={scrollToSection}
+                                                        >
+                                                            Detail
+                                                        </Button>
+
                                                     </Box>
                                                 </Box>
                                             </Box>
@@ -243,7 +248,6 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                     width: "100%",
                                                     height: "90vh",
                                                     opacity: "0.7",
-                                                    marginTop: "-28px",
                                                 }}
                                                 // className={styles.iframe}
                                                 width="1450"
@@ -262,40 +266,36 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                 }}
                                             >
                                                 <Button
-                                                    style={{
-                                                        color: "white",
-                                                        borderColor: "white",
-                                                    }}
                                                     variant="outlined"
                                                     onClick={() => setTrailer(false)}
                                                 >
-                                                    Stop Trailer
+                                                    Go Back
                                                 </Button>
                                             </Box>
                                         </>
                                     )}
                                 </Box>
-                                <Box sx={{display: "flex", justifyContent: "center"}}>
+                                <Box sx={{ display: "flex", justifyContent: "center" }}>
                                     <Box sx={{
                                         width: "40%",
                                         background: "#212121",
                                         height: "3rem",
                                         borderRadius: "8px",
-                                        margin : "10px 0px"
+                                        margin: "10px 0px"
                                     }}>
-                                        <Box sx={{display: "flex", padding: "10px", justifyContent: "space-evenly"}}>
-                                            <Typography sx={{fontSize: "18px", cursor: "pointer"}} onClick={() => setShow("Episode")}>Episodes</Typography>
-                                            <Typography sx={{fontSize: "18px", cursor: "pointer"}} onClick={() => setShow("Detail")}>Details</Typography>
+                                        <Box sx={{ display: "flex", padding: "12px", justifyContent: "space-evenly" }}>
+                                            {<Typography variant="h4" sx={show === 'Episode' ? { textDecoration:"underline" } : {cursor: "pointer"}}  onClick={() => setShow("Episode")}>Episodes</Typography>}
+                                            <Typography variant="h4"  sx={show === 'Detail' ? { textDecoration:"underline" } : {cursor: "pointer"}}  onClick={() => setShow("Detail")}>Details</Typography>
                                             {
-                                                            getReviews?.results?.length !== 0 && (<Typography sx={{fontSize: "18px", cursor: "pointer"}} onClick={() => setShow("Rating")}>Rating</Typography>)}
+                                                getReviews?.results?.length !== 0 && (<Typography variant="h4"  sx={show === 'Rating' ? { textDecoration:"underline" } : {cursor: "pointer"}} onClick={() => setShow("Rating")}>Rating</Typography>)}
                                         </Box>
 
                                     </Box>
                                 </Box>
                                 {
-                                   show === "Episode" ? (<Box><Episodes season={resultData?.seasons} id={resultData?.id}/></Box>) : 
-                                    (show === "Detail" ? (<Box><Detail resultData={resultData} actors={actors}/></Box>) : ( <Review getReviews= {getReviews}/>)
-                                    )
+                                    show === "Episode" ? (<Box><Episodes season={resultData?.seasons} id={resultData?.id} resultData={resultData} /></Box>) :
+                                        (show === "Detail" ? (<Box><Detail resultData={resultData} actors={actors} /></Box>) : (<Review getReviews={getReviews} />)
+                                        )
                                 }
                             </Box>
                         ) : (

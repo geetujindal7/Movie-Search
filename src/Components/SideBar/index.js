@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // Sidebar.js
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./popper.module.css"; // Import the CSS module
 import MenuSharpIcon from "@mui/icons-material/MenuSharp";
 import {
@@ -19,17 +19,19 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { SearchApi, SearchMovie, Keyword, SearchTVAction } from "@/Redux/actions";
 import { styled } from "@mui/material/styles";
+import { AppContext } from "../AppContext";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [select, setSelect] = useState("Actor");
   const filter = useSelector((state) => state.keywords.state);
   const [open, setOpen] = useState(false);
+  const { isOpen, setIsOpen } = useContext(AppContext);
   const dispatch = useDispatch();
 
   const handleSidebarToggle = () => {
-    setIsOpen(!isOpen); // Verify that isOpen state is being toggled correctly
+    setIsOpen(!isOpen);
   };
   const [checked, setChecked] = useState(false);
 
@@ -84,6 +86,10 @@ const Sidebar = () => {
     if (checked) setSelect("Movie");
     else setSelect("Actor");
   }, [checked]);
+
+  // useEffect(() => {
+  //   setIsOpen(opened)
+  // }, [opened]);
 
   useEffect(() => {
     setTimeout(() => {

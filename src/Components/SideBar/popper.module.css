@@ -74,15 +74,11 @@
 }
 
 .typoHeader {
-  color: rgb(251 248 248);
-  font-size: 20px !important;
   margin-top: 30px !important;
   text-align: center;
 }
 
 .typoColumn {
-  font-size: 18px !important;
-  color: #b5b5b5;
   margin: 20px 0px !important;
 }
 
@@ -98,7 +94,7 @@
 
 .tooltip {
   visibility: hidden;
-
+  z-index: 1000;
   position: absolute;
   top: 3.5rem;
   /* Or display: none, depending on how you want it to behave */

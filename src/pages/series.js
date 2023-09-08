@@ -8,7 +8,7 @@ import {
     Slide,
     Typography,
   } from "@mui/material";
-  import React, { useEffect, useState } from "react";
+  import React, { useContext, useEffect, useState } from "react";
   import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
   import Link from "next/link";
   import styles from "@/Components/Upcoming/upcoming.module.css";
@@ -22,14 +22,15 @@ import {
   import Router from 'next/router'
   import NoData from "./404";
   import Loading from "./loading";
+import { AppContext } from "@/Components/AppContext";
   
   function Series() {
-    const filter = useSelector((state) => state.airToday.state);
+    const filters = useSelector((state) => state.airToday.state);
     const dispatch = useDispatch();
     // const [genre, setGenre] = useState("most_pop_movies");
     const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1);
-  
+    const { setIsOpen } = useContext(AppContext);
   
     const handlePageChange = (event, value) => {
       setPage(value);
@@ -53,25 +54,23 @@ import {
   
     return (
       <>
-        {loading ? <Loading /> : (
-          <>
-            <Box
-              sx={{ display: "flex", gap: "5px", justifyContent: "space-between" }}
-            >
-              <Box sx={{ display: "flex", gap: "5px", padding: "15px" }}>
-                <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
-                <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Series</Typography>
+      {loading ? <Loading /> : (
+        <>
+          <Box onClick={() => setIsOpen(false)} sx={{ margin: "24px 53px" }}>
+            <Box>
+              <Box sx={{ margin: "30px 0px" }}>
+                {/* <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} /> */}
+                <Typography variant="h2">Series</Typography>
                 {/* <Box sx={{ position: "absolute", right: "40px" }}>
-              <ComingSoonFilters handleGenreChange={handleGenreChange} />
-            </Box> */}
+            <ComingSoonFilters handleGenreChange={handleGenreChange} />
+          </Box> */}
               </Box>
             </Box>
-  
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Box sx={{ padding: "20px", fontSize: "1.5rem" }}>
+              <Box>
                 <Box className={styles.card_container_wrap}>
-                  {!(filter?.results?.length === 0) ? (
-                    filter?.results?.map((value, key) => {
+                  {!(filters?.results?.length === 0) ? (
+                    filters?.results?.map((value, key) => {
                       return (
                         value?.backdrop_path || value?.poster_path ? (
                           <Box key={key} className={styles.Card}>
@@ -122,7 +121,7 @@ import {
                     sx={{
                       marginTop: "20px",
                       backgroundColor: "#242424",
-                      borderRadius: "18px",
+                      borderRadius: "8px",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
@@ -132,7 +131,7 @@ import {
                     <Pagination
                       onChange={handlePageChange}
                       page={page}
-                      count={filter?.total_pages > 500 ? 500 : filter?.total_pages} 
+                      count={filters?.total_pages > 500 ? 500 : filters?.total_pages}
                       size="large"
                       color="primary"
                     />
@@ -140,11 +139,12 @@ import {
                 </Box>
               </Box>
             </Box>
-  
-          </>
-        )}
-      </>
-    
+          </Box>
+        </>
+      )}
+    </>
+
+
     );
   }
   

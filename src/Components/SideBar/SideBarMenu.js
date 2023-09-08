@@ -8,7 +8,7 @@ import Link from "next/link";
 import { SearchApi } from "@/Redux/actions";
 import { useDispatch } from "react-redux";
 
-function SideBarMenu({setIsOpen}) {
+function SideBarMenu({ setIsOpen }) {
   const dispatch = useDispatch();
   const { follow } = useContext(AppContext);
   const followSet = [...new Set(follow)];
@@ -17,29 +17,31 @@ function SideBarMenu({setIsOpen}) {
     setIsOpen(false)
     dispatch(SearchApi(val))
   }
+
+
   return (
     <Box className={styles.sidebar_container}>
       <Link href="/">
         <img
           src="https://static.vecteezy.com/system/resources/thumbnails/002/236/321/small/movie-trendy-banner-vector.jpg"
           alt="logo"
-          style={{borderRadius: "8px"}}
+          style={{ borderRadius: "8px" }}
           width={170}
           onClick={() => setIsOpen(false)}
         />
       </Link>
-      <Typography className={styles.typoHeader}>News Feed</Typography>
+      <Typography variant="h2" className={styles.typoHeader}>News Feed</Typography>
       <Link href="/ComingSoon">
-        <Typography className={styles.typoColumn} onClick={() => setIsOpen(false)}>Coming</Typography>
+        <Typography variant="h3" className={styles.typoColumn} onClick={() => setIsOpen(false)}>Coming</Typography>
       </Link>
-      <Link href="/celebrities">
-        <Typography className={styles.typoColumn} onClick={() => setIsOpen(false)}>Celebrities</Typography>
+      <Link href="/celebrities?page=1">
+        <Typography variant="h3"   className={styles.typoColumn} onClick={() => setIsOpen(false)}>Celebrities</Typography>
       </Link>
       <Link href="/movies">
-        <Typography className={styles.typoColumn} onClick={() => setIsOpen(false)}>Movies</Typography>
+        <Typography variant="h3" className={styles.typoColumn} onClick={() => setIsOpen(false)}>Movies</Typography>
       </Link>
       <hr />
-      <Typography className={styles.typoHeader}>Following</Typography>
+      <Typography variant="h2" className={styles.typoHeader}>Following</Typography>
       <Box
         sx={{
           height: "400px",
@@ -56,6 +58,7 @@ function SideBarMenu({setIsOpen}) {
             }}
           >
             <Typography
+            variant="h3" 
               className={styles.typoColumn}
               onClick={() => handleDispatch(value)}
             >

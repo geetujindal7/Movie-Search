@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Button, Typography } from "@mui/material";
 import styles from "@/Components/MainComponent/slider.module.css";
@@ -12,11 +12,13 @@ import Image from "next/image";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import style from "@/Components/MainComponent/slider.module.css";
 import StarIcon from '@mui/icons-material/Star';
+import Review from "@/Components/VideoComponent/Review";
+import { AppContext } from "@/Components/AppContext";
 
 function Video({ result, error, resultData, actors, getImages, getReviews }) {
-  console.log(getReviews, getImages);
   const [loading, setLoading] = useState(true);
   const [trailer, setTrailer] = useState(false);
+  const { setIsOpen } = useContext(AppContext);
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -28,7 +30,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
   };
 
   useEffect(() => {
-    const timer = setInterval(nextSlide, 5000);
+    const timer = setInterval(nextSlide, 500000);
     return () => clearInterval(timer);
   }, []);
 
@@ -55,7 +57,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
         <Loading />
       ) : (
         <>
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               gap: "5px",
@@ -67,18 +69,31 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                 onClick={() => Router.back()}
                 sx={{ fontSize: "2rem" }}
               />
-              {/* <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography> */}
+              <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography>
             </Box>
-          </Box>
-          <Box sx={getReviews?.results?.length !== 0 && { height: "210vh" }}>
+          </Box> */}
+          <Box onClick={() => setIsOpen(false)} sx={getReviews?.results?.length !== 0 && { height: "210vh" }}>
             {(result?.results?.length !== 0 && !error) ||
               resultData?.backdrop_path ||
               resultData?.poster_path ? (
               <Box>
-                <Box sx={getReviews?.results?.length !== 0 ? { height: "95vh" } : { height: "90vh" }}>
+                <Box sx={getReviews?.results?.length !== 0 ? { height: "95vh" } : { height: "92vh" }}>
                   {!trailer ? (
                     <>
-                      {getImages?.backdrops?.map((val, index) => (
+                      {getImages?.backdrops?.length === 0 ? (<Box>
+                        <Image
+                          style={{
+                            width: "100%",
+                            height: "92vh",
+                            opacity: "0.4",
+                          }}
+                          src={`https://image.tmdb.org/t/p/original/${resultData?.poster_path || resultData?.backdrop_path}`}
+                          width={1150}
+                          height={600}
+                          alt="primaryImage"
+                        />
+
+                      </Box>) : (getImages?.backdrops?.map((val, index) => (
                         <Image
                           key={index}
                           className={
@@ -88,16 +103,15 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                           }
                           style={{
                             width: "100%",
-                            height: "90vh",
+                            height: "92vh",
                             opacity: "0.4",
-                            marginTop: "-28px",
                           }}
                           src={`https://image.tmdb.org/t/p/original/${val?.file_path}`}
                           width={1150}
-                          height={650}
+                          height={600}
                           alt="primaryImage"
                         />
-                      ))}
+                      )))}
                       <Box
                         sx={{
                           position: "relative",
@@ -107,23 +121,21 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                         }}
                       >
                         <Typography
+                          variant="h2"
                           sx={{
                             width: "100%",
-                            fontSize: "1.7rem",
-                            color: "white",
                           }}
                         >
                           {resultData?.original_title}
                         </Typography>
                         <Typography
+                          variant="h3"
                           sx={{
                             width: "40%",
                             marginTop: "5px",
-                            fontSize: "1.2rem",
-                            color: "#b5b5b5",
                           }}
                         >
-                          {resultData?.overview.slice(0,550)}..
+                          {resultData?.overview.slice(0, 550)}
                         </Typography>
                         <Box
                           sx={{
@@ -134,10 +146,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                           }}
                         >
                           <Typography
-                            sx={{
-                              fontSize: "1.2rem",
-                              color: "white",
-                            }}
+                            variant="h5"
                           >
                             {actors?.cast?.slice(0, 3).map((val, key) => (
                               <span key={key} style={{ marginRight: "10px" }}>
@@ -146,10 +155,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                             ))}
                           </Typography>
                           <Typography
-                            sx={{
-                              fontSize: "1.2rem",
-                              color: "#b5b5b5",
-                            }}
+                            variant="h3"
                           >
                             {resultData?.genres.map((val, key) => (
                               <span key={key} style={{ marginRight: "10px" }}>
@@ -164,40 +170,36 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                             }}
                           >
                             <Typography
+                              variant="h3"
                               sx={{
                                 marginTop: "5px",
-                                fontSize: "1.2rem",
-                                color: "#b5b5b5",
                               }}
                             >
                               IMDB {resultData?.vote_average.toFixed(1)}
                             </Typography>
                             {/* <AttachMoneyIcon sx={{color: "#b5b5b5", marginTop:" 7px"}}/> */}
                             <Typography
+                              variant="h3"
                               sx={{
                                 marginTop: "5px",
-                                fontSize: "1.2rem",
-                                color: "#b5b5b5",
                               }}
                             >
                               {resultData?.revenue} $
                             </Typography>
                           </Box>
                           <Typography
+                            variant="h3"
                             sx={{
                               marginTop: "5px",
-                              fontSize: "1.2rem",
-                              color: "#b5b5b5",
                             }}
                           >
                             Release: {formatDate(resultData?.release_date)}
                           </Typography>
                           <Typography
+                            variant="h3"
                             sx={{
                               width: "80%",
                               marginTop: "5px",
-                              fontSize: "1.2rem",
-                              color: "#b5b5b5",
                             }}
                           >
                             {resultData?.spoken_languages.map((val, key) => (
@@ -242,9 +244,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                       <iframe
                         style={{
                           width: "100%",
-                          height: "90vh",
-                          opacity: "0.7",
-                          marginTop: "-28px",
+                          height: "91vh"
                         }}
                         // className={styles.iframe}
                         width="1450"
@@ -278,39 +278,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                 </Box>
                 {
                   getReviews?.results?.length !== 0 && (<Box className={style.review}>
-                    <Box className={style.userHeading}>User Reviews</Box>
-                    <Box className={style.reviewCont}>
-                      {
-                        getReviews?.results?.map((val, key) => (
-                          <Box key={key} className={style.reviewCard}>
-                            <Box sx={{ margin: "0px 0px 14px 8px", display: "flex", gap: "20px" }}>
-                              <StarIcon sx={{ color: "#c39400" }} />
-                              <Typography sx={{ marginTop: "2px" }}>{val?.author_details?.rating || 9}/10</Typography>
-
-                            </Box>
-                            <Box sx={{ display: "flex", gap: "10px", marginBottom: "18px" }}>
-                              <Image
-                                style={{
-                                  width: "7%",
-                                  height: "3rem",
-                                  borderRadius: "50%",
-                                }}
-                                src={val?.author_details?.avatar_path ? `https://image.tmdb.org/t/p/original/${val?.author_details?.avatar_path}` : `https://img.lovepik.com/element/40128/7461.png_1200.png`}
-                                width={1000}
-                                height={1000}
-                                alt="primaryImage"
-                              />
-                              <Typography sx={{
-                                marginTop: "12px",
-                                fontWeight: "700"
-                              }}>{val?.author}</Typography>
-                            </Box>
-                            <Typography>{val?.content}</Typography>
-                          </Box>
-                        ))
-                      }
-                    </Box>
-
+                    <Review getReviews={getReviews} />
                   </Box>)
                 }
               </Box>

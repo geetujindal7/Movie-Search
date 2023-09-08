@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material';
-import React from 'react'
+import { Box, Pagination, Stack, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react'
 import styles from "@/Components/Upcoming/upcoming.module.css"
 import Image from 'next/image';
 import axios from 'axios';
@@ -8,56 +8,109 @@ import { useDispatch } from 'react-redux';
 import { SearchApi } from '@/Redux/actions';
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Router from 'next/router'
-
+import { useRouter } from 'next/router'
+import Loading from './loading';
+import { CircularProgress } from '@mui/material';
 
 function Celebrities({ result }) {
+    const router = useRouter()
     const dispatch = useDispatch()
+    const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(true)
+    // const [imageloading, setimageLoading] = useState(true)
+
+    const handlePageChange = (event, value) => {
+        setLoading(true)
+        router.push(`/celebrities?page=${value}`)
+        setPage(value)
+    };
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+    }, [result])
+
     return (
-        <Box className={styles.upcoming_header}>
-            <Box sx={{ display: "flex"}}>
-            <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} />
-                <Box sx={{ fontSize: "23px", marginTop: "4px" }}>Celebrities</Box>
-            </Box>
-            <Box className={styles.card_container} sx={{ flexWrap: "wrap" }}>
-                {
-                    result.list?.map((value, key) => {
-                        return (
-                            value?.primaryImage?.imageUrl &&
-                            <Box key={key} className={styles.Card}>
-                            <Link href={{ pathname: `/search`, query: { select: "Actor", search: `${value.nameText.text}`}}}>
-                                <Image className={styles.celebrities} src={value?.primaryImage?.imageUrl} width={250} height={300} alt="s" onClick={() => dispatch(SearchApi(value.nameText.text))} />
-                                <Typography sx={{
-                                    position: "relative",
-                                    bottom: "2.5rem",
-                                    marginLeft: "20px",
-                                    color: "white",
-                                    fontSize: "18px",
-                                    // opacity: "0.7"
-                                }}>{value.nameText.text}</Typography>
-                                </Link>
-                            </Box>
-                        )
-                    })
+        <>
+            {loading ? <div><Loading /></div> : (
+                <Box className={styles.upcoming_header_movie}>
+                    <Box sx={{ display: "flex" }}>
+                        {/* <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} /> */}
+                        <Typography sx={{ margin: "10px 0px 20px 0px" }} variant="h2">Celebrities</Typography>
+                    </Box>
+                    <Box className={styles.card_container_movie} sx={{ flexWrap: "wrap" }}>
+                        {
+                            result?.results?.map((value, key) => {
+                                return (
+                                    value?.profile_path &&
+                                    <Box key={key} className={styles.Card}>
+                                        <Link href={{ pathname: `/search`, query: { select: "Actor", search: `${value?.name}` } }}>
+                                            <Image className={styles.celebrities} src={`https://image.tmdb.org/t/p/original/${value?.profile_path}`} width={250} height={300} alt="s" onClick={() => dispatch(SearchApi(value.name))} />
+                                            <Box sx={{
+                                                display:" flex",
+                                                justifyContent: "center",
+                                                padding: "18px 0px",
+                                                backgroundColor: "black",
+                                                opacity: "0.9",
+                                                marginTop: "-69px",
+                                                height: "65px",
+                                                borderRadius: "0px 0px 8px 8px",
+                                                width: "101%"
+                                            }}>
+                                                <Typography variant="h4" >{value.name}</Typography></Box>
+                                        </Link>
+                                    </Box>
+                                )
+                            })
 
-                }
-            </Box>
+                        }
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                        <Stack
+                            spacing={3}
+                            sx={{
+                                marginTop: "20px",
+                                backgroundColor: "#121212",
+                                borderRadius: "8px",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                height: "2.8rem",
+                                width: "32%"
+                            }}
+                        >
+                            <Pagination
+                                onChange={handlePageChange}
+                                page={page}
+                                count={result?.total_pages > 500 ? 500 : result?.total_pages}
+                                size="large"
+                                color="primary"
+                            />
+                        </Stack>
+                    </Box>
+                </Box>
+            )}
 
-        </Box>
+        </>
+
     )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
     const options = {
         method: 'GET',
-        url: 'https://imdb188.p.rapidapi.com/api/v1/getPopularCelebrities',
+        url: 'https://api.themoviedb.org/3/person/popular',
+        params: { page: context.query.page },
         headers: {
-            'X-RapidAPI-Key': 'bc5b33704amsh5eff8f306d0200ep1fe8d1jsn3377938a8334',
-            'X-RapidAPI-Host': 'imdb188.p.rapidapi.com'
+            accept: 'application/json',
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1M2Q5NTBmZWFkOTdhOWExZGY1MDkxYzhjYWE3MTcxZiIsInN1YiI6IjY0YmJhOTRiNThlZmQzMDBhY2UxNWVhNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WjCdrGAmI8x4ke-TMl3eimgJlrAjJqEzsy19UyT42ro'
         }
     }
 
     const response = await axios.request(options);
-    const result = response.data.data
+    const result = response.data
     // const result = await response.text();
     return {
         props: {
