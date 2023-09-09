@@ -87,6 +87,10 @@
     height: 2.8rem,
 }
 
+.outerBox{
+    margin : 24px 53px;
+}
+
 @media (max-width: 400px) {
     .soonImage {
         width: 330px
@@ -98,6 +102,10 @@
 
     .pagina{
         height: 5.5rem;
+    }
+
+    .outerBox{
+        margin : 24px 28px;
     }
 
 }

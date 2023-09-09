@@ -22,6 +22,7 @@ function ActorItems({ search }) {
   const [actordetails, setActorDetails] = useState();
   const [error, setError] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [show, setShow] = useState(false);
   const itemsPerPage = 20;
 
   const fetchData = async () => {
@@ -57,7 +58,7 @@ function ActorItems({ search }) {
   const endIndex = startIndex + itemsPerPage;
 
   // Get the items to display on the current page
-  const itemsToShow = data.slice(startIndex, endIndex);
+  const itemsToShow = data?.slice(startIndex, endIndex);
 
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
@@ -94,7 +95,7 @@ function ActorItems({ search }) {
         <Box sx={{ margin: "6px 30px" }}>
           <Box className={styles.Image_Header}>
             <Image
-              style={{ opacity: "0.9", borderRadius: "8px" }}
+              className={styles.actorImage}
               src={`https://image.tmdb.org/t/p/original/${
                 actordetails?.profile_path || filter[0].poster_path
               }`}
@@ -110,8 +111,8 @@ function ActorItems({ search }) {
               {actordetails?.biography && (
                 <>
                   <Typography variant="h3" className={styles.actorDetail}>
-                    {actordetails?.biography.slice(0, 340)}
-                    {actordetails?.biography?.length > 350 && `...`}
+                    {show ? actordetails?.biography : actordetails?.biography.slice(0, 340) }
+                    {actordetails?.biography?.length > 350 && <button className={styles.showButton} onClick={() => setShow(!show)}>{show ? 'Show Less' : 'Show More'}</button>}
                   </Typography>
                   <Typography variant="h3" className={styles.actorDetail}>
                     Birth: {actordetails?.birthday}
@@ -170,7 +171,7 @@ function ActorItems({ search }) {
                           }}
                         >
                           <Box>
-                            <Typography variant="h4">
+                            <Typography variant="h4" sx={{textAlign: "center"}}>
                               {e.title.slice(0, 30)}
                             </Typography>
                           </Box>

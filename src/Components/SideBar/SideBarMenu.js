@@ -8,9 +8,9 @@ import Link from "next/link";
 import { SearchApi } from "@/Redux/actions";
 import { useDispatch } from "react-redux";
 
-function SideBarMenu({ setIsOpen }) {
+function SideBarMenu() {
   const dispatch = useDispatch();
-  const { follow } = useContext(AppContext);
+  const { follow, setIsOpen } = useContext(AppContext);
   const followSet = [...new Set(follow)];
 
   const handleDispatch = (val) => {
@@ -21,6 +21,7 @@ function SideBarMenu({ setIsOpen }) {
 
   return (
     <Box className={styles.sidebar_container}>
+    <Box onClick={() => setIsOpen(false)} className={styles.x}>X</Box>
       <Link href="/">
         <img
           src="https://static.vecteezy.com/system/resources/thumbnails/002/236/321/small/movie-trendy-banner-vector.jpg"

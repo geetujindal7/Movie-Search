@@ -120,6 +120,10 @@ Slider container .slider {
 
 }
 
+.outerBox{
+  margin: 30px 5rem
+}
+
 @media (max-width: 400px) {
   .mainImage {
     background-size: 25pc 41pc !important;
@@ -140,6 +144,9 @@ Slider container .slider {
   }
   .iframe {
     width: 23rem;
+  }
+  .outerBox{
+    margin: 30px 0.7rem
   }
   /* .slide{
     font-size: 13px !important;

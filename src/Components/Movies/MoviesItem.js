@@ -20,6 +20,13 @@ function MoviesItem() {
 
   const [key, setKey] = useState(0);
 
+  const splitSentence = (value) => {
+    const firstDot = value.search(/[.!?]/);
+    const secondDot = value.indexOf('.', firstDot + 1);
+    console.log(firstDot)
+    return value.slice(0, firstDot+1)
+  }
+
   useEffect(() => {
     setLoading(true)
     if (filter && filtertv) {
@@ -85,19 +92,19 @@ function MoviesItem() {
                             padding: "16px",
                             backgroundColor: "black",
                             opacity: "0.6",
-                            marginTop: "-14rem",
-                            height: "14rem",
+                            marginTop: "-18rem",
+                            height: "18rem",
                             borderRadius: "0px 0px 8px 8px",
                           }}
                         >
                           <Box sx={{
                             display: 'flex',
                             flexDirection: "column",
-                            gap: "14px"
                           }}>
                             <Typography sx={{
                               wordWrap: "break-word",
-                              width: "100%"
+                              width: "100%",
+                              minHeight: "4rem"
                             }} variant="h4">
                               {value?.original_title ||
                                 value?.original_name}
@@ -106,11 +113,11 @@ function MoviesItem() {
                               variant="h3"
                               sx={{
                                 wordBreak: "break-word",
-                                width: "360px",
-                                minHeight: "4rem",
+                                width: "370px",
+                                minHeight: "8rem",
                               }}
                             >
-                              {value.overview.slice(0, 100)}...
+                              {splitSentence(value.overview)}
                             </Typography>
                             <Link
                               href={{
@@ -121,9 +128,11 @@ function MoviesItem() {
                               }}
                             >
                               {" "}
-                              <Button className={styles.buttn}>
+                             <Box sx={{display:"flex", justifyContent: "center"}}>
+                             <Button className={styles.buttn}>
                                 Watch Trailer
                               </Button>
+                             </Box>
                             </Link>
                           </Box>
 

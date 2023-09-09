@@ -29,7 +29,7 @@ function Trailer({ result, error }) {
     return (
         <>
             {loading && <Loading />}
-            <Box sx={{ margin: "30px 5rem" }} >
+            <Box className={styles.outerBox} >
                 <Box>
                     <Box sx={{ marginBottom: "30px" }}>
                         {/* <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} /> */}

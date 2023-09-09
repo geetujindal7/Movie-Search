@@ -19,10 +19,28 @@
   padding: 19px 24px 3px 0px;
 }
 
+.actorImage{
+  color: transparent;
+    opacity: 0.9;
+    border-radius: 8px;
+    left: 0px;
+    height: 100%;
+    position: absolute;
+}
+
+.showButton {
+  border: none;
+  padding: 4px;
+  background-color: white;
+  margin-left: 6px;
+  border-radius: 8px;
+}
+
 .name_container {
   padding: 10px 30px;
   width: 53%;
-  justify-content: space-between;
+  position: relative;
+  left: 40rem
 }
 
 .title {
@@ -61,6 +79,7 @@
 }
 
 .Image_Header {
+  position: relative;
   width: 100%;
   display: flex;
   background: rgb(0, 0, 0);
@@ -81,11 +100,20 @@
     display: block;
   }
   .Image_Header img{
-    height: 40rem;
-    width: 25rem;
+    height: 27rem;
+    width: 20rem;
   }
 
   .name_container{
-    width: 100%
+    width: 100%;
+    top: 26rem;
+    left: 0px
+  }
+
+  .actorImage{
+    left: 4px
+  }
+  .movie_header{
+    margin-top: 30rem !important;
   }
 }

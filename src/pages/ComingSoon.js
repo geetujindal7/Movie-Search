@@ -66,7 +66,7 @@ function ComingSoonMovie() {
     <>
      {loading ? <Loading /> : (
         <>
-          <Box onClick={() => setIsOpen(false)} sx={{ margin: "24px 53px" }}>
+          <Box onClick={() => setIsOpen(false)} className = {styles.outerBox}>
             <Box>
               <Box sx={{ margin: "30px 0px" }}>
                 {/* <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} /> */}
@@ -141,7 +141,7 @@ function ComingSoonMovie() {
                     <Pagination
                       onChange={handlePageChange}
                       page={page}
-                      count={filter?.total_pages > 500 ? 500 : filter?.total_pages}
+                      count={filters?.total_pages > 500 ? 500 : filters?.total_pages}
                       size="large"
                       color="primary"
                     />
