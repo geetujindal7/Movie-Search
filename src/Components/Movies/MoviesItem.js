@@ -92,8 +92,8 @@ function MoviesItem() {
                             padding: "16px",
                             backgroundColor: "black",
                             opacity: "0.6",
-                            marginTop: "-18rem",
-                            height: "18rem",
+                            marginTop: "-7rem",
+                            height: "7rem",
                             borderRadius: "0px 0px 8px 8px",
                           }}
                         >
@@ -104,20 +104,11 @@ function MoviesItem() {
                             <Typography sx={{
                               wordWrap: "break-word",
                               width: "100%",
-                              minHeight: "4rem"
+                              minHeight: "2rem",
+                              maxHeight: "2rem"
                             }} variant="h4">
                               {value?.original_title ||
                                 value?.original_name}
-                            </Typography>
-                            <Typography
-                              variant="h3"
-                              sx={{
-                                wordBreak: "break-word",
-                                width: "370px",
-                                minHeight: "8rem",
-                              }}
-                            >
-                              {splitSentence(value.overview)}
                             </Typography>
                             <Link
                               href={{
@@ -128,7 +119,7 @@ function MoviesItem() {
                               }}
                             >
                               {" "}
-                             <Box sx={{display:"flex", justifyContent: "center"}}>
+                             <Box sx={{display:"flex", justifyContent: "start"}}>
                              <Button className={styles.buttn}>
                                 Watch Trailer
                               </Button>

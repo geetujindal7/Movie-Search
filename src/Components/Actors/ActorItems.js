@@ -59,8 +59,13 @@ function ActorItems({ search }) {
 
   // Get the items to display on the current page
   const itemsToShow = data?.slice(startIndex, endIndex);
+  console.log(itemsToShow)
 
   const handlePageChange = (event, page) => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
     setCurrentPage(page);
   };
 
@@ -112,7 +117,7 @@ function ActorItems({ search }) {
                 <>
                   <Typography variant="h3" className={styles.actorDetail}>
                     {show ? actordetails?.biography : actordetails?.biography.slice(0, 340) }
-                    {actordetails?.biography?.length > 350 && <button className={styles.showButton} onClick={() => setShow(!show)}>{show ? 'Show Less' : 'Show More'}</button>}
+                    {actordetails?.biography?.length > 350 && <span className={styles.showButton} onClick={() => setShow(!show)}>{show ? 'Less' : '...'}</span>}
                   </Typography>
                   <Typography variant="h3" className={styles.actorDetail}>
                     Birth: {actordetails?.birthday}
@@ -143,7 +148,7 @@ function ActorItems({ search }) {
             <Box className={styles.card}>
               {itemsToShow?.map((e, key) => (
                 <Link key={key} href={`/search/detail/${e.id}`}>
-                  {(e.poster_path || e.backdrop_path) && (
+                  {(e.poster_path || e.backdrop_path) ? (
                     <>
                       <Box
                         sx={{
@@ -178,7 +183,36 @@ function ActorItems({ search }) {
                         </Box>
                       </Box>
                     </>
-                  )}
+                  ):  <Box
+                        sx={{
+                          boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
+                          transition: "0.9s",
+                        }}
+                      >
+                         <Image
+                          style={{ borderRadius: "8px", opacity: "0.9" }}
+                          src={`https://altabel.files.wordpress.com/2016/11/1.jpg`}
+                          alt="poster_path"
+                          width={320}
+                          height={200}
+                        />
+                        <Box
+                          sx={{
+                            padding: "14px 11px",
+                            backgroundColor: "black",
+                            opacity: "0.9",
+                            marginTop: "-53px",
+                            height: "50px",
+                            borderRadius: "0px 0px 8px 8px",
+                          }}
+                        >
+                          <Box>
+                            <Typography variant="h4" sx={{textAlign: "center"}}>
+                              {e.title.slice(0, 30)}
+                            </Typography>
+                          </Box>
+                        </Box>
+                      </Box>}
                 </Link>
               ))}
             </Box>

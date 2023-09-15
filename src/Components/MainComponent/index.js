@@ -18,7 +18,7 @@ function MainComponent({ result }) {
   }, []);
 
   return (
-    <Box>
+    <Box sx={{padding: "0px 30px"}}>
       <Box sx={{ height: "34rem" }}>
         {
           result?.results?.map((value, index) => (
@@ -43,7 +43,7 @@ function MainComponent({ result }) {
         }
       </Box>
       <Box>
-        <Image src="https://v3img.voot.com/resizeMedium,w_1920,h_411/v3Storage/assets/kaalkoot_launch_03_cta-14x3-1690815691064.jpg?imformat=chrome" width={1200} height={200} alt="image" />
+        <Image style={{borderRadius: "8px"}} src="https://v3img.voot.com/resizeMedium,w_1920,h_411/v3Storage/assets/kaalkoot_launch_03_cta-14x3-1690815691064.jpg?imformat=chrome" width={1200} height={200} alt="image" />
       </Box>
     </Box>
   )

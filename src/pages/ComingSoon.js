@@ -82,7 +82,7 @@ function ComingSoonMovie() {
                   {!(filters?.results?.length === 0) ? (
                     filters?.results?.map((value, key) => {
                       return (
-                        value?.backdrop_path || value?.poster_path ? (
+                        (value?.backdrop_path || value?.poster_path) && (
                           <Box key={key} className={styles.Card}>
                             <Link href={{
                               pathname: "video",
@@ -99,17 +99,7 @@ function ComingSoonMovie() {
                               />
                             </Link>
                           </Box>
-                        ) : (
-                          <Box className={styles.Card}>
-                            <Image
-                              className={styles.soonImage}
-                              src={"https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="}
-                              width={250}
-                              height={300}
-                              alt="primaryImage"
-                            />
-                          </Box>
-                        )
+                        ) 
                       );
                     })
                   ) : (
@@ -129,8 +119,7 @@ function ComingSoonMovie() {
                   <Stack
                     spacing={3}
                     sx={{
-                      marginTop: "20px",
-                      backgroundColor: "#242424",
+                      margin: "2rem 0px",
                       borderRadius: "8px",
                       display: "flex",
                       justifyContent: "center",

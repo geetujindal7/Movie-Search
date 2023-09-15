@@ -3,9 +3,38 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   components: {
+
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#121212",
+          borderRadius: "8px",
+          padding: "3px",
+          // Apply the custom styles defined earlier        
+          ul: {
+            li:{
+              color: "white",
+            },
+            // Your custom styles for MuiButtonBase
+            // Add styles for MuiButtonBase here
+          }
+          },
+        },
+      },
+      MuiButtonBase: {
+        styleOverrides: {
+          root: {
+            
+            color: "white !important",
+           
+          }
+        }
+      },
+
+
     MuiButton: {
       styleOverrides: {
-        root:{
+        root: {
           textTransform: "Capitalize",
           fontSize: "16px",
           width: "8rem",
@@ -26,7 +55,7 @@ const theme = createTheme({
     h2: {
       fontSize: '22px', // Customize heading 2 font size
       fontWeight: '600',
-      marginTop:"8px",
+      marginTop: "8px",
       color: "#fff",
     },
     h3: {
@@ -42,13 +71,13 @@ const theme = createTheme({
       fontSize: '1.5rem', // Customize heading 2 font size
       color: "#fff",
     },
-   
+
     // Customize other typography variants as needed
   },
   icon: {
     fontSize: '22px',
   },
-  
+
 });
 
 export default theme;

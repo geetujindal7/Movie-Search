@@ -123,10 +123,12 @@ const Sidebar = () => {
   return (
     <>
       <Box className={styles.header_container}>
+        <Box onClick={() => setIsOpen(!isOpen)}  sx={{width: "65rem"}}>
         <MenuSharpIcon
           className={`${styles.icons} ${isOpen ? styles.openIcon : ""}`}
           onClick={handleSidebarToggle}
         />
+        </Box>
         <Box className={styles.formHeader}>
           <FormGroup className={styles.tooltiponhover}>
             <FormControlLabel

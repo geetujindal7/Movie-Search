@@ -41,7 +41,7 @@ function Trailer({ result, error }) {
                         (<Box>
                             <Box sx={{
                                 display: "flex",
-                                gap: "30px",
+                                gap: "30px 90px",
                                 flexWrap: "wrap",
                             }}>
 

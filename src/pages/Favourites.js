@@ -61,7 +61,7 @@ function Favourites() {
     <>
       {loading ? <Loading /> : (
         <>
-          <Box onClick={() => setIsOpen(false)} sx={{ margin: "24px 53px" }}>
+          <Box onClick={() => setIsOpen(false)} sx={{ margin: "30px" }}>
             <Box>
               <Box sx={{ margin: "30px 0px" }}>
                 {/* <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} /> */}

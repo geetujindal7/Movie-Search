@@ -121,7 +121,7 @@ Slider container .slider {
 }
 
 .outerBox{
-  margin: 30px 5rem
+  margin: 30px
 }
 
 @media (max-width: 400px) {

@@ -1,5 +1,5 @@
 .upcoming_header {
-    padding: 1rem;
+    padding: 0px 30px;
 }
 
 .upcoming_header_movie{
@@ -38,7 +38,7 @@
     display: flex;
     width: 100%;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 32px;
 }
 
 .stack {
@@ -88,7 +88,7 @@
 }
 
 .outerBox{
-    margin : 24px 53px;
+    margin : 0px 30px;
 }
 
 @media (max-width: 400px) {

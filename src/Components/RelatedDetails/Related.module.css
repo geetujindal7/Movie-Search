@@ -1,17 +1,21 @@
-.related {
-    /* font-size: 30px !important; */
+.active {
+    font-size: 30px !important;
+    color: grey;
+    cursor: pointer
+    
 }
 
-.active{
-    text-decoration: underline;
+.related{
+    /* text-decoration: underline; */
+    color: white;
+    cursor: pointer
+
 }
-
-
 
 .detail{
-    margin: 15px 0 0 !important;
+    margin: 6px 0 0 !important;
 }
 
 .container{
-    margin: 50px 0px;
+    margin: 20px 0px 0px 0px;
 }

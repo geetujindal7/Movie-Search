@@ -30,10 +30,11 @@
 
 .showButton {
   border: none;
-  padding: 4px;
-  background-color: white;
+  /* padding: 4px;
+  background-color: white; */
   margin-left: 6px;
-  border-radius: 8px;
+  color: #fff
+  /* border-radius: 8px; */
 }
 
 .name_container {

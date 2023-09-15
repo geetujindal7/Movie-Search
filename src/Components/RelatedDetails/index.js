@@ -12,8 +12,8 @@ function RelatedDetails({ data }) {
   return (
     <>
       <Box sx={{ display: "flex", gap: "30px", justifyContent: "center", marginTop: "10px" }}>
-        <Typography variant="h1" className={selected === "Related" && `${styles.related} ${styles.active}` } onClick={() => setSelected("Related")}>Related</Typography>
-        <Typography variant="h1" className={selected === "Details" && `${styles.active}`} onClick={() => setSelected("Details")}>Details</Typography>
+        <Typography variant="h1" className={selected === "Related" ? `${styles.related}` : `${styles.active}` } onClick={() => setSelected("Related")}>Related</Typography>
+        <Typography variant="h1" className={selected === "Details" ? `${styles.related}` : `${styles.active}` } onClick={() => setSelected("Details")}>Details</Typography>
       </Box>
       <Box>
         {
@@ -22,9 +22,10 @@ function RelatedDetails({ data }) {
               <Typography variant="h5" sx={{
                 padding: "1px 25px 15px 29px",
               }}>Customers also watched</Typography>
-              <Box sx={{ display: "flex", overflow: "scroll", gap: "2rem", padding: "5px 29px 3rem 29px" }}>
+              <Box sx={{ display: "flex", overflow: "scroll", gap: "2rem", padding: "5px 0px 3rem 0px", margin: "0px 30px" }}>
                 {
                   filter && filter?.slice(0, 15).map((val, key) => (
+                    val?.poster_path && 
                     <Box key={key}>
                     <Link  href={`/search/detail/${val.id}`}>
                       <Image style={{ borderRadius: "8px", opacity: "12" }} src={`https://image.tmdb.org/t/p/original/${val?.poster_path}`} alt="values" width={350} height={250} />
