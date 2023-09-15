@@ -55,7 +55,7 @@ import { AppContext } from "@/Components/AppContext";
       <>
         {loading ? <Loading /> : (
         <>
-          <Box onClick={() => setIsOpen(false)} sx={{ margin: "24px 53px" }}>
+          <Box onClick={() => setIsOpen(false)} sx={{ margin: "30px" }}>
             <Box>
               <Box sx={{ margin: "30px 0px" }}>
                 {/* <KeyboardArrowLeftIcon onClick={() => Router.back()} sx={{ fontSize: "2rem" }} /> */}
@@ -71,7 +71,7 @@ import { AppContext } from "@/Components/AppContext";
                   {!(filters?.results?.length === 0) ? (
                     filters?.results?.map((value, key) => {
                       return (
-                        value?.backdrop_path || value?.poster_path ? (
+                        (value?.backdrop_path || value?.poster_path) && (
                           <Box key={key} className={styles.Card}>
                             <Link href={{
                               pathname: "Newvideo",
@@ -88,17 +88,7 @@ import { AppContext } from "@/Components/AppContext";
                               />
                             </Link>
                           </Box>
-                        ) : (
-                          <Box className={styles.Card}>
-                            <Image
-                              className={styles.soonImage}
-                              src={"https://media.istockphoto.com/id/1271522601/photo/pop-corn-and-on-red-armchair-cinema.jpg?s=612x612&w=0&k=20&c=XwQxmfrHb-OwV5onPUW5ApB4RaGBK7poSIzZj4q_N_g="}
-                              width={250}
-                              height={300}
-                              alt="primaryImage"
-                            />
-                          </Box>
-                        )
+                        ) 
                       );
                     })
                   ) : (

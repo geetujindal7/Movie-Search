@@ -29,7 +29,7 @@ function Episodes({ season, id, resultData }) {
 
   return (
    loading ? <Loading /> : (
-    <Box>
+    <Box sx={{margin: "0px 30px"}}>
     <select name="season" onChange={(e) => setSeason(e.target.value)} id="cars" value={seasons} className={styles.selec}>
       {season?.map((val, key) => (
         <>
@@ -44,7 +44,7 @@ function Episodes({ season, id, resultData }) {
             <Image
               style={{
                 height: "17rem",
-                margin: "1rem 3rem",
+                margin: "1rem 0rem",
                 borderRadius: "8px",
                 width: "26%"
               }}
@@ -57,7 +57,7 @@ function Episodes({ season, id, resultData }) {
               height={1000}
               alt="primaryImage"
             />
-            <Box sx={{ margin: "20px 5px" }}>
+            <Box sx={{ margin: "10px 0rem 6px 2rem" }}>
               <Typography
                variant="h5"
                sx={{marginTop :"10px"}}
@@ -81,7 +81,7 @@ function Episodes({ season, id, resultData }) {
                 <Typography
                   variant="h3"
                 >
-                  {val?.runtime}min
+                  {val?.runtime || 45}min 
                 </Typography>
               </Box>
               <Typography

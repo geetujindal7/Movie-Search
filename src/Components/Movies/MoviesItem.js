@@ -20,13 +20,6 @@ function MoviesItem() {
 
   const [key, setKey] = useState(0);
 
-  const splitSentence = (value) => {
-    const firstDot = value.search(/[.!?]/);
-    const secondDot = value.indexOf('.', firstDot + 1);
-    console.log(firstDot)
-    return value.slice(0, firstDot+1)
-  }
-
   useEffect(() => {
     setLoading(true)
     if (filter && filtertv) {

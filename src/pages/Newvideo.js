@@ -23,7 +23,6 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
     const [show, setShow] = useState("Detail")
     const [currentIndex, setCurrentIndex] = useState(0);
     const { setIsOpen } = useContext(AppContext);
-
     // Function to go to the next slide
     const nextSlide = () => {
         setCurrentIndex((prevIndex) =>
@@ -41,6 +40,15 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
         return new Date(inputDate).toLocaleDateString(undefined, options);
     }
 
+    const splitSentence = (value) => {
+        const firstDot = value.search(/[.!?]/);
+        // const secondDot = value.indexOf('.', firstDot + 3);
+        return value.slice(0, firstDot+1)
+      }
+
+      const handleDisplay = (value) => {
+        setShow(value)
+      }
     function scrollToSection() {
         // Scroll to a specific Y position (e.g., 500 pixels from the top)
         window.scrollTo(0, 800);
@@ -80,15 +88,16 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                             resultData?.backdrop_path ||
                             resultData?.poster_path ? (
                             <Box>
-                                <Box sx={getReviews?.results?.length !== 0 ? { height: "95vh" } : { height: "90vh" }}>
+                                <Box sx={getReviews?.results?.length !== 0 ? { height: "95vh", margin: "0px 30px" } : { height: "90vh", margin: "0px 30px" }}>
                                     {!trailer ? (
                                         <>
-                                            {getImages?.backdrops?.length === 0 ? (<Box>
+                                            {<Box>
                                                 <Image
                                                     style={{
                                                         width: "100%",
                                                         height: "90vh",
                                                         opacity: "0.4",
+                                                        borderRadius: "8px"
                                                     }}
                                                     src={`https://image.tmdb.org/t/p/original/${resultData?.poster_path || resultData?.backdrop_path}`}
                                                     width={1150}
@@ -96,31 +105,16 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                     alt="primaryImage"
                                                 />
 
-                                            </Box>) : (getImages?.backdrops?.map((val, index) => (
-                                                <Image
-                                                    key={index}
-                                                    className={
-                                                        index === currentIndex
-                                                            ? `${style.slide} ${style.active} `
-                                                            : `${style.slide} `
-                                                    }
-                                                    style={{
-                                                        width: "100%",
-                                                        height: "90vh",
-                                                        opacity: "0.4",
-                                                    }}
-                                                    src={`https://image.tmdb.org/t/p/original/${val?.file_path}`}
-                                                    width={1150}
-                                                    height={650}
-                                                    alt="primaryImage"
-                                                />
-                                            )))}
+                                            </Box>}
                                             <Box
                                                 sx={{
                                                     position: "relative",
-                                                    bottom: "20rem",
-                                                    left: "4rem",
-                                                    right: "7rem",
+                                                    bottom: "15rem",
+                                                    // left: "4rem",
+                                                    // right: "7rem",
+                                                    width: "100%",
+                                                    height: "40%",
+                                                    left: "20px"
                                                 }}
                                             >
                                                 <Typography
@@ -138,19 +132,20 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                         marginTop: "5px",
                                                     }}
                                                 >
-                                                    {resultData?.overview.slice(0, 550)}
+                                                    {splitSentence(resultData?.overview)}
                                                 </Typography>
                                                 <Box
                                                     sx={{
                                                         position: "absolute",
                                                         top: "0px",
                                                         right: "0rem",
-                                                        left: "51rem"
+                                                        left: "58rem"
                                                     }}
                                                 >
                                                     <Typography
                                                         variant="h4"
-
+                                                        sx={{width: "94%",
+                                                        wordWrap: "break-word"}}
                                                     >
                                                         {actors?.cast?.slice(0, 3).map((val, key) => (
                                                             <span key={key} style={{ marginRight: "10px" }}>
@@ -215,7 +210,7 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                                             </span>
                                                         ))}
                                                     </Typography>
-                                                    <Box sx={{ display: "flex", gap: "20px", marginTop: "10px" }}>
+                                                    <Box sx={{ display: "flex", gap: "20px", }}>
                                                         {result?.results?.length !== 0 && <Button
                                                             style={{
                                                                 marginTop: "10px",
@@ -284,10 +279,10 @@ function Newvideo({ result, error, resultData, actors, getImages, getReviews }) 
                                         margin: "10px 0px"
                                     }}>
                                         <Box sx={{ display: "flex", padding: "12px", justifyContent: "space-evenly" }}>
-                                            {<Typography variant="h4" sx={show === 'Episode' ? { textDecoration:"underline" } : {cursor: "pointer"}}  onClick={() => setShow("Episode")}>Episodes</Typography>}
-                                            <Typography variant="h4"  sx={show === 'Detail' ? { textDecoration:"underline" } : {cursor: "pointer"}}  onClick={() => setShow("Detail")}>Details</Typography>
+                                            {<Typography variant="h4" sx={show === 'Episode' ? {cursor: "pointer", color: "white", fontSize: "20px" } : {cursor: "pointer", color: "grey"}}  onClick={() => handleDisplay("Episode")}>Episodes</Typography>}
+                                            <Typography variant="h4"  sx={show === 'Detail' ? { cursor: "pointer",color: "white",fontSize: "20px" } : {cursor: "pointer", color: "grey" }}  onClick={() => handleDisplay("Detail")}>Details</Typography>
                                             {
-                                                getReviews?.results?.length !== 0 && (<Typography variant="h4"  sx={show === 'Rating' ? { textDecoration:"underline" } : {cursor: "pointer"}} onClick={() => setShow("Rating")}>Rating</Typography>)}
+                                                getReviews?.results?.length !== 0 && (<Typography variant="h4"  sx={show === 'Rating' ? {cursor: "pointer", color: "white", fontSize: "20px" } : {cursor: "pointer", color: "grey"}}onClick={() => setShow("Rating")}>Rating</Typography>)}
                                         </Box>
 
                                     </Box>

@@ -11,7 +11,7 @@ import NoData from "./404";
 import Image from "next/image";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import style from "@/Components/MainComponent/slider.module.css";
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from "@mui/icons-material/Star";
 import Review from "@/Components/VideoComponent/Review";
 import { AppContext } from "@/Components/AppContext";
 
@@ -23,20 +23,26 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Function to go to the next slide
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === getImages?.backdrops?.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  // const nextSlide = () => {
+  //   setCurrentIndex((prevIndex) =>
+  //     prevIndex === getImages?.backdrops?.length - 1 ? 0 : prevIndex + 1
+  //   );
+  // };
 
-  useEffect(() => {
-    const timer = setInterval(nextSlide, 500000);
-    return () => clearInterval(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setInterval(nextSlide, 500000);
+  //   return () => clearInterval(timer);
+  // }, []);
 
   function formatDate(inputDate) {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(inputDate).toLocaleDateString(undefined, options);
+  }
+
+  const splitSentence = (value) => {
+    const firstDot = value.search(/[.!?]/);
+    // const secondDot = value.indexOf('.', firstDot + 3);
+    return value.slice(0, firstDot+1)
   }
 
   function scrollToSection() {
@@ -72,52 +78,48 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
               <Typography sx={{ marginTop: "2px", fontSize: "20px" }}>Results</Typography>
             </Box>
           </Box> */}
-          <Box onClick={() => setIsOpen(false)} sx={getReviews?.results?.length !== 0 && { height: "210vh" }}>
+          <Box
+            onClick={() => setIsOpen(false)}
+            sx={getReviews?.results?.length !== 0 && { height: "210vh" }}
+          >
             {(result?.results?.length !== 0 && !error) ||
-              resultData?.backdrop_path ||
-              resultData?.poster_path ? (
+            resultData?.backdrop_path ||
+            resultData?.poster_path ? (
               <Box>
-                <Box sx={getReviews?.results?.length !== 0 ? { height: "95vh" } : { height: "92vh" }}>
+                <Box
+                  sx={
+                    getReviews?.results?.length !== 0
+                      ? { height: "95vh", margin: "0px 30px" }
+                      : { height: "92vh", margin: "0px 30px" }
+                  }
+                >
                   {!trailer ? (
                     <>
-                      {getImages?.backdrops?.length === 0 ? (<Box>
+                      <Box>
                         <Image
                           style={{
                             width: "100%",
                             height: "92vh",
                             opacity: "0.4",
+                            borderRadius: "8px"
                           }}
-                          src={`https://image.tmdb.org/t/p/original/${resultData?.poster_path || resultData?.backdrop_path}`}
+                          src={`https://image.tmdb.org/t/p/original/${
+                            resultData?.poster_path || resultData?.backdrop_path
+                          }`}
                           width={1150}
                           height={600}
                           alt="primaryImage"
                         />
-
-                      </Box>) : (getImages?.backdrops?.map((val, index) => (
-                        <Image
-                          key={index}
-                          className={
-                            index === currentIndex
-                              ? `${style.slide} ${style.active} `
-                              : `${style.slide} `
-                          }
-                          style={{
-                            width: "100%",
-                            height: "92vh",
-                            opacity: "0.4",
-                          }}
-                          src={`https://image.tmdb.org/t/p/original/${val?.file_path}`}
-                          width={1150}
-                          height={600}
-                          alt="primaryImage"
-                        />
-                      )))}
+                      </Box>
                       <Box
                         sx={{
                           position: "relative",
-                          bottom: "20rem",
-                          left: "4rem",
-                          right: "7rem",
+                          bottom: "15rem",
+                          // left: "4rem",
+                          // right: "7rem",
+                          width: "100%",
+                          height: "40%",
+                          left: "20px",
                         }}
                       >
                         <Typography
@@ -135,18 +137,19 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                             marginTop: "5px",
                           }}
                         >
-                          {resultData?.overview.slice(0, 550)}
+                          {splitSentence(resultData?.overview)}
                         </Typography>
                         <Box
                           sx={{
                             position: "absolute",
-                            top: "10px",
+                            top: "0px",
                             right: "0rem",
-                            left: "51rem"
+                            left: "58rem",
                           }}
                         >
                           <Typography
-                            variant="h5"
+                            variant="h4"
+                            sx={{ width: "94%", wordWrap: "break-word" }}
                           >
                             {actors?.cast?.slice(0, 3).map((val, key) => (
                               <span key={key} style={{ marginRight: "10px" }}>
@@ -154,9 +157,8 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                               </span>
                             ))}
                           </Typography>
-                          <Typography
-                            variant="h3"
-                          >
+                          <Typography variant="h3"
+                           sx={{ marginTop: "10px" }}>
                             {resultData?.genres.map((val, key) => (
                               <span key={key} style={{ marginRight: "10px" }}>
                                 | {val.name} |{" "}
@@ -166,13 +168,13 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                           <Box
                             sx={{
                               display: "flex",
-                              gap: "20px"
+                              gap: "20px",
                             }}
                           >
                             <Typography
                               variant="h3"
                               sx={{
-                                marginTop: "5px",
+                                marginTop: "10px",
                               }}
                             >
                               IMDB {resultData?.vote_average.toFixed(1)}
@@ -181,7 +183,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                             <Typography
                               variant="h3"
                               sx={{
-                                marginTop: "5px",
+                                marginTop: "10px",
                               }}
                             >
                               {resultData?.revenue} $
@@ -190,7 +192,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                           <Typography
                             variant="h3"
                             sx={{
-                              marginTop: "5px",
+                              marginTop: "10px",
                             }}
                           >
                             Release: {formatDate(resultData?.release_date)}
@@ -199,7 +201,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                             variant="h3"
                             sx={{
                               width: "80%",
-                              marginTop: "5px",
+                              marginTop: "10px",
                             }}
                           >
                             {resultData?.spoken_languages.map((val, key) => (
@@ -209,21 +211,22 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                             ))}
                           </Typography>
                           <Box sx={{ display: "flex", gap: "20px" }}>
-                            {result?.results?.length !== 0 && <Button
-                              style={{
-                                color: "white",
-                                borderColor: "white",
-                                marginTop: "10px",
-                              }}
-                              variant="outlined"
-                              onClick={() => setTrailer(true)}
-                            >
-                              Watch Trailer
-                            </Button>
-                            }
+                            {result?.results?.length !== 0 && (
+                              <Button
+                                style={{
+                                  color: "white",
+                                  borderColor: "white",
+                                  marginTop: "10px",
+                                }}
+                                variant="outlined"
+                                onClick={() => setTrailer(true)}
+                              >
+                                Watch Trailer
+                              </Button>
+                            )}
 
-                            {
-                              getReviews?.results?.length !== 0 && (<Button
+                            {getReviews?.results?.length !== 0 && (
+                              <Button
                                 style={{
                                   color: "white",
                                   borderColor: "white",
@@ -233,8 +236,8 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                                 onClick={scrollToSection}
                               >
                                 Reviews
-                              </Button>)
-                            }
+                              </Button>
+                            )}
                           </Box>
                         </Box>
                       </Box>
@@ -244,7 +247,7 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                       <iframe
                         style={{
                           width: "100%",
-                          height: "91vh"
+                          height: "91vh",
                         }}
                         // className={styles.iframe}
                         width="1450"
@@ -276,11 +279,11 @@ function Video({ result, error, resultData, actors, getImages, getReviews }) {
                     </>
                   )}
                 </Box>
-                {
-                  getReviews?.results?.length !== 0 && (<Box className={style.review}>
+                {getReviews?.results?.length !== 0 && (
+                  <Box className={style.review}>
                     <Review getReviews={getReviews} />
-                  </Box>)
-                }
+                  </Box>
+                )}
               </Box>
             ) : (
               <Box>
